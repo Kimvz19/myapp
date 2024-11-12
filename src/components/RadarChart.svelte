@@ -1,8 +1,22 @@
 <script>
+
+///////////////////////////////
+//Code voor Radar chart uit D3
+///////////////////////////////
+
+//importeren van D3
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
 
+
+
     // Voorbeelddata (elke categorie met een waarde)
+
+    // Punten van de Radar chart
+    // Later anders benoemen voor de data
+
+    //Wat wil ik bereiken : dat je met de filters kunt kiezen wat er op deze punten van de data komt te staan
+
     let data = [
         { axis: "Speed", value: 0.7 },
         { axis: "Strength", value: 0.8 },
@@ -11,9 +25,12 @@
         { axis: "Flexibility", value: 0.5 },
     ];
 
+
     let width = 1500;
     let height = 1000;
     let maxValue = 1;
+
+
 
     // Schalen en instellingen voor de grafiek
     let radius = Math.min(width / 2, height / 2);
