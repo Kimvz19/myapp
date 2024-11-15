@@ -1,0 +1,62 @@
+
+// // Import the apiUtil.js module with the exported functions.
+// import { fetchPosts } from "../lib/apiUtil";
+
+
+// Display only the filtered data based on the state
+async function displayPosts(stateFilter) {
+    try {
+      // Fetch the data from the API
+      let posts = await fetchPosts();
+  
+      // Filter the posts by the specified state
+      const filteredPosts = posts.filter(posts => posts.state === stateFilter);
+      console.log(filteredPosts.slice());
+  
+      return filteredPosts;
+    } catch (error) {
+      console.error("Error displaying posts:", error.message);
+      return [];
+    }
+  }
+  
+  // Example call to displayPosts
+  displayPosts("Hawaii")
+
+
+// Import the apiUtil.js module with the exported functions.
+import { fetchPosts } from "../lib/apiUtil";
+
+/**
+ * Filters data based on multiple criteria.
+ * @param {Object} filters - An object with key-value pairs to filter by (e.g., { state: "United States", phase: "1" }).
+ * @returns {Promise<Array>} - A filtered list of posts.
+ */
+async function displayFilteredPosts(filters = {}) {
+  try {
+    // Fetch the data from the API
+    let posts = await fetchPosts();
+
+    // Filter posts dynamically based on the filters object
+    const filteredPosts = posts.filter(post => {
+      return Object.keys(filters).every(key => {
+        // Check if the key exists and matches the filter value
+        return post[key] && String(post[key]) === String(filters[key]);
+      });
+    });
+
+    // Return the filtered posts
+    return filteredPosts;
+  } catch (error) {
+    console.error("Error displaying filtered posts:", error.message);
+    return [];
+  }
+}
+
+// Example usage
+displayFilteredPosts({ 
+  state: "United States", 
+  phase: "1", 
+}).then(filteredList => {
+  console.log(filteredList); // Logs the filtered list
+});
