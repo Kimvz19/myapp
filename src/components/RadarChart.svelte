@@ -8,36 +8,26 @@
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
 
-
-
-    // Voorbeelddata (elke categorie met een waarde)
-
-    // Punten van de Radar chart
-    // Later anders benoemen voor de data
-
-    //Wat wil ik bereiken : dat je met de filters kunt kiezen wat er op deze punten van de data komt te staan
-
     let data = [
-        { axis: "Speed", value: 0.7 },
-        { axis: "Strength", value: 0.8 },
-        { axis: "Agility", value: 0.6 },
-        { axis: "Endurance", value: 0.9 },
-        { axis: "Flexibility", value: 0.5 },
+        { axis: "confidence", value: 0.7 },
+        { axis: "highci", value: 0.8 },
+        { axis: "lowci", value: 0.6 },
+        { axis: "phase", value: 0.9 },
+        { axis: "quartile", value: 0.5 },
     ];
 
-
-    let width = 1500;
-    let height = 1000;
+    let width = 1450;
+    let height = 950;
     let maxValue = 1;
 
 
 
     // Schalen en instellingen voor de grafiek
-    let radius = Math.min(width / 2, height / 2);
-    let angleSlice = (Math.PI * 2) / data.length;
-    let levels = 5;  // Aantal concentrische cirkels
+    let radius = Math.min(width / 2, height / 2.2);
+    let angleSlice = (Math.PI * 2) / data.length; //bepaadld de hoek tussen de punten
+    let levels = 15;  // Aantal concentrische cirkels
 
-    // Container referentie voor de grafiek
+
     let chartContainer;
 
     // Functie voor het genereren van de radar chart

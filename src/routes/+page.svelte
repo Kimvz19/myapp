@@ -31,6 +31,7 @@ h1{
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
+  font-size: 45px;
 }
 
 h2{
@@ -38,6 +39,7 @@ h2{
   font-optical-sizing: auto;
   font-weight: 200;
   font-style: normal;
+  font-size: 25px;
 }
 
 </style>
