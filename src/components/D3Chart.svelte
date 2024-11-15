@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 
     //Dit was een voorbeeld opdracht om te checken of D3 werkt
     //Ik laat dit erin staan voor ondersteuning als er iets mis gaat met D3
@@ -25,4 +25,4 @@
             .style("fill", "pink");
     });
 </script>
-<svg id="chart"></svg>
+<svg id="chart"></svg> -->
