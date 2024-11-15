@@ -11,11 +11,25 @@
 <h1>De psychologische impact van COVID-19</h1>
 <h2>Breng de indicatoren van angst en depressie in beeld</h2>
 
+<!-- filter buttons -->
+<p>Filter opties</p>
+
+<div class="dropdown">
+    <button class="dropdown-button">Menu</button>
+    <div class="dropdown-content">
+        <a href="#option1">Optie 1</a>
+        <a href="#option2">Optie 2</a>
+        <a href="#option3">Optie 3</a>
+    </div>
+</div>
+
 <!-- imports van componenten-->
 <script>
     import D3Chart from "../components/D3Chart.svelte";
     import RadarChart from '../components/RadarChart.svelte';
 
+// filter voor buttons
+    import Filterbuttons from "../components/filterbuttons.svelte";
 </script>
 
 <!-- styling van page-->
