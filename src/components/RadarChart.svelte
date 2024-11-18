@@ -8,6 +8,7 @@
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
 
+
     let data = [
         { axis: "confidence", value: 0.7 },
         { axis: "highci", value: 0.8 },
@@ -48,7 +49,7 @@
                 .attr("cy", 0)
                 .attr("r", r)
                 .style("fill", "none")
-                .style("stroke", "#eb9bb3")
+                .style("stroke", "#ddd")
                 .style("stroke-width", 0.5);
         }
 
@@ -64,7 +65,7 @@
                 .attr("y1", 0)
                 .attr("x2", lineCoord.x)
                 .attr("y2", lineCoord.y)
-                .style("stroke", "#cc003d")
+                .style("stroke", "#888")
                 .style("stroke-width", 0.5);
 
             // Label voor elke as
@@ -86,8 +87,8 @@
         svg.append("path")
             .datum(data)
             .attr("d", line)
-            .style("fill", "rgba(237, 178, 198)") //kleur van de inhoud van de radar
-            .style("stroke", "#cc0052")
+            .style("fill", "rgba(0, 128, 255, 0.3)")
+            .style("stroke", "#007acc")
             .style("stroke-width", 2);
     };
 
