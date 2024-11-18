@@ -11,9 +11,9 @@
 
 <main>
     <Header />
+    <Filter />
     <D3Chart />
     <RadarChart />
     <Filteroptions />
-    <Filter />
 </main>
 

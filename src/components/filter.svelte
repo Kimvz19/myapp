@@ -10,8 +10,7 @@
             // Fetch the data from the API
             let posts = await fetchPosts();
 
-        
-
+    
             // Filter the posts by the specified state
             filteredPosts = posts.filter((post) => post.state === stateFilter);
 
@@ -30,7 +29,7 @@
 
 <!-- html code-->
 <div>
-    <h2>Gegevens in {stateFilter}</h2>
+    <p>Gegevens in {stateFilter}</p>
 
 <!-- inpur van de gebruiker zelf-->
 <input
@@ -51,3 +50,24 @@ placeholder="Enter state"
         <p>No posts found for {stateFilter}.</p>
     {/if}
 </div>
+
+<!-- styling-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+
+<style>
+
+div,button, input{
+    font-family: "Montserrat";
+      font-optical-sizing: auto;
+      font-weight: 200;
+      font-style: normal;
+      font-size: 20px;
+      margin-left: 10px;
+}
+
+button, input{
+    border-radius: 5px;
+
+}
+
+</style>

@@ -18,7 +18,6 @@
         <button>all filters</button>
         <button>time period</button>
         <button>state</button>
-        <button>gender</button>
     </div>
 </div>
 
