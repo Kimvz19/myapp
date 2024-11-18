@@ -28,8 +28,7 @@
     import D3Chart from "../components/D3Chart.svelte";
     import RadarChart from '../components/RadarChart.svelte';
 
-// filter voor buttons
-    import Filterbuttons from "../components/filterbuttons.svelte";
+
 </script>
 
 <!-- styling van page-->
