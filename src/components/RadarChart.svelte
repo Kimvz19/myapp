@@ -7,6 +7,7 @@
 //importeren van D3
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
+    import { fetchPosts } from "../lib/apiUtil.js";  
 
     let data = [
         { axis: "confidence", value: 0.7 },
@@ -19,8 +20,6 @@
     let width = 1450;
     let height = 950;
     let maxValue = 1;
-
-
 
     // Schalen en instellingen voor de grafiek
     let radius = Math.min(width / 2, height / 2.2);

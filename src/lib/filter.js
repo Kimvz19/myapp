@@ -1,24 +1,28 @@
 
-import { fetchPosts } from "../lib/apiUtil.js";  // Zorg ervoor dat het pad klopt
-// Display only the filtered data based on the state
-async function displayPosts(stateFilter) {
-    try {
-        // Fetch the data from the API
-        let post = await fetchPosts();
+// import { fetchPosts } from "../lib/apiUtil.js";  // Ensure the path is correct
 
-        // Filter the posts by the specified state
-        const filteredPost = post.filter(post => post.state === stateFilter); 
-        console.log(filteredPost.slice());
+// // Display only the filtered data based on the state
+// async function displayPosts(stateFilter) {
+//     try {
+//         // Fetch the data from the API
+//         let posts = await fetchPosts();  // Renamed `post` to `posts` for clarity
 
-        return filteredPost;
-    } catch (error) {
-        console.error("Error displaying post:", error.message);
-        return [];
-    }
-}
+//         // Filter the posts by the specified state
+//         const filteredPosts = posts.filter(post => post
+//             .state === stateFilter); 
+//         console.log(filteredPosts);  // Log the filtered posts
 
-// Example call to displayPosts
-displayPosts("Hawaii");
+//         return filteredPosts;
+
+
+//     } catch (error) {
+//         console.error("Error displaying posts:", error.message);
+//         return [];
+//     }
+// }
+// // Example call to displayPosts
+// displayPosts("Hawaii");
+
 
 
 

@@ -4,6 +4,7 @@
     import D3Chart from "../components/D3Chart.svelte";
     import RadarChart from '../components/RadarChart.svelte';
     import Filteroptions from "../components/filteroptions.svelte";
+    import Filter from "../components/filter.svelte";
 
     
 </script>
@@ -13,5 +14,6 @@
     <D3Chart />
     <RadarChart />
     <Filteroptions />
+    <Filter />
 </main>
 
