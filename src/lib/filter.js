@@ -1,5 +1,5 @@
-import { fetchPosts } from "../lib/apiUtil";
 
+import { fetchPosts } from "../lib/apiUtil.js";  // Zorg ervoor dat het pad klopt
 // Display only the filtered data based on the state
 async function displayPosts(stateFilter) {
     try {
