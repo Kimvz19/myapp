@@ -20,5 +20,5 @@ async function fetchPosts() {
     }
   }
   
-  // Export the functions using named exports.
+  // // Export the functions using named exports.
   export { fetchPosts };

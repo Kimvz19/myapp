@@ -15,11 +15,11 @@
 <p>Filter opties</p>
 
 <div class="dropdown">
-    <button class="dropdown-button">Menu</button>
     <div class="dropdown-content">
-        <a href="#option1">Optie 1</a>
-        <a href="#option2">Optie 2</a>
-        <a href="#option3">Optie 3</a>
+        <button>all filters</button>
+        <button>time period</button>
+        <button>state</button>
+        <button>gender</button>
     </div>
 </div>
 
@@ -27,8 +27,6 @@
 <script>
     import D3Chart from "../components/D3Chart.svelte";
     import RadarChart from '../components/RadarChart.svelte';
-
-
 </script>
 
 <!-- styling van page-->
@@ -47,12 +45,25 @@ h1{
   font-size: 45px;
 }
 
-h2{
+h2, p{
   font-family: "Montserrat";
   font-optical-sizing: auto;
   font-weight: 200;
   font-style: normal;
   font-size: 25px;
+}
+
+p{
+margin-left: 10px;
+}
+
+button{
+  font-family: "Montserrat";
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 20px;
+  margin-left: 10px;
 }
 
 </style>
