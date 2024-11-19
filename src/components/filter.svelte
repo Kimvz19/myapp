@@ -1,8 +1,13 @@
 <script>
     // Import the function to fetch posts from the specified path
+    import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
     let filteredPosts = [];
     let stateFilter = "Hawaii";
+
+    onMount(async () => {
+        await displayPosts(stateFilter);
+    });
 
 
     async function displayPosts(stateFilter) {
@@ -14,6 +19,11 @@
             // Filter the posts by the specified state
             filteredPosts = posts.filter((post) => post.state === stateFilter);
 
+            // filteredPosts = posts.filter((post) => post
+            // .state === stateFilter && post
+            // .age > 15 && post.age < 30);
+
+
             console.log(filteredPosts); // Log the filtered posts
 
         //error prevention
@@ -22,6 +32,7 @@
             filteredPosts = []; // In case of error, reset the filtered posts
         }
     }
+    console.log(filteredPosts); 
 
     //uitvoering function
     displayPosts(stateFilter);
@@ -43,7 +54,7 @@ placeholder="Enter state"
     {#if filteredPosts.length > 0}
         <ul>
             {#each filteredPosts as post}
-                <li>{post.indicator} - {post.state} - {post.confidence_interval}</li>
+                <li>{post.indicator} - {post.state} - {post.confidence_interval} - {post.age}</li>
             {/each}
         </ul>
     {:else}

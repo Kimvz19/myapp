@@ -8,7 +8,6 @@
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
 
-
     let data = [
         { axis: "confidence", value: 0.7 },
         { axis: "highci", value: 0.8 },
