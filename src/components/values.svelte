@@ -3,6 +3,7 @@
     import { fetchPosts } from "../lib/apiUtil.js";
   
     let actualTimePeriod = [];
+    let TimePeriodAge = [];
   
     async function displayTime() {
       try {

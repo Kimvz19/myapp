@@ -54,7 +54,7 @@ placeholder="Enter state"
     {#if filteredPosts.length > 0}
         <ul>
             {#each filteredPosts as post}
-                <li>{post.indicator} - {post.state} - {post.confidence_interval} - {post.age}</li>
+                <li>{post.indicator} - {post.state} - {post.confidence_interval}</li>
             {/each}
         </ul>
     {:else}
