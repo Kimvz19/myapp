@@ -1,8 +1,7 @@
 // Write a module that fetches a dataset e.g. 'fake' posts from Json Placeholder. https://jsonplaceholder.typicode.com/posts Use async await, use fetch.
 async function fetchPosts() {
-  const url = "https://data.cdc.gov/resource/8pt5-q6wp.json?$limit=1000&$offset=16100";
+  const url = "https://data.cdc.gov/resource/8pt5-q6wp.json?$limit=1000&$offset=16300";
 
-  
   try {
     const response = await fetch(url); //om url fetch response
     console.log(response.status); // Log de status van de response
