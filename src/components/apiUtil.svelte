@@ -4,7 +4,7 @@
     // Asynchrone functie om posts op te halen
     async function fetchPosts() {
         const url =
-            "https://data.cdc.gov/resource/8pt5-q6wp.json?time_period_start_date=2020-04-23T00:00:00.000";
+            "https://data.cdc.gov/resource/8pt5-q6wp.json?time_period_start_date=2024-01-23T00:00:00.000";
 
         try {
             const response = await fetch(url);
