@@ -5,7 +5,6 @@
     import State from "../components/Statefilter.svelte";
     import Time from "../components/Timefilter.svelte";
 
-    
 </script>
 
 <main>
