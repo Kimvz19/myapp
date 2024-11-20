@@ -2,7 +2,7 @@
 <script>
     import Header from "../components/header.svelte";
     import RadarChart from '../components/RadarChart.svelte';
-    import Filter from "../components/filter.svelte";
+    import State from "../components/Statefilter.svelte";
     import Time from "../components/Timefilter.svelte";
 
     
@@ -10,7 +10,7 @@
 
 <main>
     <Header />
-    <Filter />
+    <State />
     <RadarChart />
     <Time />
 </main>
