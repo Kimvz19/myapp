@@ -127,18 +127,6 @@ placeholder="Enter state"
     box-sizing: border-box;
 }
 
-/* Hover effect voor de links in het dropdown menu */
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
-/* Toon het dropdown menu wanneer de knop wordt ingedrukt */
-.dropdown.show .dropdown-content {
-    display: block;
-}
-
-
-
 div,button, input{
     font-family: "Montserrat";
       font-optical-sizing: auto;
