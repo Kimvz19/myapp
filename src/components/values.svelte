@@ -4,10 +4,6 @@
 
 // Variabelen
   let actualTimePeriod = []; //tijd periode vanaf period 72
-  let rightAgelist = []; // leeftijd groep 18 - 29
-
-
-
 
 // functie voor filteren van de juiste tijd periode
   async function displayTime() {
@@ -19,9 +15,6 @@
 
       actualTimePeriod = data.filter(
         (item) => Number(item.time_period) === maxTimePeriod,);
-
-
-
 
     // melding voor error 
     } catch (error) {
