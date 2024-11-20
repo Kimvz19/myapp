@@ -4,7 +4,6 @@ async function fetchPosts() {
 
   try {
     const response = await fetch(url); //om url fetch response
-    console.log(response.status); // Log de status van de response
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }

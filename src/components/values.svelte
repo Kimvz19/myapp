@@ -1,35 +1,40 @@
 <script>
-    import { onMount } from "svelte";
-    import { fetchPosts } from "../lib/apiUtil.js";
-  
-    let actualTimePeriod = [];
+  import { onMount } from "svelte";
+  import { fetchPosts } from "../lib/apiUtil.js";
 
-  
-    async function displayTime() {
-      try {
-        let data = await fetchPosts();
-  
-        // Valideer en filter de data
-        // let validData = data.filter(item => !isNaN(Number(item.time_period)));
-        let maxTimePeriod = Math.max(...data.map(item => Number(item.time_period)));
-        actualTimePeriod = data.filter(item => Number(item.time_period) === maxTimePeriod);
+// Variabelen
+  let actualTimePeriod = []; //tijd periode vanaf period 72
+  let rightAgelist = []; // leeftijd groep 18 - 29
 
 
-      } catch (error) {
-        console.error("Error bij het ophalen van data:", error.message);
-      }
 
+
+// functie voor filteren van de juiste tijd periode
+  async function displayTime() {
+    try {
+      let data = await fetchPosts();
+
+      let maxTimePeriod = Math.max(
+        ...data.map((item) => Number(item.time_period)), );
+
+      actualTimePeriod = data.filter(
+        (item) => Number(item.time_period) === maxTimePeriod,);
+
+
+
+
+    // melding voor error 
+    } catch (error) {
+      console.error("Error bij het ophalen van data:", error.message);
     }
-  
-    // Roep de functie aan bij het laden van de component
-    onMount(() => {
-      displayTime();
-    });
-  
-    // Automatisch opnieuw loggen als de waarde verandert
-    $: console.log(actualTimePeriod);
-  </script>
-  
+  }
 
-  
-  
+
+  // Roep de functie aan bij het laden van de component
+  onMount(() => {
+    displayTime();
+  });
+
+  // Automatisch opnieuw loggen als de waarde verandert
+  $: console.log(actualTimePeriod);
+</script>
