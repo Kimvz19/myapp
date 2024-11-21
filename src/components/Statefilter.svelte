@@ -1,55 +1,58 @@
+<!-- Er zitten 2 filters hierin-->
+
+
 <script>
-    // Import the function to fetch posts from the specified path
+    // Import the necessary functions and components
     import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
-    let filteredPosts = [];
-    let stateFilter = "Hawaii";
 
-    onMount(async () => {
-        await displayPosts(stateFilter);
-    });
+    // Variabelen
+    let actualTimePeriod = []; // De meest actuele tijdsperiode
+    let filteredPosts = []; // Geselecteerde posts op basis van state en actualTimePeriod
+    let stateFilter = "Hawaii"; // Default state
 
-
-    async function displayPosts(stateFilter) {
+    // Functie voor het ophalen van de meest actuele tijdsperiode
+    async function displayTime() {
         try {
-            // Fetch the data from the API
-            let posts = await fetchPosts();
+            // Haal de data op uit de API
+            let data = await fetchPosts();
 
-    
-            // Filter the posts by the specified state
-            filteredPosts = posts.filter((post) => post.state === stateFilter);
+            // Vind de meest recente time_period
+            let maxTimePeriod = Math.max(...data.map((item) => Number(item.time_period)));
 
-            // filteredPosts = posts.filter((post) => post
-            // .state === stateFilter && post
-            // .age > 15 && post.age < 30);
+            // Filter de data op de meest actuele time_period
+            actualTimePeriod = data.filter((item) => Number(item.time_period) === maxTimePeriod);
 
+            // Filter de posts op basis van de meest actuele time_period en de opgegeven state
+            filteredPosts = actualTimePeriod.filter((post) => post.state === stateFilter);
 
-            console.log(filteredPosts); // Log the filtered posts
-
-        //error prevention
         } catch (error) {
-            console.error("Error displaying posts:", error.message);
-            filteredPosts = []; // In case of error, reset the filtered posts
+            console.error("Error bij het ophalen van data:", error.message);
+            filteredPosts = []; // Reset de filteredPosts bij een fout
         }
     }
-    console.log(filteredPosts); 
 
-    //uitvoering function
-    displayPosts(stateFilter);
+    // Roep de displayTime functie aan bij het laden van de component
+    onMount(() => {
+        displayTime();
+    });
+
+    // Automatisch opnieuw loggen als de waarde verandert
+    $: console.log(filteredPosts);
 </script>
 
-<!-- html code-->
+<!-- HTML Code -->
 <div>
     <p>Gegevens in {stateFilter}</p>
 
-<!-- inpur van de gebruiker zelf-->
-<input
-type="text"
-bind:value={stateFilter}
-placeholder="Enter state"
-/>
+    <!-- Gebruikersinput voor de state -->
+    <input
+        type="text"
+        bind:value={stateFilter}
+        placeholder="Enter state"
+    />
 
-<button on:click={() => displayPosts(stateFilter)}>Filter Posts</button>
+    <button on:click={() => displayTime()}>Filter Posts</button>
 
     {#if filteredPosts.length > 0}
         <ul>
@@ -62,28 +65,27 @@ placeholder="Enter state"
     {/if}
 </div>
 
+<!-- Styling -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+
+<style>
+    div, button, input {
+        font-family: "Montserrat";
+        font-optical-sizing: auto;
+        font-weight: 200;
+        font-style: normal;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    button, input {
+        border-radius: 5px;
+    }
+</style>
+
+
 
 
 
 <!-- styling-->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
-
-<style>
-
-
-
-div,button, input{
-    font-family: "Montserrat";
-      font-optical-sizing: auto;
-      font-weight: 200;
-      font-style: normal;
-      font-size: 20px;
-      margin-left: 10px;
-}
-
-button, input{
-    border-radius: 5px;
-
-}
-
-</style>
