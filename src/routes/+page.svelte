@@ -9,8 +9,8 @@
 
 <main>
     <Header />
-    <State />
-    <RadarChart />
+    <!-- <State />
+    <RadarChart /> -->
     <Time />
 </main>
 
