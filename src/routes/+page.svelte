@@ -10,5 +10,5 @@
     <Header />
     <State />
     <Tryout />
-    <!-- <RadarChart /> -->
+    <RadarChart />
 </main>

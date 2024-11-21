@@ -127,8 +127,8 @@
     </button>
 
     <!-- Input fields for comparison indexes -->
-    <input class="input-field" type="number" bind:value={index1} placeholder="Enter Index 1" />
-    <input class="input-field" type="number" bind:value={index2} placeholder="Enter Index 2" />
+    <input class="input-field" type="number" bind:value={index1} placeholder="Enter Index 1" min=0 />
+    <input class="input-field" type="number" bind:value={index2} placeholder="Enter Index 2" min=0 />
 
     <button on:click={compareIndexes}>Compare Indexes</button>
 
