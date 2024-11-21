@@ -23,9 +23,12 @@
             // Filter de data op de meest actuele time_period
             actualTimePeriod = data.filter((item) => Number(item.time_period) === maxTimePeriod);
 
-            // Filter de posts op basis van de meest actuele time_period en de opgegeven state
-            filteredPosts = actualTimePeriod.filter((post) => post.state === stateFilter);
+              // Filter de posts op basis van de meest actuele time_period en de opgegeven state (zonder hoofdlettergevoeligheid)
+              filteredPosts = actualTimePeriod.filter((post) => 
+                post.state.toLowerCase() === stateFilter.toLowerCase() // Vergelijk alles in kleine letters
+            );
 
+            
         } catch (error) {
             console.error("Error bij het ophalen van data:", error.message);
             filteredPosts = []; // Reset de filteredPosts bij een fout
