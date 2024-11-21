@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
 
@@ -80,4 +80,4 @@
     input {
         border-radius: 5px;
     }
-</style>
+</style> -->
