@@ -83,7 +83,7 @@
                 <div><h3>Index ${index2}</h3>${result2}</div>
             `;
         } else {
-            outputDiv.innerHTML = "<p>One or both indexes are invalid!</p>";
+            outputDiv.innerHTML = "<p>Er is een fout, vul een ander nummer in!</p>";
         }
     }
 
@@ -138,7 +138,7 @@
         class="input-field"
         type="number"
         bind:value={index1}
-        placeholder="Enter person nummer1"
+        placeholder="Enter person"
         min="0"
     />
 
@@ -146,11 +146,11 @@
         class="input-field"
         type="number"
         bind:value={index2}
-        placeholder="Enter person nummer"
+        placeholder="Enter person"
         min="0"
     />
 
-    <button on:click={compareIndexes}>Compare persons</button>
+    <button on:click={compareIndexes}>Vergelijk</button>
 
     <!-- Result output -->
     <div class="resultOutput"></div>
