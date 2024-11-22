@@ -11,5 +11,5 @@
     <Header />
     <!-- <State /> -->
     <Tryout />
-    <RadarChart {selectedPost}/>
+    <RadarChart/>
 </main>
