@@ -11,7 +11,7 @@
     let index1 = null; // Index for the first comparison
     let index2 = null; // Index for the second comparison
 
-    export let selectedPost = [];
+    let selectedPost = [];
 
 
     // Function to fetch the most current time period
@@ -69,8 +69,6 @@
             return "<p>Er is een foutje, vul een ander nummer in!</p>";
         }
     }
-
-    export { displayRange };
 
 
 

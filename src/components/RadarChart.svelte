@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import * as d3 from "d3";
 
-    import { selectedPost} from './tryout.svelte'; // Importeer selectedPost en de getoonde functie
+    // import { selectedPost} from './tryout.svelte'; // Importeer selectedPost en de getoonde functie
 
     // Voorbeelddata met intervallen en numerieke waarden
     let apiData = {
