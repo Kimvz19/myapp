@@ -1,16 +1,21 @@
 <script>
-    import { onMount } from 'svelte';
-    import * as d3 from 'd3';
+    import { onMount } from "svelte";
+    import * as d3 from "d3";
 
+    import { getPersonDetails } from "./path/to/your/script";
+
+    // Gebruik de functie
+    let personData = getPersonDetails(1);
+    console.log(personData);
 
     // Voorbeelddata met intervallen en numerieke waarden
     let apiData = {
         confidence: [0.6, 0.8], // Interval
-        highci: 1.5,            // Nummer
-        lowci: 0.5,             // Nummer
-        phase: 2,               // Nummer
-        quartile: [0.2, 0.7],   // Interval
-        value: [0.4, 0.9]       // Interval
+        highci: 1.5, // Nummer
+        lowci: 0.5, // Nummer
+        phase: 2, // Nummer
+        quartile: [0.2, 0.7], // Interval
+        value: [0.4, 0.9], // Interval
     };
 
     // Functie om waarden te schalen tussen 0 en 1
@@ -23,7 +28,7 @@
         lowci: { min: 0, max: 1 },
         phase: { min: 0, max: 2 },
         quartile: { min: 0, max: 1 },
-        value: { min: 0, max: 1 }
+        value: { min: 0, max: 1 },
     };
 
     // Data splitsen in minimum- en maximumwaarden
@@ -32,10 +37,28 @@
 
     for (let [key, value] of Object.entries(apiData)) {
         if (Array.isArray(value)) {
-            dataMin.push({ axis: key, value: normalize(value[0], rangeMap[key].min, rangeMap[key].max) });
-            dataMax.push({ axis: key, value: normalize(value[1], rangeMap[key].min, rangeMap[key].max) });
+            dataMin.push({
+                axis: key,
+                value: normalize(
+                    value[0],
+                    rangeMap[key].min,
+                    rangeMap[key].max,
+                ),
+            });
+            dataMax.push({
+                axis: key,
+                value: normalize(
+                    value[1],
+                    rangeMap[key].min,
+                    rangeMap[key].max,
+                ),
+            });
         } else {
-            let normalized = normalize(value, rangeMap[key].min, rangeMap[key].max);
+            let normalized = normalize(
+                value,
+                rangeMap[key].min,
+                rangeMap[key].max,
+            );
             dataMin.push({ axis: key, value: normalized });
             dataMax.push({ axis: key, value: normalized });
         }
@@ -53,9 +76,13 @@
 
     // Functie voor het genereren van de radar chart
     const drawChart = (container) => {
-        const rScale = d3.scaleLinear().range([0, radius]).domain([0, maxValue]);
+        const rScale = d3
+            .scaleLinear()
+            .range([0, radius])
+            .domain([0, maxValue]);
 
-        const svg = d3.select(container)
+        const svg = d3
+            .select(container)
             .append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -77,8 +104,14 @@
         // Aslijnen en labels toevoegen
         dataMin.forEach((d, i) => {
             const angle = angleSlice * i - Math.PI / 2;
-            const lineCoord = { x: rScale(maxValue) * Math.cos(angle), y: rScale(maxValue) * Math.sin(angle) };
-            const labelCoord = { x: (rScale(maxValue) + 20) * Math.cos(angle), y: (rScale(maxValue) + 20) * Math.sin(angle) };
+            const lineCoord = {
+                x: rScale(maxValue) * Math.cos(angle),
+                y: rScale(maxValue) * Math.sin(angle),
+            };
+            const labelCoord = {
+                x: (rScale(maxValue) + 20) * Math.cos(angle),
+                y: (rScale(maxValue) + 20) * Math.sin(angle),
+            };
 
             // Aslijnen
             svg.append("line")
@@ -101,7 +134,8 @@
 
         // Functie om een pad te tekenen
         const drawPath = (data, fill, stroke) => {
-            const line = d3.lineRadial()
+            const line = d3
+                .lineRadial()
                 .radius((d) => rScale(d.value))
                 .angle((d, i) => i * angleSlice);
 
@@ -128,16 +162,6 @@
 
 <!-- Container voor de grafiek -->
 <div bind:this={chartContainer}></div>
-
-<style>
-    div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
-
-
 
 <!-- // //importeren van D3
 //     import { onMount } from 'svelte';
@@ -241,7 +265,13 @@
 //         justify-content: center;
 //         align-items: center;
 //     }
-// </style> --> -->
+// </style> -->
+-->
 
-
-  
+<style>
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

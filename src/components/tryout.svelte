@@ -77,8 +77,7 @@
         if (index1Valid && index2Valid) {
             let result1 = await displayRange(index1);
             let result2 = await displayRange(index2);
-            console.log(result1);
-
+        
 
             // Display the comparison results
             outputDiv.innerHTML = `
@@ -91,6 +90,13 @@
         }
     }
 
+        // Exported function to get the details of a person based on their index
+        export async function getPersonDetails(personIndex) {
+        return await displayRange(personIndex);
+    }
+
+    // You can log the results here to test
+    console.log(getPersonDetails(index1));
     console.log(displayRange(index1));
 
 
