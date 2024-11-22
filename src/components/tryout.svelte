@@ -175,7 +175,7 @@
 
 <style>
     button,
-    p {
+    p, .input-field {
         font-family: "Montserrat";
         font-optical-sizing: auto;
         font-weight: 200;
