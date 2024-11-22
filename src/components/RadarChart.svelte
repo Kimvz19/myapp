@@ -1,6 +1,5 @@
 <script>
     import { onMount } from "svelte";
-    import { getPersonDetails, index1, index2, compareIndexes } from "../lib/tryout.js";
     import * as d3 from "d3";
 
     let selectedIndex1 = index1;
@@ -11,10 +10,6 @@
         console.log(`Index 1: ${selectedIndex1}`);
         console.log(`Index 2: ${selectedIndex2}`);
     });
-
-    async function handleComparison() {
-        await compareIndexes();
-    }
 
     // Voorbeelddata met intervallen en numerieke waarden
     let apiData = {
