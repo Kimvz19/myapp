@@ -92,6 +92,15 @@
         return await displayRange(personIndex);
     }
 
+    // Function to reset the form and variables to initial state
+    function resetForm() {
+        stateFilter = "hawaii";  // Reset state filter to the default state
+        index1 = null;  // Reset the first index
+        index2 = null;  // Reset the second index
+        filteredPosts = [];  // Clear filtered posts
+        actualTimePeriod = [];  // Clear actual time period data
+        dataFound = false;  // Reset the dataFound status
+    }
 
     // You can log the results here to test
     console.log(getPersonDetails(index1));
@@ -153,6 +162,8 @@
 
     <button on:click={compareIndexes}>Vergelijk</button>
 
+    <!-- Reset Button -->
+    <button on:click={resetForm}>Reset</button> <!-- Reset button added -->
 
     <!-- Result output -->
     <div class="resultOutput"></div>
