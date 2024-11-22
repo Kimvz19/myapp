@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
 
+
     // Voorbeelddata met intervallen en numerieke waarden
     let apiData = {
         confidence: [0.6, 0.8], // Interval

@@ -67,16 +67,18 @@
     }
 
     // Function to compare two indexes in filteredPosts
-    async function compareIndexes() {
+     async function compareIndexes() {
         let outputDiv = document.querySelector(".resultOutput");
 
         // Ensure that the indexes are valid numbers and within range
-        let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
-        let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
+         let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
+         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
         if (index1Valid && index2Valid) {
             let result1 = await displayRange(index1);
             let result2 = await displayRange(index2);
+            console.log(displayRange(index1));
+            console.log(displayRange(index2));
 
             // Display the comparison results
             outputDiv.innerHTML = `
@@ -88,6 +90,9 @@
             outputDiv.innerHTML = "<p>One or both indexes are invalid!</p>";
         }
     }
+
+    console.log(displayRange(index1));
+
 
 </script>
 
