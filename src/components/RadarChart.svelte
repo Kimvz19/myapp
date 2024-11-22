@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import * as d3 from "d3";
 
-    import { getPersonDetails } from "./tryout.svelte";
+    import { getPersonDetails } from "../components/tryout.svelte";
 
     // Gebruik de functie4
     let personData = getPersonDetails(1); 
