@@ -1,6 +1,20 @@
 <script>
     import { onMount } from "svelte";
+    import { getPersonDetails, index1, index2, compareIndexes } from "../lib/tryout.js";
     import * as d3 from "d3";
+
+    let selectedIndex1 = index1;
+    let selectedIndex2 = index2;
+
+    onMount(() => {
+        // Call any necessary initialization code
+        console.log(`Index 1: ${selectedIndex1}`);
+        console.log(`Index 2: ${selectedIndex2}`);
+    });
+
+    async function handleComparison() {
+        await compareIndexes();
+    }
 
     // Voorbeelddata met intervallen en numerieke waarden
     let apiData = {
@@ -250,7 +264,7 @@
 //     });
 // </script>
 
-// <!-- Container voor de grafiek -->
+// <Container voor de grafiek -->
 <!-- // <div bind:this={chartContainer}></div>
 
 // <style>
@@ -260,7 +274,7 @@
 //         align-items: center;
 //     }
 // </style> -->
--->
+
 
 <style>
     div {

@@ -35,8 +35,6 @@
 
             // Update the dataFound status
             dataFound = filteredPosts.length > 0;
-
-            
         } catch (error) {
             console.error("Error fetching data:", error.message);
             filteredPosts = []; // Reset the filtered posts on error
@@ -54,30 +52,29 @@
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             let selectedPost = filteredPosts[personIndex];
             return `
-                <p><strong>Value:</strong> ${selectedPost.value}</p>
-                <p><strong>Confidence Interval:</strong> ${selectedPost.confidence_interval}</p>
-                <p><strong>Low CI:</strong> ${selectedPost.lowci}</p>
-                <p><strong>High CI:</strong> ${selectedPost.highci}</p>
-                <p><strong>Quartile Range:</strong> ${selectedPost.quartile_range}</p>
-                <p><strong>Phase:</strong> ${selectedPost.phase}</p>
+                <p>${selectedPost.value}</p>
+                <p>${selectedPost.confidence_interval}</p>
+                <p>${selectedPost.lowci}</p>
+                <p>${selectedPost.highci}</p>
+                <p>${selectedPost.quartile_range}</p>
+                <p>${selectedPost.phase}</p>
             `;
         } else {
-            return "<p>Invalid index! Please select a valid index.</p>";
+            return "<p>Er is een foutje, vul een ander nummer in!</p>";
         }
     }
 
     // Function to compare two indexes in filteredPosts
-     async function compareIndexes() {
+    async function compareIndexes() {
         let outputDiv = document.querySelector(".resultOutput");
 
         // Ensure that the indexes are valid numbers and within range
-         let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
-         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
+        let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
+        let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
         if (index1Valid && index2Valid) {
             let result1 = await displayRange(index1);
             let result2 = await displayRange(index2);
-        
 
             // Display the comparison results
             outputDiv.innerHTML = `
@@ -90,16 +87,14 @@
         }
     }
 
-        // Exported function to get the details of a person based on their index
-        export async function getPersonDetails(personIndex) {
+    // Exported function to get the details of a person based on their index
+    export async function getPersonDetails(personIndex) {
         return await displayRange(personIndex);
     }
 
     // You can log the results here to test
     console.log(getPersonDetails(index1));
     console.log(displayRange(index1));
-
-
 </script>
 
 <!-- HTML Code -->
@@ -119,12 +114,7 @@
     >
         {#if dataFound}
             <!-- Green check mark if data is found -->
-            <svg
-                width="10"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-            >
+            <svg width="10" height="12" viewBox="0 0 12 12" fill="none">
                 <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
@@ -134,24 +124,37 @@
             </svg>
         {:else}
             <!-- Red cross if no data is found -->
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.66667 0C10.3533 0 13.3333 2.98 13.3333 6.66667C13.3333 10.3533 10.3533 13.3333 6.66667 13.3333C2.98 13.3333 0 10.3533 0 6.66667C0 2.98 2.98 0 6.66667 0ZM9.06 3.33333L6.66667 5.72667L4.27333 3.33333L3.33333 4.27333L5.72667 6.66667L3.33333 9.06L4.27333 10L6.66667 7.60667L9.06 10L10 9.06L7.60667 6.66667L10 4.27333L9.06 3.33333Z" fill="#F00" />
+            <svg width="10" height="12" viewBox="0 0 12 12" fill="none">
+                <path
+                    d="M6.66667 0C10.3533 0 13.3333 2.98 13.3333 6.66667C13.3333 10.3533 10.3533 13.3333 6.66667 13.3333C2.98 13.3333 0 10.3533 0 6.66667C0 2.98 2.98 0 6.66667 0ZM9.06 3.33333L6.66667 5.72667L4.27333 3.33333L3.33333 4.27333L5.72667 6.66667L3.33333 9.06L4.27333 10L6.66667 7.60667L9.06 10L10 9.06L7.60667 6.66667L10 4.27333L9.06 3.33333Z"
+                    fill="#F00"
+                />
             </svg>
         {/if}
     </button>
 
     <!-- Input fields for comparison indexes -->
-    <input class="input-field" type="number" bind:value={index1} placeholder="Enter Index 1" min=0 />
-    <input class="input-field" type="number" bind:value={index2} placeholder="Enter Index 2" min=0 />
+    <input
+        class="input-field"
+        type="number"
+        bind:value={index1}
+        placeholder="Enter person nummer1"
+        min="0"
+    />
 
-    <button on:click={compareIndexes}>Compare Indexes</button>
+    <input
+        class="input-field"
+        type="number"
+        bind:value={index2}
+        placeholder="Enter person nummer"
+        min="0"
+    />
+
+    <button on:click={compareIndexes}>Compare persons</button>
 
     <!-- Result output -->
     <div class="resultOutput"></div>
 </div>
-
-
-
 
 <!-- Styling -->
 <link
