@@ -181,10 +181,9 @@
 </div>
 
 <!-- Styling -->
-<link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
-/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"/>
+
+
 <style>
     .input-field {
         margin: 10px;
