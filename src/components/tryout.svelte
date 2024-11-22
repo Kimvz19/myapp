@@ -109,7 +109,7 @@
     <p>Data in {stateFilter}</p>
 
     <!-- User input for the state -->
-    <input type="text" bind:value={stateFilter} placeholder="Enter state" />
+    <input class="input-field" type="text" bind:value={stateFilter} placeholder="Enter state" />
 
     <!-- Filter posts button -->
     <button on:click={displayTime}>Filter Posts</button>
@@ -175,7 +175,7 @@
 
 <style>
     button,
-    p, .input-field {
+    p, .input-field  {
         font-family: "Montserrat";
         font-optical-sizing: auto;
         font-weight: 200;
