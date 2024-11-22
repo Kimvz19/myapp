@@ -5,7 +5,7 @@
     import { getPersonDetails } from "./tryout.svelte";
 
     // Gebruik de functie4
-    let personData = getPersonDetails(1);
+    let personData = getPersonDetails(1); 
     console.log(personData);
 
     // Voorbeelddata met intervallen en numerieke waarden
