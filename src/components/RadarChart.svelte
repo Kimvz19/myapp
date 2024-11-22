@@ -2,12 +2,6 @@
     import { onMount } from "svelte";
     import * as d3 from "d3";
 
-    import { getPersonDetails } from "../components/tryout.svelte";
-
-    // Gebruik de functie4
-    let personData = getPersonDetails(1); 
-    console.log(personData);
-
     // Voorbeelddata met intervallen en numerieke waarden
     let apiData = {
         confidence: [0.6, 0.8], // Interval
