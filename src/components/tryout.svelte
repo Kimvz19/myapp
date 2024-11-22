@@ -11,6 +11,9 @@
     let index1 = null; // Index for the first comparison
     let index2 = null; // Index for the second comparison
 
+    export let selectedPost = [];
+
+
     // Function to fetch the most current time period
     async function displayTime() {
         try {
@@ -53,7 +56,7 @@
     // Function to display data for a specific index from filteredPosts
     async function displayRange(personIndex) {
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
-            let selectedPost = filteredPosts[personIndex];
+            selectedPost = [filteredPosts[personIndex]];
             return `
                 <p>${selectedPost.value}</p>
                 <p>${selectedPost.confidence_interval}</p>
@@ -66,6 +69,10 @@
             return "<p>Er is een foutje, vul een ander nummer in!</p>";
         }
     }
+
+    export { displayRange };
+
+
 
     // Function to compare two indexes in filteredPosts
     async function compareIndexes() {
