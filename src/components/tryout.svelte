@@ -10,6 +10,7 @@
     let dataFound = false; // To track if data is found
     let index1 = null; // Index for the first comparison
     let index2 = null; // Index for the second comparison
+    let resultHtml = ''; // Variable to store the result HTML for displaying post details
 
     // Function to fetch the most current time period
     async function displayTime() {
@@ -51,7 +52,7 @@
     async function displayRange(personIndex) {
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             let selectedPost = filteredPosts[personIndex];
-            return `
+            resultHtml = `
                 <p>${selectedPost.value}</p>
                 <p>${selectedPost.confidence_interval}</p>
                 <p>${selectedPost.lowci}</p>
@@ -60,7 +61,7 @@
                 <p>${selectedPost.phase}</p>
             `;
         } else {
-            return "<p>Er is een foutje, vul een ander nummer in!</p>";
+            resultHtml = "<p>Er is een foutje, vul een ander nummer in!</p>";
         }
     }
 
@@ -100,12 +101,18 @@
         filteredPosts = [];  // Clear filtered posts
         actualTimePeriod = [];  // Clear actual time period data
         dataFound = false;  // Reset the dataFound status
+        resultHtml = ''; // Clear the displayed result details
+
+        // Clear the result output section in the HTML
+        let outputDiv = document.querySelector(".resultOutput");
+        outputDiv.innerHTML = ''; // Clear the result area
     }
 
     // You can log the results here to test
     console.log(getPersonDetails(index1));
     console.log(displayRange(index1));
 </script>
+
 
 <!-- HTML Code -->
 <div>
