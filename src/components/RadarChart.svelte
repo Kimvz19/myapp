@@ -2,15 +2,6 @@
     import { onMount } from "svelte";
     import * as d3 from "d3";
 
-    let selectedIndex1 = index1;
-    let selectedIndex2 = index2;
-
-    onMount(() => {
-        // Call any necessary initialization code
-        console.log(`Index 1: ${selectedIndex1}`);
-        console.log(`Index 2: ${selectedIndex2}`);
-    });
-
     // Voorbeelddata met intervallen en numerieke waarden
     let apiData = {
         confidence: [0.6, 0.8], // Interval
@@ -20,52 +11,6 @@
         quartile: [0.2, 0.7], // Interval
         value: [0.4, 0.9], // Interval
     };
-
-    // Functie om waarden te schalen tussen 0 en 1
-    const normalize = (value, min, max) => (value - min) / (max - min);
-
-    // Minimum- en maximumwaarden instellen voor normalisatie
-    const rangeMap = {
-        confidence: { min: 0, max: 1 },
-        highci: { min: 0, max: 2 },
-        lowci: { min: 0, max: 1 },
-        phase: { min: 0, max: 2 },
-        quartile: { min: 0, max: 1 },
-        value: { min: 0, max: 1 },
-    };
-
-    // Data splitsen in minimum- en maximumwaarden
-    let dataMin = [];
-    let dataMax = [];
-
-    for (let [key, value] of Object.entries(apiData)) {
-        if (Array.isArray(value)) {
-            dataMin.push({
-                axis: key,
-                value: normalize(
-                    value[0],
-                    rangeMap[key].min,
-                    rangeMap[key].max,
-                ),
-            });
-            dataMax.push({
-                axis: key,
-                value: normalize(
-                    value[1],
-                    rangeMap[key].min,
-                    rangeMap[key].max,
-                ),
-            });
-        } else {
-            let normalized = normalize(
-                value,
-                rangeMap[key].min,
-                rangeMap[key].max,
-            );
-            dataMin.push({ axis: key, value: normalized });
-            dataMax.push({ axis: key, value: normalized });
-        }
-    }
 
     let width = 1450;
     let height = 950;
