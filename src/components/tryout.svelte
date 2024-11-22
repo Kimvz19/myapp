@@ -1,16 +1,15 @@
 <script>
-    // import svelte
+    // Import Svelte and utility functions
     import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    // variabelen
+    // Variables
     let actualTimePeriod = []; // The most current time period
     let filteredPosts = []; // Filtered posts based on state and time period
     let stateFilter = "hawaii"; // Default state, in lowercase to avoid case sensitivity
     let dataFound = false; // To track if data is found
     let index1 = null; // Index for the first comparison
     let index2 = null; // Index for the second comparison
-   
 
     // Function to fetch the most current time period
     async function displayTime() {
@@ -45,14 +44,17 @@
 
     // Call displayTime when the component is mounted
     onMount(() => {
-        displayTime();
+        displayTime().then(() => {
+            // Log after data is fetched and available
+            console.log(filteredPosts); // Log filtered posts once data is available
+        });
     });
 
     // Function to display data for a specific index from filteredPosts
     async function displayRange(personIndex) {
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             let selectedPost = filteredPosts[personIndex];
-            return`
+            return `
                 <p>${selectedPost.value}</p>
                 <p>${selectedPost.confidence_interval}</p>
                 <p>${selectedPost.lowci}</p>
@@ -103,11 +105,13 @@
         dataFound = false;  // Reset the dataFound status
     }
 
-    // You can log the results here to test
-    console.log(getPersonDetails(index1));
-    console.log(displayRange(index1));
+    // Log the result of a specific index once the data is available
+    onMount(() => {
+        displayTime().then(() => {
+            console.log(displayRange(index1)); // Log result for the first index after data is available
+        });
+    });
 </script>
-
 
 <!-- HTML Code -->
 <div>
@@ -173,47 +177,32 @@
 
 <!-- Styling -->
 <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap"
     rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
 />
-
 <style>
-    div,
-    button,
-    input {
-        font-family: "Montserrat";
-        font-optical-sizing: auto;
-        font-weight: 200;
-        font-style: normal;
-        font-size: 20px;
-        margin-left: 10px;
-    }
-
-    button,
-    input {
-        border-radius: 5px;
+    .input-field {
+        margin: 10px;
+        padding: 8px;
+        font-size: 14px;
     }
 
     .status-button {
-        width: 15px; /* Vergroot de knop */
-        height: 16px; /* Vergroot de knop */
-        border-radius: 50%; /* Ronde knop */
-        margin-left: 15px; /* Iets meer ruimte */
-        border: none;
-        display: inline-flex;
+        width: 120px;
+        height: 40px;
+        font-size: 14px;
+        border-radius: 5px;
+        text-align: center;
+        display: flex;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
-        transition: all 0.3s ease; /* Zorgt voor een vloeiende overgang bij kleurverandering */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Schaduw voor extra diepte */
     }
 
-    .status-button:hover {
-        transform: scale(1.1); /* Knop wordt groter bij hover */
-    }
-
-    .status-button:active {
-        transform: scale(0.95); /* Knop wordt iets kleiner wanneer ingedrukt */
+    .resultOutput {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
     }
 </style>
 
