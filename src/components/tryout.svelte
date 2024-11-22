@@ -1,9 +1,9 @@
 <script>
-    // Import the necessary functions and components
+    // import svelte
     import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    // Variables for the posts
+    // variabelen
     let actualTimePeriod = []; // The most current time period
     let filteredPosts = []; // Filtered posts based on state and time period
     let stateFilter = "hawaii"; // Default state, in lowercase to avoid case sensitivity
@@ -35,6 +35,8 @@
 
             // Update the dataFound status
             dataFound = filteredPosts.length > 0;
+
+            
         } catch (error) {
             console.error("Error fetching data:", error.message);
             filteredPosts = []; // Reset the filtered posts on error
