@@ -142,11 +142,6 @@
         transform: scale(1.1); /* Knop wordt groter bij hover */
     }
 
-    .status-icon {
-        width: 24px; /* Maak het pictogram iets groter */
-        height: 24px;
-    }
-
     .status-button:active {
         transform: scale(0.95); /* Knop wordt iets kleiner wanneer ingedrukt */
     }
