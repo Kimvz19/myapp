@@ -52,7 +52,7 @@
     // Function to display data for a specific index from filteredPosts
     async function displayRange(personIndex) {
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
-            const selectedPost = filteredPosts[personIndex];
+            let selectedPost = filteredPosts[personIndex];
             return `
                 <p><strong>Value:</strong> ${selectedPost.value}</p>
                 <p><strong>Confidence Interval:</strong> ${selectedPost.confidence_interval}</p>
@@ -68,15 +68,15 @@
 
     // Function to compare two indexes in filteredPosts
     async function compareIndexes() {
-        const outputDiv = document.querySelector(".resultOutput");
+        let outputDiv = document.querySelector(".resultOutput");
 
         // Ensure that the indexes are valid numbers and within range
-        const index1Valid = index1 >= 0 && index1 < filteredPosts.length;
-        const index2Valid = index2 >= 0 && index2 < filteredPosts.length;
+        let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
+        let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
         if (index1Valid && index2Valid) {
-            const result1 = await displayRange(index1);
-            const result2 = await displayRange(index2);
+            let result1 = await displayRange(index1);
+            let result2 = await displayRange(index2);
 
             // Display the comparison results
             outputDiv.innerHTML = `
@@ -88,6 +88,7 @@
             outputDiv.innerHTML = "<p>One or both indexes are invalid!</p>";
         }
     }
+
 </script>
 
 <!-- HTML Code -->
