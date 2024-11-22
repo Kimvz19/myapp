@@ -11,8 +11,7 @@
     let index1 = null; // Index for the first comparison
     let index2 = null; // Index for the second comparison
 
-    let selectedPost = [];
-
+    let selectedPost = {}; // Changed from array to object for single post
 
     // Function to fetch the most current time period
     async function displayTime() {
@@ -56,7 +55,7 @@
     // Function to display data for a specific index from filteredPosts
     async function displayRange(personIndex) {
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
-            selectedPost = [filteredPosts[personIndex]];
+            selectedPost = filteredPosts[personIndex]; // Access directly the post object
             return `
                 <p>${selectedPost.value}</p>
                 <p>${selectedPost.confidence_interval}</p>
@@ -69,8 +68,6 @@
             return "<p>Er is een foutje, vul een ander nummer in!</p>";
         }
     }
-
-
 
     // Function to compare two indexes in filteredPosts
     async function compareIndexes() {
@@ -91,31 +88,20 @@
                 <div><h3>Index ${index2}</h3>${result2}</div>
             `;
         } else {
-            outputDiv.innerHTML = "<p>Er is een fout, vul een ander nummer in!</p>";
+            outputDiv.innerHTML =
+                "<p>Er is een fout, vul een ander nummer in!</p>";
         }
-    }
-
-    // Exported function to get the details of a person based on their index
-    export async function getPersonDetails(personIndex) {
-        return await displayRange(personIndex);
     }
 
     // Function to reset the form and variables to initial state
     function resetForm() {
-        stateFilter = "hawaii";  // Reset state filter to the default state
-        index1 = null;  // Reset the first index
-        index2 = null;  // Reset the second index
-        filteredPosts = [];  // Clear filtered posts
-        actualTimePeriod = [];  // Clear actual time period data
-        dataFound = false;  // Reset the dataFound status
+        stateFilter = "hawaii"; // Reset state filter to the default state
+        index1 = null; // Reset the first index
+        index2 = null; // Reset the second index
+        filteredPosts = []; // Clear filtered posts
+        actualTimePeriod = []; // Clear actual time period data
+        dataFound = false; // Reset the dataFound status
     }
-
-    // Log the result of a specific index once the data is available
-    onMount(() => {
-        displayTime().then(() => {
-            console.log(displayRange(index1)); // Log result for the first index after data is available
-        });
-    });
 </script>
 
 <!-- HTML Code -->
@@ -131,7 +117,7 @@
     <!-- Status button showing if data is found -->
     <button
         class="status-button"
-        style:background-color={dataFound ? "green" : "red"}
+        style="background-color: {dataFound ? 'green' : 'red'}"
     >
         {#if dataFound}
             <!-- Green check mark if data is found -->
@@ -174,17 +160,30 @@
     <button on:click={compareIndexes}>Vergelijk</button>
 
     <!-- Reset Button -->
-    <button on:click={resetForm}>Reset</button> <!-- Reset button added -->
+    <button on:click={resetForm}>Reset</button>
+    <!-- Reset button added -->
 
     <!-- Result output -->
     <div class="resultOutput"></div>
 </div>
 
 <!-- Styling -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"/>
-
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+/>
 
 <style>
+    button,
+    p {
+        font-family: "Montserrat";
+        font-optical-sizing: auto;
+        font-weight: 200;
+        font-style: normal;
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
     .input-field {
         margin: 10px;
         padding: 8px;
@@ -209,4 +208,3 @@
         border-radius: 8px;
     }
 </style>
-
