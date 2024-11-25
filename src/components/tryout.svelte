@@ -60,14 +60,14 @@
     async function displayRange(personIndex) {
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             selectedPost = filteredPosts[personIndex]; // Access directly the post object
-            return [
-                selectedPost.value,
-                selectedPost.confidence_interval,
-                selectedPost.lowci,
-                selectedPost.highci,
-                selectedPost.quartile_range,
-                selectedPost.phase,
-            ];
+            return {
+                value: selectedPost.value,
+                confidence_interval: selectedPost.confidence_interval,
+                lowci: selectedPost.lowci,
+                highci: selectedPost.highci,
+                quartile_range: selectedPost.quartile_range,
+                phase: selectedPost.phase,
+            };
         } else {
             return "<p>Er is een foutje, vul een ander nummer in!</p>";
         }
@@ -111,7 +111,6 @@
     //////////////////
     // Radar chart //
     //////////////////
-
 </script>
 
 <!-- HTML Code -->
