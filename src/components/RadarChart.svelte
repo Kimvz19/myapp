@@ -4,7 +4,8 @@
     import {result1, result2} from "../components/tryout.svelte";
 
 
-    
+    console.log(result1);
+    console.log(result2);
 
     // Voorbeeld data voor de grafiek
     let apiData = {
