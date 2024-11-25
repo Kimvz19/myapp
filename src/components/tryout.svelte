@@ -3,8 +3,8 @@
     import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    export let result1 = [];
-    export let result2 = [];
+    let result1 = [];
+    let result2 = [];
 
     // Variables
     let actualTimePeriod = []; // The most current time period

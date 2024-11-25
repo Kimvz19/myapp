@@ -1,13 +1,6 @@
 <script>
     import { onMount } from "svelte";
     import * as d3 from "d3";
-    import {result1, result2} from "../components/tryout.svelte";
-
-
-    console.log(result1);
-    console.log(result2);
-
-    
 
     // Voorbeeld data voor de grafiek
     let apiData = {
