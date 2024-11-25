@@ -4,8 +4,8 @@
     import * as d3 from "d3";
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    let result1 = [];
-    let result2 = [];
+    let result1 = {};
+    let result2 = {};
 
     // Variables
     let actualTimePeriod = []; // The most current time period
@@ -100,16 +100,13 @@
 
     // Function to reset the form and variables to initial state
     function resetForm() {
-    stateFilter = "hawaii"; // Reset state filter to the default state
-    index1 = null; // Reset the first index
-    index2 = null; // Reset the second index
-    filteredPosts = []; // Clear filtered posts
-    actualTimePeriod = []; // Clear actual time period data
-    dataFound = false; // Reset the dataFound status
-    result1 = [];
-    result2 = [];
-}
-
+        stateFilter = "hawaii"; // Reset state filter to the default state
+        index1 = null; // Reset the first index
+        index2 = null; // Reset the second index
+        filteredPosts = []; // Clear filtered posts
+        actualTimePeriod = []; // Clear actual time period data
+        dataFound = false; // Reset the dataFound status
+    }
 
     //////////////////
     // Radar chart //
@@ -120,20 +117,11 @@
     let height = 500; // Hoogte van de grafiek
 
 
-    // Dataset 1 (Data punten voor Angst, met 'axis' als de assen namen)
     let data1 = [
-        { axis: "min", value: "{result1.value} - 1", lowci: "{result1.lowci} - 1", highci: "{result1.highci} - 1" },// Punt A voor Angst
-        { axis: "Avg", value: "{result1.value}  ", lowci: "{result1.lowci}", highci: "{result1.highci}" }, // Punt B voor Angst
-        { axis: "max", value: "{result1.value} + 1", lowci: "{result1.lowci} + 1"  , highci: "{result1.highci}" + 1 }, // Punt C voor Angst
+        { axis: "A", value: "13.3", lowci: "8.6", highci: "12.4"}, // Punt A voor Angst
+        { axis: "B", value: "10.1", lowci: "6.5", highci: "14.2" }, // Punt B voor Angst
+        { axis: "C", value: "15.0", lowci: "12.3", highci: "18.7" }, // Punt C voor Angst
     ];
-    
-    console.log(data1); 
-
-    // let data1 = [
-    //     { axis: "A", value: "13.3", lowci: "8.6", highci: "19.2" }, // Punt A voor Angst
-    //     { axis: "B", value: "10.1", lowci: "6.5", highci: "14.2" }, // Punt B voor Angst
-    //     { axis: "C", value: "15.0", lowci: "12.3", highci: "18.7" }, // Punt C voor Angst
-    // ];
 
 
     // Dataset 2 (Data punten voor Depressie, met 'axis' als de assen namen)
@@ -142,6 +130,8 @@
         { axis: "B", value: "11.5", lowci: "8.0", highci: "15.0" }, // Punt B voor Depressie
         { axis: "C", value: "14.2", lowci: "10.0", highci: "18.0" }, // Punt C voor Depressie
     ];
+
+    console.log(data2);
 
     let maxValue = 20; // Maximale waarde voor de schaal
     let levels = 5; // Aantal niveau cirkels voor de grafiek
