@@ -59,14 +59,14 @@
     async function displayRange(personIndex) {
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             selectedPost = filteredPosts[personIndex]; // Access directly the post object
-            return `
-                <p>${selectedPost.value}</p>
-                <p>${selectedPost.confidence_interval}</p>
-                <p>${selectedPost.lowci}</p>
-                <p>${selectedPost.highci}</p>
-                <p>${selectedPost.quartile_range}</p>
-                <p>${selectedPost.phase}</p>
-            `;
+            return [
+                selectedPost.value,
+                selectedPost.confidence_interval,
+                selectedPost.lowci,
+                selectedPost.highci,
+                selectedPost.quartile_range,
+                selectedPost.phase,
+            ];
         } else {
             return "<p>Er is een foutje, vul een ander nummer in!</p>";
         }
