@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import * as d3 from "d3";
+    import * as d3 from 'd3';
 
     // Voorbeeld data voor de grafiek
     let apiData = {
