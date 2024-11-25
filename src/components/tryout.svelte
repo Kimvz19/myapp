@@ -13,6 +13,9 @@
 
     let selectedPost = {}; // Changed from array to object for single post
 
+    export let result1 = [];
+    export let result2 = [];
+
     // Function to fetch the most current time period
     async function displayTime() {
         try {
@@ -78,8 +81,8 @@
         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
         if (index1Valid && index2Valid) {
-            let result1 = await displayRange(index1);
-            let result2 = await displayRange(index2);
+            result1 = await displayRange(index1);
+            result2 = await displayRange(index2);
 
             // Display the comparison results
             outputDiv.innerHTML = `
@@ -92,6 +95,8 @@
                 "<p>Er is een fout, vul een ander nummer in!</p>";
         }
     }
+
+
 
     // Function to reset the form and variables to initial state
     function resetForm() {

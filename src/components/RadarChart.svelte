@@ -1,6 +1,25 @@
 <script>
     import { onMount } from "svelte";
     import * as d3 from "d3";
+    import {result1, result2} from "../components/tryout.svelte";
+
+
+    async function importResults() {
+    try {
+      //aanroepen van de data uit de API
+      let dataIndex1 = await result1;
+      let dataIndex2 = await result2;
+
+    console.log("Data Index 1:", dataIndex1);
+    console.log("Data Index 2:", dataIndex2);
+
+    } catch (error) {
+      // Melding voor error
+      console.error("Error bij het ophalen van data:", error.message);
+    }
+
+  }
+
 
     // Voorbeeld data voor de grafiek
     let apiData = {
