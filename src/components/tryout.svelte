@@ -112,7 +112,6 @@
     //////////////////
     // Radar chart //
     //////////////////
-console.log(result1.value, result1.highci);
 
 
 </script>
