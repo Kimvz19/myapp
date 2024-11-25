@@ -14,32 +14,18 @@
   rel="stylesheet"
 />
 
-
-
 <!-- html code-->
 <h1>De psychologische impact van COVID-19</h1>
 <h2>Breng de indicatoren van angst en depressie in beeld</h2>
 
-
-
-<!-- filter buttons -->
-<p>Filter opties</p>
-
-<button>all filters</button>
-<button>time period</button>
-<button>state</button>
-
-
 <!-- styling -->
 
 <style>
-
   h1,
   h2 {
     display: flex;
     justify-content: center;
     text-align: center;
-
   }
 
   h1 {
@@ -50,26 +36,11 @@
     font-size: 45px;
   }
 
-  h2,
-  p {
+  h2 {
     font-family: "Montserrat";
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
     font-size: 25px;
   }
-
-  p {
-    margin-left: 10px;
-  }
-
-  button {
-    font-family: "Montserrat";
-    font-optical-sizing: auto;
-    font-weight: 200;
-    font-style: normal;
-    font-size: 20px;
-    margin-left: 10px;
-  }
-
 </style>
