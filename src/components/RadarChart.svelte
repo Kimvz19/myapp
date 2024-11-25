@@ -152,6 +152,39 @@
             .style("stroke", "#800080")
             .style("stroke-width", "2px")
             .style("fill-opacity", 0.8);
+
+        // Nu, om de confidence interval lijnen te tekenen (lowci, highci):
+        function drawConfidenceInterval(data, color) {
+            let radarLineCI = d3
+                .lineRadial()
+                .radius((d) => (parseFloat(d.lowci) / maxValue) * radius) // Low CI lijn
+                .angle((d, i) => i * angleSlice)
+                .curve(d3.curveCardinalClosed);
+            svg.append("path")
+                .datum(data) // Gebruik data voor Anxiety of Depression
+                .attr("d", radarLineCI)
+                .style("fill", "none")
+                .style("stroke", color)
+                .style("stroke-dasharray", "3,3")
+                .style("stroke-width", "2px");
+
+            let radarLineHighCI = d3
+                .lineRadial()
+                .radius((d) => (parseFloat(d.highci) / maxValue) * radius) // High CI lijn
+                .angle((d, i) => i * angleSlice)
+                .curve(d3.curveCardinalClosed);
+            svg.append("path")
+                .datum(data) // Gebruik data voor Anxiety of Depression
+                .attr("d", radarLineHighCI)
+                .style("fill", "none")
+                .style("stroke", color)
+                .style("stroke-dasharray", "3,3")
+                .style("stroke-width", "2px");
+        }
+
+        // Teken confidence intervals
+        drawConfidenceInterval(data1, "#40E0D0"); // Anxiety
+        drawConfidenceInterval(data2, "#800080"); // Depression
     }
 </script>
 
