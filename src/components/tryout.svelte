@@ -114,6 +114,9 @@
     //////////////////
 
 
+    console.log(`results of index1: ${result1}`);
+
+
 </script>
 
 <!-- HTML Code -->
@@ -184,7 +187,6 @@
     <div class="resultOutput"></div>
 </div>
 
-<div class="chart" bind:this={chartContainer}></div>
 
 <!-- Styling -->
 <link
@@ -228,9 +230,4 @@
         border-radius: 8px;
     }
 
-    .chart {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 </style>
