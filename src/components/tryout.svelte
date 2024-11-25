@@ -54,7 +54,6 @@
             // Log after data is fetched and available
             console.log(filteredPosts); // Log filtered posts once data is available
         });
-        drawChart(chartContainer); // Activeert de grafiek
     });
 
     // Function to display data for a specific index from filteredPosts
@@ -113,112 +112,6 @@
     // Radar chart //
     //////////////////
 
-    //    // Voorbeeld data voor de grafiek
-    //    let apiData = {
-    //     confidence: [0.6, 0.8], // Interval
-    //     highci: 1.5, // Nummer
-    //     lowci: 0.5, // Nummer
-    //     phase: 2, // Nummer
-    //     quartile: [0.2, 0.7], // Interval
-    //     value: [0.4, 0.9], // Interval
-    // };
-
-    // Afmetingen en instellingen voor de grafiek
-
-    let dataValues = result1;
-    console.log(dataValues);
-
-    let normalizedValues = normalizeData(dataValues);
-    console.log(normalizedValues);
-
-    // Radar chart tekenen
-    let drawChart = (container) => {
-        let rScale = d3.scaleLinear().range([0, radius]).domain([0, maxValue]);
-
-        let svg = d3
-            .select(container)
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", `translate(${width / 2}, ${height / 2})`);
-
-        // Voeg concentrische cirkels toe
-        for (let level = 0; level < levels; level++) {
-            let r = (radius / levels) * (level + 1);
-            svg.append("circle")
-                .attr("cx", 0)
-                .attr("cy", 0)
-                .attr("r", r)
-                .style("fill", "none")
-                .style("stroke", "#ddd")
-                .style("stroke-width", 0.5);
-        }
-
-        // Labels voor de assen
-        let axisLabels = [
-            "Value",
-            "Confidence Interval",
-            "Low CI",
-            "High CI",
-            "Quartile Range",
-            "Phase",
-        ];
-
-        // Voeg de assen en labels toe
-        normalizedValues.forEach((d, i) => {
-            let angle = angleSlice * i - Math.PI / 2;
-            let lineCoord = {
-                x: rScale(maxValue) * Math.cos(angle),
-                y: rScale(maxValue) * Math.sin(angle),
-            };
-            let labelCoord = {
-                x: (rScale(maxValue) + 20) * Math.cos(angle),
-                y: (rScale(maxValue) + 20) * Math.sin(angle),
-            };
-
-            // Tekenen van de assen
-            svg.append("line")
-                .attr("x1", 0)
-                .attr("y1", 0)
-                .attr("x2", lineCoord.x)
-                .attr("y2", lineCoord.y)
-                .style("stroke", "#888")
-                .style("stroke-width", 0.5);
-
-            // Toevoegen van labels voor elke as
-            svg.append("text")
-                .attr("x", labelCoord.x)
-                .attr("y", labelCoord.y)
-                .attr("dy", "0.5em")
-                .attr("text-anchor", "middle")
-                .style("font-size", "10px")
-                .text(axisLabels[i]);
-        });
-
-        // Functie om het pad te tekenen
-        let drawPath = (data, fill, stroke) => {
-            let line = d3
-                .lineRadial()
-                .radius((d) => rScale(d))
-                .angle((d, i) => i * angleSlice);
-
-            svg.append("path")
-                .datum(data)
-                .attr("d", line)
-                .style("fill", fill)
-                .style("stroke", stroke)
-                .style("stroke-width", 2);
-        };
-
-        // Teken het pad voor de genormaliseerde waarden
-        drawPath(normalizedValues, "rgba(0, 128, 255, 0.3)", "#007acc");
-    };
-
-    // Roep de functie aan met een container
-    drawChart("#chartContainer");
-
-    // De grafiek tekenen zodra het component is gemonteerd
 </script>
 
 <!-- HTML Code -->
