@@ -113,22 +113,22 @@
 // Radar chart //
 //////////////////
 
-       // Voorbeeld data voor de grafiek
-       let apiData = {
-        confidence: [0.6, 0.8], // Interval
-        highci: 1.5, // Nummer
-        lowci: 0.5, // Nummer
-        phase: 2, // Nummer
-        quartile: [0.2, 0.7], // Interval
-        value: [0.4, 0.9], // Interval
-    };
+    //    // Voorbeeld data voor de grafiek
+    //    let apiData = {
+    //     confidence: [0.6, 0.8], // Interval
+    //     highci: 1.5, // Nummer
+    //     lowci: 0.5, // Nummer
+    //     phase: 2, // Nummer
+    //     quartile: [0.2, 0.7], // Interval
+    //     value: [0.4, 0.9], // Interval
+    // };
 
     // Afmetingen en instellingen voor de grafiek
     let width = 1450;
     let height = 950;
     let maxValue = 1;
     let radius = Math.min(width / 2, height / 2.2);
-    let angleSlice = (Math.PI * 2) / apiData.confidence.length; // Aantal assen (één per dataset)
+    let angleSlice = (Math.PI * 2) / result1.confidence.length; // Aantal assen (één per dataset)
     let levels = 15; // Aantal concentrische lagen in de grafiek
 
     let chartContainer;
@@ -161,7 +161,7 @@
         }
 
         // Voeg de assen en labels toe
-        apiData.confidence.forEach((d, i) => {
+        result1.confidence.forEach((d, i) => {
             const angle = angleSlice * i - Math.PI / 2;
             const lineCoord = {
                 x: rScale(maxValue) * Math.cos(angle),
@@ -207,7 +207,7 @@
         };
 
         // Pad voor de data tekenen (bijvoorbeeld voor confidence)
-        drawPath(apiData.confidence, "rgba(0, 128, 255, 0.3)", "#007acc");
+        drawPath(result1.confidence, "rgba(0, 128, 255, 0.3)", "#007acc");
     };
 
     // De grafiek tekenen zodra het component is gemonteerd
