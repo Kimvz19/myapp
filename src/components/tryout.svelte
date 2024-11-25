@@ -125,7 +125,7 @@
 
     // Afmetingen en instellingen voor de grafiek
 
-    let dataValues = [result1];
+    let dataValues = result1;
     console.log(dataValues);
 
     let normalizedValues = normalizeData(dataValues);
