@@ -3,9 +3,9 @@
     import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    export let result1
-    export let result2 
-    
+    export let result1 = [];
+    export let result2 = [];
+
     // Variables
     let actualTimePeriod = []; // The most current time period
     let filteredPosts = []; // Filtered posts based on state and time period
