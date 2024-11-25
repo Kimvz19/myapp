@@ -54,6 +54,8 @@
             // Log after data is fetched and available
             console.log(filteredPosts); // Log filtered posts once data is available
         });
+
+        drawChart();
     });
 
     // Function to display data for a specific index from filteredPosts
@@ -200,11 +202,6 @@
        .style("stroke", "blue")
        .style("stroke-width", "3px");
   };
-
-  // Laad de grafiek zodra de component is gemonteerd
-  onMount(() => {
-    drawChart(); // Activeert de grafiek
-  });
 
 </script>
 
