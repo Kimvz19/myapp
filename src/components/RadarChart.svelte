@@ -7,6 +7,8 @@
     console.log(result1);
     console.log(result2);
 
+    
+
     // Voorbeeld data voor de grafiek
     let apiData = {
         confidence: [0.6, 0.8], // Interval

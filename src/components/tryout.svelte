@@ -3,6 +3,9 @@
     import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
 
+    export let result1
+    export let result2 
+    
     // Variables
     let actualTimePeriod = []; // The most current time period
     let filteredPosts = []; // Filtered posts based on state and time period
@@ -13,8 +16,6 @@
 
     let selectedPost = {}; // Changed from array to object for single post
 
-    export let result1
-    export let result2 
 
     // Function to fetch the most current time period
     async function displayTime() {
