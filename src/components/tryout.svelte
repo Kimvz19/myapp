@@ -55,6 +55,7 @@
             // Log after data is fetched and available
             console.log(filteredPosts); // Log filtered posts once data is available
         });
+        drawChart(chartContainer); // Activeert de grafiek
     });
 
     // Function to display data for a specific index from filteredPosts
@@ -128,7 +129,7 @@
     let height = 950;
     let maxValue = 1;
     let radius = Math.min(width / 2, height / 2.2);
-    let angleSlice = (Math.PI * 2) / result1.confidence.length; // Aantal assen (één per dataset)
+    let angleSlice = (Math.PI * 2) / result1.length; // Aantal assen (één per dataset)
     let levels = 15; // Aantal concentrische lagen in de grafiek
 
     let chartContainer;
@@ -211,9 +212,7 @@
     };
 
     // De grafiek tekenen zodra het component is gemonteerd
-    onMount(() => {
-        drawChart(chartContainer); // Activeert de grafiek
-    });
+
 </script>
 
 <!-- HTML Code -->
