@@ -129,7 +129,7 @@
     let height = 950;
     let maxValue = 1;
     let radius = Math.min(width / 2, height / 2.2);
-    let angleSlice = (Math.PI * 2) / result1.length; // Aantal assen (één per dataset)
+    let angleSlice = (Math.PI * 2) / result1.confidence.length; // Aantal assen (één per dataset)
     let levels = 15; // Aantal concentrische lagen in de grafiek
 
     let chartContainer;
