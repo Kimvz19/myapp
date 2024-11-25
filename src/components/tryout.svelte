@@ -13,8 +13,8 @@
 
     let selectedPost = {}; // Changed from array to object for single post
 
-    export let result1 = [];
-    export let result2 = [];
+    export let result1
+    export let result2 
 
     // Function to fetch the most current time period
     async function displayTime() {
