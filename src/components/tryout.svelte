@@ -2,6 +2,7 @@
     // Import Svelte and utility functions
     import { onMount } from "svelte";
     import { fetchPosts } from "../lib/apiUtil.js";
+    
 
     let result1 = [];
     let result2 = [];
