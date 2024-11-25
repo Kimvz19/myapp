@@ -81,19 +81,9 @@
         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
         if (index1Valid && index2Valid) {
-            // result1 = await displayRange(index1);
-            // result2 = await displayRange(index2);
-            try {
-                result1 = await displayRange(index1);
-            } catch (error) {
-                console.error(`Fout bij ophalen van result1: ${error.message}`);
-            }
-
-            try {
-                result2 = await displayRange(index2);
-            } catch (error) {
-                console.error(`Fout bij ophalen van result2: ${error.message}`);
-            }
+            result1 = await displayRange(index1);
+            result2 = await displayRange(index2);
+            console.log(result1, result2);
 
             // Display the comparison results
             outputDiv.innerHTML = `
