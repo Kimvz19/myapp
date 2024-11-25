@@ -113,8 +113,88 @@
     // Radar chart //
     //////////////////
 
+    let data1 = [
+      {axis: "Confidence Interval", value: 17.8},
+      {axis: "High CI", value: 24.7},
+      {axis: "Low CI", value: 12.2},
+      {axis: "Phase", value: 4.2},
+      {axis: "Quartile Range", value: 16.6}
+    ];
 
-    console.log(`results of index1: ${result1}`);
+    let data2 = [
+      {axis: "Confidence Interval", value: 15.5},
+      {axis: "High CI", value: 22.3},
+      {axis: "Low CI", value: 10.0},
+      {axis: "Phase", value: 5.8},
+      {axis: "Quartile Range", value: 18.2}
+    ];
+
+    let margin = {top: 50, right: 50, bottom: 50, left: 50};
+    let width = 600 - margin.left - margin.right;
+    let height = 600 - margin.top - margin.bottom;
+    let radius = Math.min(width, height) / 2;
+
+    // Create SVG container
+    let svg = d3.select("#radar-chart")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+                .attr("transform", "translate(" + (width / 2 + margin.left) + "," + (height / 2 + margin.top) + ")");
+
+    // Create scale for the radar chart
+    let angleSlice = Math.PI * 2 / data1.length;
+    let rScale = d3.scaleLinear()
+                   .domain([0, 30])  // Max value across datasets
+                   .range([0, radius]);
+
+    // Function to draw the radar chart's axis
+    let axisGrid = svg.append("g").attr("class", "axisWrapper");
+    axisGrid.selectAll(".axis")
+            .data(data1)
+            .enter()
+            .append("line")
+            .attr("x1", function(d, i) { return rScale(0) * Math.cos(angleSlice * i - Math.PI / 2); })
+            .attr("y1", function(d, i) { return rScale(0) * Math.sin(angleSlice * i - Math.PI / 2); })
+            .attr("x2", function(d, i) { return rScale(30) * Math.cos(angleSlice * i - Math.PI / 2); })
+            .attr("y2", function(d, i) { return rScale(30) * Math.sin(angleSlice * i - Math.PI / 2); })
+            .attr("class", "line")
+            .style("stroke", "#CDCDCD")
+            .style("stroke-width", "1px");
+
+    axisGrid.selectAll(".axisLabel")
+            .data(data1)
+            .enter()
+            .append("text")
+            .attr("x", function(d, i) { return rScale(30) * Math.cos(angleSlice * i - Math.PI / 2); })
+            .attr("y", function(d, i) { return rScale(30) * Math.sin(angleSlice * i - Math.PI / 2); })
+            .attr("class", "legend")
+            .style("font-size", "12px")
+            .style("text-anchor", "middle")
+            .style("fill", "#737373")
+            .text(function(d) { return d.axis; });
+
+    // Function to draw radar chart path
+    let radarLine = d3.lineRadial()
+                      .radius(function(d) { return rScale(d.value); })
+                      .angle(function(d, i) { return i * angleSlice; });
+
+    // Draw the radar chart for the first dataset (data1)
+    svg.append("path")
+       .datum(data1)
+       .attr("class", "radarChart")
+       .attr("d", radarLine)
+       .style("fill", "rgba(255, 0, 0, 0.3)")
+       .style("stroke", "red")
+       .style("stroke-width", "3px");
+
+    // Draw the radar chart for the second dataset (data2)
+    svg.append("path")
+       .datum(data2)
+       .attr("class", "radarChart")
+       .attr("d", radarLine)
+       .style("fill", "rgba(0, 0, 255, 0.3)")
+       .style("stroke", "blue")
+       .style("stroke-width", "3px");
 
 
 </script>
