@@ -1,117 +1,211 @@
 <script>
     import { onMount } from "svelte";
-    import * as d3 from 'd3';
+    import * as d3 from "d3";
 
-    // Voorbeeld data voor de grafiek
-    let apiData = {
-        confidence: [0.6, 0.8], // Interval
-        highci: 1.5, // Nummer
-        lowci: 0.5, // Nummer
-        phase: 2, // Nummer
-        quartile: [0.2, 0.7], // Interval
-        value: [0.4, 0.9], // Interval
-    };
+    let chartContainer; // Verwijzing naar de SVG-container
+    let width = 400;
+    let height = 400;
 
-    // Afmetingen en instellingen voor de grafiek
-    let width = 1450;
-    let height = 950;
-    let maxValue = 1;
-    let radius = Math.min(width / 2, height / 2.2);
-    let angleSlice = (Math.PI * 2) / apiData.confidence.length; // Aantal assen (één per dataset)
-    let levels = 15; // Aantal concentrische lagen in de grafiek
+    // Dataset 1 (Roze)
+    let data1 = [
+        {
+            axis: "A",
+            value: "13.3",
+            lowci: "8.6",
+            highci: "19.2",
+            confidence_interval: "8.6 - 19.2",
+        },
+        {
+            axis: "B",
+            value: "10.1",
+            lowci: "6.5",
+            highci: "14.2",
+            confidence_interval: "6.5 - 14.2",
+        },
+        {
+            axis: "C",
+            value: "15.0",
+            lowci: "12.3",
+            highci: "18.7",
+            confidence_interval: "12.3 - 18.7",
+        },
+    ];
 
-    let chartContainer;
+    // Dataset 2 (Groen)
+    let data2 = [
+        {
+            axis: "A",
+            value: "12.0",
+            lowci: "9.0",
+            highci: "15.0",
+            confidence_interval: "9.0 - 15.0",
+        },
+        {
+            axis: "B",
+            value: "11.5",
+            lowci: "8.0",
+            highci: "15.0",
+            confidence_interval: "8.0 - 15.0",
+        },
+        {
+            axis: "C",
+            value: "14.2",
+            lowci: "10.0",
+            highci: "18.0",
+            confidence_interval: "10.0 - 18.0",
+        },
+    ];
 
-    // Functie voor het genereren van de radar grafiek
-    const drawChart = (container) => {
-        const rScale = d3
-            .scaleLinear()
-            .range([0, radius])
-            .domain([0, maxValue]);
+    let maxValue = 20; // Maximale waarde (afhankelijk van je dataset)
+    let levels = 5; // Aantal niveaus in de grid
+
+    onMount(() => {
+        createRadarChart(chartContainer);
+    });
+
+    function createRadarChart(container) {
+        const radius = Math.min(width, height) / 2;
+        const angleSlice = (Math.PI * 2) / data1.length;
 
         const svg = d3
             .select(container)
-            .append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")
             .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-        // Voeg de concentrische cirkels toe
-        for (let level = 0; level < levels; level++) {
-            const r = (radius / levels) * (level + 1);
-            svg.append("circle")
-                .attr("cx", 0)
-                .attr("cy", 0)
-                .attr("r", r)
-                .style("fill", "none")
-                .style("stroke", "#ddd")
-                .style("stroke-width", 0.5);
-        }
+        // Grid niveaus
+        svg.selectAll(".grid-level")
+            .data(d3.range(1, levels + 1).reverse())
+            .enter()
+            .append("circle")
+            .attr("class", "grid-level")
+            .attr("r", (d) => (radius / levels) * d)
+            .style("fill", "#CDCDCD")
+            .style("stroke", "#999")
+            .style("fill-opacity", 0.1);
 
-        // Voeg de assen en labels toe
-        apiData.confidence.forEach((d, i) => {
-            const angle = angleSlice * i - Math.PI / 2;
-            const lineCoord = {
-                x: rScale(maxValue) * Math.cos(angle),
-                y: rScale(maxValue) * Math.sin(angle),
-            };
-            const labelCoord = {
-                x: (rScale(maxValue) + 20) * Math.cos(angle),
-                y: (rScale(maxValue) + 20) * Math.sin(angle),
-            };
+        // Assen en labels
+        const axis = svg
+            .selectAll(".axis")
+            .data(data1)
+            .enter()
+            .append("g")
+            .attr("class", "axis");
 
-            // Tekenen van de assen
-            svg.append("line")
-                .attr("x1", 0)
-                .attr("y1", 0)
-                .attr("x2", lineCoord.x)
-                .attr("y2", lineCoord.y)
-                .style("stroke", "#888")
-                .style("stroke-width", 0.5);
+        axis.append("line")
+            .attr("x1", 0)
+            .attr("y1", 0)
+            .attr(
+                "x2",
+                (d, i) => radius * Math.cos(angleSlice * i - Math.PI / 2),
+            )
+            .attr(
+                "y2",
+                (d, i) => radius * Math.sin(angleSlice * i - Math.PI / 2),
+            )
+            .style("stroke", "#999")
+            .style("stroke-width", "2px");
 
-            // Toevoegen van labels voor elke as
-            svg.append("text")
-                .attr("x", labelCoord.x)
-                .attr("y", labelCoord.y)
-                .attr("dy", "0.5em")
-                .attr("text-anchor", "middle")
-                .style("font-size", "10px")
-                .text(d); // 'd' is de naam van de as
-        });
+        axis.append("text")
+            .attr(
+                "x",
+                (d, i) =>
+                    (radius + 20) * Math.cos(angleSlice * i - Math.PI / 2),
+            )
+            .attr(
+                "y",
+                (d, i) =>
+                    (radius + 20) * Math.sin(angleSlice * i - Math.PI / 2),
+            )
+            .text((d) => d.axis)
+            .style("font-size", "12px")
+            .attr("text-anchor", "middle");
 
-        // Functie voor het tekenen van het pad van de grafiek
-        const drawPath = (data, fill, stroke) => {
-            const line = d3
-                .lineRadial()
-                .radius((d) => rScale(d))
-                .angle((d, i) => i * angleSlice);
+        // Functie om een polygon te tekenen
+        const radarLine = d3
+            .lineRadial()
+            .radius((d) => (parseFloat(d.value) / maxValue) * radius)
+            .angle((d, i) => i * angleSlice)
+            .curve(d3.curveLinearClosed);
 
-            svg.append("path")
-                .datum(data)
-                .attr("d", line)
-                .style("fill", fill)
-                .style("stroke", stroke)
-                .style("stroke-width", 2);
-        };
+        // Dataset 1: Confidence interval (Roze schaduw)
+        svg.append("path")
+            .datum(data1)
+            .attr(
+                "d",
+                d3
+                    .lineRadial()
+                    .radius((d) => (parseFloat(d.highci) / maxValue) * radius)
+                    .angle((d, i) => i * angleSlice)
+                    .curve(d3.curveLinearClosed),
+            )
+            .style("fill", "rgba(255, 20, 147, 0.2)") // Roze transparante schaduw
+            .style("stroke", "none");
 
-        // Pad voor de data tekenen (bijvoorbeeld voor confidence)
-        drawPath(apiData.confidence, "rgba(0, 128, 255, 0.3)", "#007acc");
-    };
+        svg.append("path")
+            .datum(data1)
+            .attr(
+                "d",
+                d3
+                    .lineRadial()
+                    .radius((d) => (parseFloat(d.lowci) / maxValue) * radius)
+                    .angle((d, i) => i * angleSlice)
+                    .curve(d3.curveLinearClosed),
+            )
+            .style("fill", "rgba(255, 20, 147, 0.2)")
+            .style("stroke", "none");
 
-    // De grafiek tekenen zodra het component is gemonteerd
-    onMount(() => {
-        drawChart(chartContainer); // Activeert de grafiek
-    });
+        // Dataset 1: Hoofdpolygon (Roze)
+        svg.append("path")
+            .datum(data1)
+            .attr("d", radarLine)
+            .style("fill", "rgba(255, 20, 147, 0.5)") // Roze polygon
+            .style("stroke", "deeppink")
+            .style("stroke-width", "2px");
+
+        // Dataset 2: Confidence interval (Groene schaduw)
+        svg.append("path")
+            .datum(data2)
+            .attr(
+                "d",
+                d3
+                    .lineRadial()
+                    .radius((d) => (parseFloat(d.highci) / maxValue) * radius)
+                    .angle((d, i) => i * angleSlice)
+                    .curve(d3.curveLinearClosed),
+            )
+            .style("fill", "rgba(34, 139, 34, 0.2)") // Groene transparante schaduw
+            .style("stroke", "none");
+
+        svg.append("path")
+            .datum(data2)
+            .attr(
+                "d",
+                d3
+                    .lineRadial()
+                    .radius((d) => (parseFloat(d.lowci) / maxValue) * radius)
+                    .angle((d, i) => i * angleSlice)
+                    .curve(d3.curveLinearClosed),
+            )
+            .style("fill", "rgba(34, 139, 34, 0.2)")
+            .style("stroke", "none");
+
+        // Dataset 2: Hoofdpolygon (Groen)
+        svg.append("path")
+            .datum(data2)
+            .attr("d", radarLine)
+            .style("fill", "rgba(34, 139, 34, 0.5)") // Groene polygon
+            .style("stroke", "green")
+            .style("stroke-width", "2px");
+    }
 </script>
 
-<!-- Container voor de grafiek -->
-<div bind:this={chartContainer}></div>
+<svg bind:this={chartContainer}></svg>
 
 <style>
-    div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    svg {
+        display: block;
+        margin: auto;
     }
 </style>
