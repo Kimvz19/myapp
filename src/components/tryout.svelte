@@ -72,6 +72,7 @@
             return "<p>Er is een foutje, vul een ander nummer in!</p>";
         }
     }
+    
 
     // Function to compare two indexes in filteredPosts
     async function compareIndexes() {
@@ -111,6 +112,9 @@
     //////////////////
     // Radar chart //
     //////////////////
+console.log(result1.value, result1.highci);
+
+
 </script>
 
 <!-- HTML Code -->
