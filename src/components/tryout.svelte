@@ -81,8 +81,19 @@
         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
         if (index1Valid && index2Valid) {
-            result1 = await displayRange(index1);
-            result2 = await displayRange(index2);
+            // result1 = await displayRange(index1);
+            // result2 = await displayRange(index2);
+            try {
+                result1 = await displayRange(index1);
+            } catch (error) {
+                console.error(`Fout bij ophalen van result1: ${error.message}`);
+            }
+
+            try {
+                result2 = await displayRange(index2);
+            } catch (error) {
+                console.error(`Fout bij ophalen van result2: ${error.message}`);
+            }
 
             // Display the comparison results
             outputDiv.innerHTML = `
@@ -95,8 +106,6 @@
                 "<p>Er is een fout, vul een ander nummer in!</p>";
         }
     }
-
-
 
     // Function to reset the form and variables to initial state
     function resetForm() {
@@ -114,7 +123,12 @@
     <p>Data in {stateFilter}</p>
 
     <!-- User input for the state -->
-    <input class="input-field" type="text" bind:value={stateFilter} placeholder="Enter state" />
+    <input
+        class="input-field"
+        type="text"
+        bind:value={stateFilter}
+        placeholder="Enter state"
+    />
 
     <!-- Filter posts button -->
     <button on:click={displayTime}>Filter Posts</button>
@@ -180,7 +194,8 @@
 
 <style>
     button,
-    p, .input-field  {
+    p,
+    .input-field {
         font-family: "Montserrat";
         font-optical-sizing: auto;
         font-weight: 200;
