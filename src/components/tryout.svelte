@@ -114,40 +114,44 @@
     //////////////////
 
     let data1 = [
-      {axis: "Confidence Interval", value: 17.8},
-      {axis: "High CI", value: 24.7},
-      {axis: "Low CI", value: 12.2},
-      {axis: "Phase", value: 4.2},
-      {axis: "Quartile Range", value: 16.6}
-    ];
+    {axis: "Confidence Interval", value: 17.8},
+    {axis: "High CI", value: 24.7},
+    {axis: "Low CI", value: 12.2},
+    {axis: "Phase", value: 4.2},
+    {axis: "Quartile Range", value: 16.6}
+  ];
 
-    let data2 = [
-      {axis: "Confidence Interval", value: 15.5},
-      {axis: "High CI", value: 22.3},
-      {axis: "Low CI", value: 10.0},
-      {axis: "Phase", value: 5.8},
-      {axis: "Quartile Range", value: 18.2}
-    ];
+  let data2 = [
+    {axis: "Confidence Interval", value: 15.5},
+    {axis: "High CI", value: 22.3},
+    {axis: "Low CI", value: 10.0},
+    {axis: "Phase", value: 5.8},
+    {axis: "Quartile Range", value: 18.2}
+  ];
 
+  let chartContainer;
+
+  // Functie om de grafiek te tekenen
+  const drawChart = () => {
     let margin = {top: 50, right: 50, bottom: 50, left: 50};
     let width = 600 - margin.left - margin.right;
     let height = 600 - margin.top - margin.bottom;
     let radius = Math.min(width, height) / 2;
 
-    // Create SVG container
-    let svg = d3.select("#radar-chart")
+    // Maak een SVG container
+    let svg = d3.select(chartContainer)
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
               .append("g")
                 .attr("transform", "translate(" + (width / 2 + margin.left) + "," + (height / 2 + margin.top) + ")");
 
-    // Create scale for the radar chart
+    // Schaal voor de radar chart
     let angleSlice = Math.PI * 2 / data1.length;
     let rScale = d3.scaleLinear()
-                   .domain([0, 30])  // Max value across datasets
+                   .domain([0, 30])  // Max waarde
                    .range([0, radius]);
 
-    // Function to draw the radar chart's axis
+    // Teken de assen
     let axisGrid = svg.append("g").attr("class", "axisWrapper");
     axisGrid.selectAll(".axis")
             .data(data1)
@@ -173,12 +177,12 @@
             .style("fill", "#737373")
             .text(function(d) { return d.axis; });
 
-    // Function to draw radar chart path
+    // Functie voor de radar chart lijnen
     let radarLine = d3.lineRadial()
                       .radius(function(d) { return rScale(d.value); })
                       .angle(function(d, i) { return i * angleSlice; });
 
-    // Draw the radar chart for the first dataset (data1)
+    // Teken de radar chart voor de eerste dataset (data1)
     svg.append("path")
        .datum(data1)
        .attr("class", "radarChart")
@@ -187,7 +191,7 @@
        .style("stroke", "red")
        .style("stroke-width", "3px");
 
-    // Draw the radar chart for the second dataset (data2)
+    // Teken de radar chart voor de tweede dataset (data2)
     svg.append("path")
        .datum(data2)
        .attr("class", "radarChart")
@@ -195,9 +199,16 @@
        .style("fill", "rgba(0, 0, 255, 0.3)")
        .style("stroke", "blue")
        .style("stroke-width", "3px");
+  };
 
+  // Laad de grafiek zodra de component is gemonteerd
+  onMount(() => {
+    drawChart(); // Activeert de grafiek
+  });
 
 </script>
+
+
 
 <!-- HTML Code -->
 <div>
@@ -267,6 +278,8 @@
     <div class="resultOutput"></div>
 </div>
 
+<div class="chart" bind:this={chartContainer}></div>
+
 
 <!-- Styling -->
 <link
@@ -275,6 +288,15 @@
 />
 
 <style>
+
+.chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  
     button,
     p,
     .input-field {
