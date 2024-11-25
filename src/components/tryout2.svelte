@@ -369,13 +369,25 @@
 <!-- radar chart-->
 <svg bind:this={chartContainer}></svg>
 
+
+
+
+
+
+<!------------->
 <!-- Styling -->
+<!------------->
 <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
 />
 
 <style>
+
+    div{
+        display: flex;
+        justify-content: center ;
+    }
     button,
     p,
     .input-field {
@@ -415,5 +427,5 @@
         display: block;
         margin: auto;
     }
-    
+
 </style>
