@@ -113,13 +113,7 @@
 
             console.log("Vergelijking:", result1, result2);
             outputDiv.innerHTML = `
-            <h2>Comparison of Index ${index1} and Index ${index2}</h2>
-           
-        `;
-
-            // Display the comparison results
-            outputDiv.innerHTML = `
-    <h2>Comparison of Index ${index1} and Index ${index2}</h2>
+            <h2>Comparison</h2>
     <div>
         <h3>Index ${index1}</h3>
         <table border="1">
@@ -142,7 +136,9 @@
             <tr><td>Value</td><td>${result2.value}</td></tr>
         </table>
     </div>
-`;
+        `;
+
+
         } else {
             outputDiv.innerHTML =
                 "<p>Er is een fout, vul een ander nummer in!</p>";
