@@ -136,6 +136,7 @@
             // Maak de radar chart met de gestructureerde data
             let data1 = createRadarData(result1);
             let data2 = createRadarData(result2);
+            console.log(data1, data2);
 
             // Nu kan de radar chart setup functie worden aangeroepen
             setupRadarChart(data1, data2);
@@ -155,8 +156,8 @@
 
     // Radar chart creation functie aangepast
     function createRadarChart(container, data1, data2) {
-        let width = 800,
-            height = 700,
+        let width = 700,
+            height = 650,
             maxValue = 20,
             levels = 5;
         let radius = Math.min(width, height) / 2;
@@ -180,10 +181,12 @@
             .attr("y1", "0%")
             .attr("x2", "100%")
             .attr("y2", "100%");
+
         anxietyGradient
             .append("stop")
             .attr("offset", "0%")
             .attr("stop-color", "#40E0D0");
+            
         anxietyGradient
             .append("stop")
             .attr("offset", "100%")
