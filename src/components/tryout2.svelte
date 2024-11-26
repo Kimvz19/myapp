@@ -4,75 +4,51 @@
     import * as d3 from "d3";
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    let result1 = null; //Hier wordt data ingeladen
-    let result2 = null; //Hier wordt data ingeladen
+    let result1 = null; // Data for comparison 1
+    let result2 = null; // Data for comparison 2
+    let chartContainer;
 
     // Variables
-    let actualTimePeriod = []; // The most current time period
-    let filteredPosts = []; // Filtered posts based on state and time period
-    let stateFilter = "hawaii"; // Default state, in lowercase to avoid case sensitivity
-    let dataFound = false; // To track if data is found
-    let index1 = null; // Index for the first comparison
-    let index2 = null; // Index for the second comparison
-    let selectedPost = {}; // Changed from array to object for single post
+    let actualTimePeriod = [];
+    let filteredPosts = [];
+    let stateFilter = "hawaii";
+    let dataFound = false;
+    let index1 = null;
+    let index2 = null;
+    let selectedPost = {};
 
     // Function to fetch the most current time period
     async function displayTime() {
         try {
-            // Fetch data from the API
             let data = await fetchPosts();
-
-            // Find the most recent time_period
             let maxTimePeriod = Math.max(
                 ...data.map((item) => Number(item.time_period)),
             );
-
-            // Filter data based on the most recent time_period
             actualTimePeriod = data.filter(
                 (item) => Number(item.time_period) === maxTimePeriod,
             );
-
-            // Filter posts based on stateFilter (case insensitive comparison)
             filteredPosts = actualTimePeriod.filter(
                 (post) =>
                     post.state.toLowerCase() === stateFilter.toLowerCase(),
             );
-
-            // Update the dataFound status
             dataFound = filteredPosts.length > 0;
         } catch (error) {
             console.error("Error fetching data:", error.message);
-            filteredPosts = []; // Reset the filtered posts on error
-            dataFound = false; // No data found on error
+            filteredPosts = [];
+            dataFound = false;
         }
     }
 
-    // Call displayTime when the component is mounted
-    onMount(() => {
-        displayTime().then(() => {
-            // Log after data is fetched and available
-            console.log("Data is geladen;", filteredPosts); // Log filtered posts once data is available
-        });
-
-        // maakt melding om meer inzicht te hebben in wat al is geladen en wat niet
-        if (!dataFound || filteredPosts.length === 0) {
-            console.log("Data is nog niet ingeladen.");
-            return;
-        }
-    });
-
-    // Function to display data for a specific index from filteredPosts
-    // Function to display data for a specific index from filteredPosts
+    // Function to fetch data for a specific index from filteredPosts
     async function displayRange(personIndex) {
-        //Check of filteredPosts beschikbaar is!
         if (filteredPosts.length === 0) {
             console.error(
-                "Geen data beschikbaar. Zorg dat displayTime() voltooid is.",
+                "No data available, ensure displayTime() is completed.",
             );
             return null;
         }
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
-            selectedPost = filteredPosts[personIndex]; // Access directly the post object
+            selectedPost = filteredPosts[personIndex];
             return {
                 confidence_interval: selectedPost.confidence_interval,
                 lowci: selectedPost.lowci,
@@ -82,125 +58,121 @@
                 value: selectedPost.value,
             };
         } else {
-            return "<p>Er is een fout, vul een ander nummer in!</p>";
+            return "<p>Invalid index, enter another number!</p>";
         }
     }
 
-    // Function to compare two indexes in filteredPosts
+    // Functie om data voor de radar chart op te bouwen
+    function createRadarData(selectedPost) {
+        return [
+            {
+                axis: "Confidence Interval",
+                value: selectedPost.confidence_interval,
+            },
+            { axis: "Low CI", value: selectedPost.lowci },
+            { axis: "High CI", value: selectedPost.highci },
+            { axis: "Quartile Range", value: selectedPost.quartile_range },
+            { axis: "Phase", value: selectedPost.phase },
+            { axis: "Value", value: selectedPost.value },
+        ];
+    }
+
+    // Functie om twee indices met data te vergelijken
     async function compareIndexes() {
-        //Weer een check of de data is gevonden!
-        if (!dataFound || filteredPosts.length === 0) {
-            console.log("Data is niet geladen of geen resultaten gevonden.");
+        await displayTime(); // Wacht op displayTime() voordat je verder gaat
+
+        if (
+            index1 === null ||
+            index2 === null ||
+            !dataFound ||
+            filteredPosts.length === 0
+        ) {
+            console.error("Invalid indices or data not available.");
             return;
         }
 
         let outputDiv = document.querySelector(".resultOutput");
 
-        // Ensure that the indexes are valid numbers and within range
         let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
         if (index1Valid && index2Valid) {
+            // Haal de data op voor beide indices
             result1 = await displayRange(index1);
             result2 = await displayRange(index2);
 
-            //Dubbel check met gegevens
             if (!result1 || !result2) {
-                outputDiv.innerHTML =
-                    "<p>Er is een fout, vul een ander nummer in!</p>";
+                outputDiv.innerHTML = "<p>Invalid input, try again!</p>";
                 return;
             }
 
-            console.log("Vergelijking:", result1, result2);
+            console.log("Comparison:", result1, result2);
             outputDiv.innerHTML = `
             <h2>Comparison</h2>
-    <div>
-        <h3>Index ${index1}</h3>
-        <table border="1">
-            <tr><td>Confidence Interval</td><td>${result1.confidence_interval}</td></tr>
-            <tr><td>Low CI</td><td>${result1.lowci}</td></tr>
-            <tr><td>High CI</td><td>${result1.highci}</td></tr>
-            <tr><td>Quartile Range</td><td>${result1.quartile_range}</td></tr>
-            <tr><td>Phase</td><td>${result1.phase}</td></tr>
-            <tr><td>Value</td><td>${result1.value}</td></tr>
-        </table>
-    </div>
-    <div>
-        <h3>Index ${index2}</h3>
-        <table border="1">
-            <tr><td>Confidence Interval</td><td>${result2.confidence_interval}</td></tr>
-            <tr><td>Low CI</td><td>${result2.lowci}</td></tr>
-            <tr><td>High CI</td><td>${result2.highci}</td></tr>
-            <tr><td>Quartile Range</td><td>${result2.quartile_range}</td></tr>
-            <tr><td>Phase</td><td>${result2.phase}</td></tr>
-            <tr><td>Value</td><td>${result2.value}</td></tr>
-        </table>
-    </div>
+            <div>
+                <h3>Index ${index1}</h3>
+                <table border="1">
+                    <tr><td>Confidence Interval</td><td>${result1.confidence_interval}</td></tr>
+                    <tr><td>Low CI</td><td>${result1.lowci}</td></tr>
+                    <tr><td>High CI</td><td>${result1.highci}</td></tr>
+                    <tr><td>Quartile Range</td><td>${result1.quartile_range}</td></tr>
+                    <tr><td>Phase</td><td>${result1.phase}</td></tr>
+                    <tr><td>Value</td><td>${result1.value}</td></tr>
+                </table>
+            </div>
+            <div>
+                <h3>Index ${index2}</h3>
+                <table border="1">
+                    <tr><td>Confidence Interval</td><td>${result2.confidence_interval}</td></tr>
+                    <tr><td>Low CI</td><td>${result2.lowci}</td></tr>
+                    <tr><td>High CI</td><td>${result2.highci}</td></tr>
+                    <tr><td>Quartile Range</td><td>${result2.quartile_range}</td></tr>
+                    <tr><td>Phase</td><td>${result2.phase}</td></tr>
+                    <tr><td>Value</td><td>${result2.value}</td></tr>
+                </table>
+            </div>
         `;
 
+            // Maak de radar chart met de gestructureerde data
+            let data1 = createRadarData(result1);
+            let data2 = createRadarData(result2);
 
+            // Nu kan de radar chart setup functie worden aangeroepen
+            setupRadarChart(data1, data2);
         } else {
-            outputDiv.innerHTML =
-                "<p>Er is een fout, vul een ander nummer in!</p>";
+            outputDiv.innerHTML = "<p>Invalid index, try again!</p>";
         }
     }
 
-    // Function to reset the form and variables to initial state
-    function resetForm() {
-        stateFilter = "hawaii"; // Reset state filter to the default state
-        index1 = null; // Reset the first index
-        index2 = null; // Reset the second index
-        filteredPosts = []; // Clear filtered posts
-        actualTimePeriod = []; // Clear actual time period data
-        dataFound = false; // Reset the dataFound status
+    // Radar chart setup functie aangepast om data door te geven
+    async function setupRadarChart(data1, data2) {
+        if (!data1 || !data2 || !chartContainer) {
+            console.error("Data missing or chart container not available.");
+            return;
+        }
+        createRadarChart(chartContainer, data1, data2);
     }
 
-    //////////////////
-    // Radar chart //
-    //////////////////
+    // Radar chart creation functie aangepast
+    function createRadarChart(container, data1, data2) {
+        let width = 800,
+            height = 700,
+            maxValue = 20,
+            levels = 5;
+        let radius = Math.min(width, height) / 2;
+        let angleSlice = (Math.PI * 2) / data1.length;
 
-    let chartContainer; // Verwijzing naar de container voor de grafiek
-    let width = 400; // Breedte van de grafiek
-    let height = 500; // Hoogte van de grafiek
-
-    let data1 = [
-        { axis: "A", value: "13.3", lowci: "8.6", highci: "12.4" }, // Punt A voor Angst
-        { axis: "B", value: "10.1", lowci: "6.5", highci: "14.2" }, // Punt B voor Angst
-        { axis: "C", value: "15.0", lowci: "12.3", highci: "18.7" }, // Punt C voor Angst
-    ];
-
-    // Dataset 2 (Data punten voor Depressie, met 'axis' als de assen namen)
-    let data2 = [
-        { axis: "A", value: "12.0", lowci: "9.0", highci: "15.0" }, // Punt A voor Depressie
-        { axis: "B", value: "11.5", lowci: "8.0", highci: "15.0" }, // Punt B voor Depressie
-        { axis: "C", value: "14.2", lowci: "10.0", highci: "18.0" }, // Punt C voor Depressie
-    ];
-
-    onMount(() => {
-        createRadarChart(chartContainer); // Functie aanroepen wanneer de component is geladen
-    });
-
-    let maxValue = 20; // Maximale waarde voor de schaal
-    let levels = 5; // Aantal niveau cirkels voor de grafiek
-
-    // Functie om de radar grafiek te maken
-    function createRadarChart(container) {
-        let radius = Math.min(width, height) / 2; // Straal van de grafiek
-        let angleSlice = (Math.PI * 2) / data1.length; // Hoek per data punt
-
-        // Maak de SVG container voor de grafiek
         let svg = d3
-            .select(container) // Selecteer de container
-            .attr("width", width) // Stel de breedte in
-            .attr("height", height) // Stel de hoogte in
-            .html("") // Reset de inhoud van de container
+            .select(container)
+            .attr("width", width)
+            .attr("height", height)
+            .html("")
             .append("g")
-            .attr("transform", `translate(${width / 2}, ${height / 2})`); // Center de grafiek
+            .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-        // SVG-definities voor gradients (kleurverlopen)
         let defs = svg.append("defs");
 
-        // Gradient voor Angst (Turquoise → Grijs)
+        // Define gradients for Anxiety and Depression
         let anxietyGradient = defs
             .append("linearGradient")
             .attr("id", "anxietyGradient")
@@ -217,7 +189,6 @@
             .attr("offset", "100%")
             .attr("stop-color", "#A9A9A9");
 
-        // Gradient voor Depressie (Donkerblauw → Paars)
         let depressionGradient = defs
             .append("linearGradient")
             .attr("id", "depressionGradient")
@@ -234,114 +205,74 @@
             .attr("offset", "100%")
             .attr("stop-color", "#800080");
 
-        // Maak de grid niveaus (cirkels)
         svg.selectAll(".grid-level")
-            .data(d3.range(1, levels + 1).reverse()) // Maak cirkels voor elk niveau
+            .data(d3.range(1, levels + 1).reverse())
             .enter()
             .append("circle")
             .attr("class", "grid-level")
-            .attr("r", (d) => (radius / levels) * d) // Straal van de cirkels
+            .attr("r", (d) => (radius / levels) * d)
             .style("fill", "#CDCDCD")
             .style("stroke", "#999")
             .style("fill-opacity", 0.1);
 
-        // Maak de assen en labels
         let axis = svg
             .selectAll(".axis")
-            .data(data1) // Gebruik de data voor de assen
+            .data(data1)
             .enter()
             .append("g")
             .attr("class", "axis");
 
-        // Maak de lijnen voor de assen
         axis.append("line")
             .attr("x1", 0)
             .attr("y1", 0)
             .attr(
                 "x2",
                 (d, i) => radius * Math.cos(angleSlice * i - Math.PI / 2),
-            ) // X-coördinaat van de lijn
+            )
             .attr(
                 "y2",
                 (d, i) => radius * Math.sin(angleSlice * i - Math.PI / 2),
-            ) // Y-coördinaat van de lijn
+            )
             .style("stroke", "#999")
             .style("stroke-width", "2px");
 
-        // Voeg de labels voor de assen toe (Punten A, B, C)
         axis.append("text")
             .attr(
                 "x",
                 (d, i) =>
                     (radius + 20) * Math.cos(angleSlice * i - Math.PI / 2),
-            ) // X-positie van het label
+            )
             .attr(
                 "y",
                 (d, i) =>
                     (radius + 20) * Math.sin(angleSlice * i - Math.PI / 2),
-            ) // Y-positie van het label
-            .text((d) => d.axis) // Gebruik de 'axis' naam uit de data
+            )
+            .text((d) => d.axis)
             .style("font-size", "12px")
-            .attr("text-anchor", "middle"); // Centreer het label op de lijn
+            .attr("text-anchor", "middle");
 
-        // Functie om een polygon (vorm) te tekenen
         let radarLine = d3
             .lineRadial()
-            .radius((d) => (parseFloat(d.value) / maxValue) * radius) // Zet de waarde om naar de straal
-            .angle((d, i) => i * angleSlice) // Zet de data om naar hoeken
-            .curve(d3.curveCardinalClosed); // Zorg ervoor dat de polygon gesloten is
+            .radius((d) => (parseFloat(d.value) / maxValue) * radius)
+            .angle((d, i) => i * angleSlice);
 
-        // Dataset 1: Angst (Anxiety) polygon tekenen
+        // Render radar chart
         svg.append("path")
-            .datum(data1) // Gebruik data1 voor Anxiety
+            .data([data1])
+            .attr("class", "radar-chart")
             .attr("d", radarLine)
-            .style("fill", "url(#anxietyGradient)") // Gebruik de gedefinieerde gradient
-            .style("stroke", "#40E0D0")
-            .style("stroke-width", "2px")
-            .style("fill-opacity", 0.8);
+            .style("fill", "url(#anxietyGradient)");
 
-        // Dataset 2: Depressie (Depression) polygon tekenen
         svg.append("path")
-            .datum(data2) // Gebruik data2 voor Depression
+            .data([data2])
+            .attr("class", "radar-chart")
             .attr("d", radarLine)
-            .style("fill", "url(#depressionGradient)") // Gebruik de gedefinieerde gradient
-            .style("stroke", "#800080")
-            .style("stroke-width", "2px")
-            .style("fill-opacity", 0.8);
-
-        // Nu, om de confidence interval lijnen te tekenen (lowci, highci):
-        function drawConfidenceInterval(data, color) {
-            let radarLineCI = d3
-                .lineRadial()
-                .radius((d) => (parseFloat(d.lowci) / maxValue) * radius) // Low CI lijn
-                .angle((d, i) => i * angleSlice)
-                .curve(d3.curveCardinalClosed);
-            svg.append("path")
-                .datum(data) // Gebruik data voor Anxiety of Depression
-                .attr("d", radarLineCI)
-                .style("fill", "none")
-                .style("stroke", color)
-                .style("stroke-dasharray", "3,3")
-                .style("stroke-width", "2px");
-
-            let radarLineHighCI = d3
-                .lineRadial()
-                .radius((d) => (parseFloat(d.highci) / maxValue) * radius) // High CI lijn
-                .angle((d, i) => i * angleSlice)
-                .curve(d3.curveCardinalClosed);
-            svg.append("path")
-                .datum(data) // Gebruik data voor Anxiety of Depression
-                .attr("d", radarLineHighCI)
-                .style("fill", "none")
-                .style("stroke", color)
-                .style("stroke-dasharray", "3,3")
-                .style("stroke-width", "2px");
-        }
-
-        // Teken confidence intervals
-        drawConfidenceInterval(data1, "#40E0D0"); // Anxiety
-        drawConfidenceInterval(data2, "#800080"); // Depression
+            .style("fill", "url(#depressionGradient)");
     }
+    // Call displayTime to fetch initial data when the component is mounted
+    onMount(async () => {
+        await displayTime();
+    });
 </script>
 
 <!-- HTML Code -->
@@ -405,7 +336,7 @@
     <button on:click={compareIndexes}>Vergelijk</button>
 
     <!-- Reset Button -->
-    <button on:click={resetForm}>Reset</button>
+    <!-- <button on:click={resetForm}>Reset</button> -->
     <!-- Reset button added -->
 
     <!-- Result output -->
