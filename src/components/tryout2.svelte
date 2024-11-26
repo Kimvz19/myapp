@@ -7,7 +7,6 @@
     let result1 = {}; //Hier wordt data ingeladen
     let result2 = {}; //Hier wordt data ingeladen
 
-
     // Variables
     let actualTimePeriod = []; // The most current time period
     let filteredPosts = []; // Filtered posts based on state and time period
@@ -57,22 +56,21 @@
 
         // maakt melding om meer inzicht te hebben in wat al is geladen en wat niet
         if (!dataFound || filteredPosts.length === 0) {
-    console.log("Data is nog niet ingeladen.");
-    return;
-}
-
+            console.log("Data is nog niet ingeladen.");
+            return;
+        }
     });
-
-
 
     // Function to display data for a specific index from filteredPosts
     // Function to display data for a specific index from filteredPosts
     async function displayRange(personIndex) {
         //Check of filteredPosts beschikbaar is!
         if (filteredPosts.length === 0) {
-        console.error("Geen data beschikbaar. Zorg dat displayTime() voltooid is.");
-        return null;
-    }
+            console.error(
+                "Geen data beschikbaar. Zorg dat displayTime() voltooid is.",
+            );
+            return null;
+        }
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             selectedPost = filteredPosts[personIndex]; // Access directly the post object
             return {
@@ -83,7 +81,6 @@
                 phase: selectedPost.phase,
                 value: selectedPost.value,
             };
-
         } else {
             return "<p>Er is een fout, vul een ander nummer in!</p>";
         }
@@ -91,6 +88,12 @@
 
     // Function to compare two indexes in filteredPosts
     async function compareIndexes() {
+        //Weer een check of de data is gevonden!
+        if (!dataFound || filteredPosts.length === 0) {
+            console.error("Data is niet geladen of geen resultaten gevonden.");
+            return;
+        }
+
         let outputDiv = document.querySelector(".resultOutput");
 
         // Ensure that the indexes are valid numbers and within range
@@ -100,7 +103,19 @@
         if (index1Valid && index2Valid) {
             result1 = await displayRange(index1);
             result2 = await displayRange(index2);
-            console.log(result1, result2);
+
+            //Dubbel check met gegevens
+            if (!result1 || !result2) {
+                outputDiv.innerHTML =
+                    "<p>Er is een fout, vul een ander nummer in!</p>";
+                return;
+            }
+
+            console.log("Vergelijking:", result1, result2);
+            outputDiv.innerHTML = `
+            <h2>Comparison of Index ${index1} and Index ${index2}</h2>
+           
+        `;
 
             // Display the comparison results
             outputDiv.innerHTML = `
@@ -133,7 +148,6 @@
                 "<p>Er is een fout, vul een ander nummer in!</p>";
         }
     }
-
 
     // Function to reset the form and variables to initial state
     function resetForm() {
