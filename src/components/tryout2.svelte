@@ -7,6 +7,7 @@
     let result1 = {}; //Hier wordt data ingeladen
     let result2 = {}; //Hier wordt data ingeladen
 
+
     // Variables
     let actualTimePeriod = []; // The most current time period
     let filteredPosts = []; // Filtered posts based on state and time period
@@ -14,7 +15,6 @@
     let dataFound = false; // To track if data is found
     let index1 = null; // Index for the first comparison
     let index2 = null; // Index for the second comparison
-
     let selectedPost = {}; // Changed from array to object for single post
 
     // Function to fetch the most current time period
@@ -52,15 +52,18 @@
     onMount(() => {
         displayTime().then(() => {
             // Log after data is fetched and available
-            console.log(filteredPosts); // Log filtered posts once data is available
+            console.log("Data is geladen;", filteredPosts); // Log filtered posts once data is available
         });
 
+        // maakt melding om meer inzicht te hebben in wat al is geladen en wat niet
         if (!dataFound || filteredPosts.length === 0) {
     console.log("Data is nog niet ingeladen.");
     return;
 }
 
     });
+
+
 
     // Function to display data for a specific index from filteredPosts
     // Function to display data for a specific index from filteredPosts
