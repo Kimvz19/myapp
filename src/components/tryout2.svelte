@@ -68,6 +68,11 @@
     // Function to display data for a specific index from filteredPosts
     // Function to display data for a specific index from filteredPosts
     async function displayRange(personIndex) {
+        //Check of filteredPosts beschikbaar is!
+        if (filteredPosts.length === 0) {
+        console.error("Geen data beschikbaar. Zorg dat displayTime() voltooid is.");
+        return null;
+    }
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             selectedPost = filteredPosts[personIndex]; // Access directly the post object
             return {
@@ -78,8 +83,9 @@
                 phase: selectedPost.phase,
                 value: selectedPost.value,
             };
+
         } else {
-            return "<p>Er is een foutje, vul een ander nummer in!</p>";
+            return "<p>Er is een fout, vul een ander nummer in!</p>";
         }
     }
 
