@@ -4,8 +4,8 @@
     import * as d3 from "d3";
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    let result1 = {}; //Hier wordt data ingeladen
-    let result2 = {}; //Hier wordt data ingeladen
+    let result1 = null; //Hier wordt data ingeladen
+    let result2 = null; //Hier wordt data ingeladen
 
     // Variables
     let actualTimePeriod = []; // The most current time period
@@ -90,7 +90,7 @@
     async function compareIndexes() {
         //Weer een check of de data is gevonden!
         if (!dataFound || filteredPosts.length === 0) {
-            console.error("Data is niet geladen of geen resultaten gevonden.");
+            console.log("Data is niet geladen of geen resultaten gevonden.");
             return;
         }
 
