@@ -4,8 +4,8 @@
     import * as d3 from "d3";
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    let result1 = {};
-    let result2 = {};
+    let result1 = {}; //Hier wordt data ingeladen
+    let result2 = {}; //Hier wordt data ingeladen
 
     // Variables
     let actualTimePeriod = []; // The most current time period
@@ -54,6 +54,12 @@
             // Log after data is fetched and available
             console.log(filteredPosts); // Log filtered posts once data is available
         });
+
+        if (!dataFound || filteredPosts.length === 0) {
+    console.log("Data is nog niet ingeladen.");
+    return;
+}
+
     });
 
     // Function to display data for a specific index from filteredPosts
@@ -118,6 +124,7 @@
                 "<p>Er is een fout, vul een ander nummer in!</p>";
         }
     }
+
 
     // Function to reset the form and variables to initial state
     function resetForm() {
