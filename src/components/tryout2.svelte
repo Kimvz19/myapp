@@ -57,6 +57,7 @@
     });
 
     // Function to display data for a specific index from filteredPosts
+    // Function to display data for a specific index from filteredPosts
     async function displayRange(personIndex) {
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             selectedPost = filteredPosts[personIndex]; // Access directly the post object
@@ -66,7 +67,7 @@
                 highci: selectedPost.highci,
                 quartile_range: selectedPost.quartile_range,
                 phase: selectedPost.phase,
-                value: selectedPost.value
+                value: selectedPost.value,
             };
         } else {
             return "<p>Er is een foutje, vul een ander nummer in!</p>";
@@ -88,10 +89,30 @@
 
             // Display the comparison results
             outputDiv.innerHTML = `
-                <h2>Comparison of Index ${index1} and Index ${index2}</h2>
-                <div><h3>Index ${index1}</h3>${result1}</div>
-                <div><h3>Index ${index2}</h3>${result2}</div>
-            `;
+    <h2>Comparison of Index ${index1} and Index ${index2}</h2>
+    <div>
+        <h3>Index ${index1}</h3>
+        <table border="1">
+            <tr><td>Confidence Interval</td><td>${result1.confidence_interval}</td></tr>
+            <tr><td>Low CI</td><td>${result1.lowci}</td></tr>
+            <tr><td>High CI</td><td>${result1.highci}</td></tr>
+            <tr><td>Quartile Range</td><td>${result1.quartile_range}</td></tr>
+            <tr><td>Phase</td><td>${result1.phase}</td></tr>
+            <tr><td>Value</td><td>${result1.value}</td></tr>
+        </table>
+    </div>
+    <div>
+        <h3>Index ${index2}</h3>
+        <table border="1">
+            <tr><td>Confidence Interval</td><td>${result2.confidence_interval}</td></tr>
+            <tr><td>Low CI</td><td>${result2.lowci}</td></tr>
+            <tr><td>High CI</td><td>${result2.highci}</td></tr>
+            <tr><td>Quartile Range</td><td>${result2.quartile_range}</td></tr>
+            <tr><td>Phase</td><td>${result2.phase}</td></tr>
+            <tr><td>Value</td><td>${result2.value}</td></tr>
+        </table>
+    </div>
+`;
         } else {
             outputDiv.innerHTML =
                 "<p>Er is een fout, vul een ander nummer in!</p>";
@@ -116,13 +137,11 @@
     let width = 400; // Breedte van de grafiek
     let height = 500; // Hoogte van de grafiek
 
-
     let data1 = [
-        { axis: "A", value: "13.3", lowci: "8.6", highci: "12.4"}, // Punt A voor Angst
+        { axis: "A", value: "13.3", lowci: "8.6", highci: "12.4" }, // Punt A voor Angst
         { axis: "B", value: "10.1", lowci: "6.5", highci: "14.2" }, // Punt B voor Angst
         { axis: "C", value: "15.0", lowci: "12.3", highci: "18.7" }, // Punt C voor Angst
     ];
-
 
     // Dataset 2 (Data punten voor Depressie, met 'axis' als de assen namen)
     let data2 = [
@@ -131,14 +150,12 @@
         { axis: "C", value: "14.2", lowci: "10.0", highci: "18.0" }, // Punt C voor Depressie
     ];
 
-    console.log(data2);
-
-    let maxValue = 20; // Maximale waarde voor de schaal
-    let levels = 5; // Aantal niveau cirkels voor de grafiek
-
     onMount(() => {
         createRadarChart(chartContainer); // Functie aanroepen wanneer de component is geladen
     });
+
+    let maxValue = 20; // Maximale waarde voor de schaal
+    let levels = 5; // Aantal niveau cirkels voor de grafiek
 
     // Functie om de radar grafiek te maken
     function createRadarChart(container) {
@@ -372,11 +389,6 @@
 <!-- radar chart-->
 <svg bind:this={chartContainer}></svg>
 
-
-
-
-
-
 <!------------->
 <!-- Styling -->
 <!------------->
@@ -386,10 +398,9 @@
 />
 
 <style>
-
-    div{
+    div {
         display: flex;
-        justify-content: center ;
+        justify-content: center;
     }
     button,
     p,
@@ -430,5 +441,4 @@
         display: block;
         margin: auto;
     }
-
 </style>
