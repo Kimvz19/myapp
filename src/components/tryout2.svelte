@@ -364,7 +364,6 @@
         align-items: center;
     }
 
-    
     button,
     p,
     .input-field {
@@ -374,12 +373,14 @@
         font-style: normal;
         font-size: 20px;
         margin-left: 10px;
+        height: 35px;
     }
 
     .input-field {
         margin: 10px;
         padding: 8px;
         font-size: 14px;
+        height: 20px;
     }
 
     .status-button {
