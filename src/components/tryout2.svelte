@@ -158,7 +158,10 @@
     function createRadarChart(container, data1, data2) {
         let width = 700,
             height = 850,
-            maxValue = 20,
+            maxValue = Math.max(
+            d3.max(data1.map((d) => parseFloat(d.value))),
+            d3.max(data2.map((d) => parseFloat(d.value)))
+        ) * 1.1, // Automatische maxValue
             levels = 5;
         let radius = Math.min(width, height) / 2;
         let angleSlice = (Math.PI * 2) / data1.length;
