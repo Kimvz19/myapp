@@ -264,21 +264,52 @@
             .radius((d) => (parseFloat(d.value) / maxValue) * radius)
             .angle((d, i) => i * angleSlice);
 
-        // Render radar chart
-        svg.append("path")
-            .data([data1])
-            .attr("class", "radar-chart")
-            .attr("d", radarLine)
-            .style("fill", "url(#anxietyGradient)")
-            .style("fill-opacity", 0.5); // Voeg doorzichtigheid toe
+     // Render radar chart buitenlijn en vlakken
+svg.append("path")
+    .data([data1])
+    .attr("class", "radar-chart-line")
+    .attr("d", radarLine)
+    .style("stroke", "url(#anxietyGradient)") // Buitenkantlijn met kleur
+    .style("stroke-width", 2)
+    .style("fill", "url(#anxietyGradient)")
+    .style("fill-opacity", 0.5) // Lichte transparantie voor het vlak
+    .style("stroke-opacity", 1); // Volledige opacity voor de buitenlijn
 
+svg.append("path")
+    .data([data2])
+    .attr("class", "radar-chart-line")
+    .attr("d", radarLine)
+    .style("stroke", "url(#depressionGradient)")
+    .style("stroke-width", 2)
+    .style("fill", "url(#depressionGradient)")
+    .style("fill-opacity", 0.5)
+    .style("stroke-opacity", 1);
 
-        svg.append("path")
-            .data([data2])
-            .attr("class", "radar-chart")
-            .attr("d", radarLine)
-            .style("fill", "url(#depressionGradient)")
-            .style("fill-opacity", 0.4); // Voeg doorzichtigheid toe
+// Voeg punten toe aan de hoekpunten
+svg.selectAll(".data-point1")
+    .data(data1)
+    .enter()
+    .append("circle")
+    .attr("class", "data-point1")
+    .attr("cx", (d, i) => radius * (parseFloat(d.value) / maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
+    .attr("cy", (d, i) => radius * (parseFloat(d.value) / maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
+    .attr("r", 4) // Straal van de cirkel
+    .style("fill", "#40E0D0") // Kleur van de punt
+    .style("stroke", "#000") // Zwarte rand voor zichtbaarheid
+    .style("stroke-width", 1.5);
+
+svg.selectAll(".data-point2")
+    .data(data2)
+    .enter()
+    .append("circle")
+    .attr("class", "data-point2")
+    .attr("cx", (d, i) => radius * (parseFloat(d.value) / maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
+    .attr("cy", (d, i) => radius * (parseFloat(d.value) / maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
+    .attr("r", 4)
+    .style("fill", "#800080")
+    .style("stroke", "#000")
+    .style("stroke-width", 1.5);
+
     }
     // Call displayTime to fetch initial data when the component is mounted
     onMount(async () => {
