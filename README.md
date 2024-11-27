@@ -10,4 +10,4 @@ De input van de gebruiker wordt op verschillende manieren gevraagd in het ontwer
 
 Om de gebruiker meer te informeren over de data zijn er gebruiksvriendelijke feedback punten toegevoegd om ervoor te zorgen dat het gebruik van de ontwerp goed verloopt; 
 1) De gebruiker krijgt feedback van een button als de data is gevonden (groen of rood)
-2) De gebruiker krijgt een Radar chart te zien als de gegevens zijn opgehaald, als de gegevens niet gevonden kunnen worden, krijgt de gebruiker dit te zien.
+2) De gebruiker krijgt een Radar chart te zien als de gegevens zijn opgehaald, als de gegevens niet gevonden kunnen worden, krijgt de gebruiker een melding te zien om de input gegevens opnieuw in te vullen, error + problem solving.
