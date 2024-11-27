@@ -186,7 +186,7 @@
             .append("stop")
             .attr("offset", "0%")
             .attr("stop-color", "#40E0D0");
-            
+
         anxietyGradient
             .append("stop")
             .attr("offset", "100%")
@@ -300,7 +300,7 @@
     >
         {#if dataFound}
             <!-- Green check mark if data is found -->
-            <svg width="10" height="12" viewBox="0 0 12 12" fill="none">
+            <svg width="15" height="17" viewBox="0 0 12 12" fill="none">
                 <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
@@ -361,7 +361,10 @@
     div {
         display: flex;
         justify-content: center;
+        align-items: center;
     }
+
+    
     button,
     p,
     .input-field {
@@ -380,10 +383,11 @@
     }
 
     .status-button {
-        width: 120px;
-        height: 40px;
+        width: 37px;
+        height: 35px;
         font-size: 14px;
         border-radius: 5px;
+        border-style: none;
         text-align: center;
         display: flex;
         justify-content: center;
