@@ -55,16 +55,22 @@
         }
     }
 
-    
+
 
     // Function to fetch data for a specific index from filteredPosts
+
+    // functie om index van de lijst te selecteren
     async function displayRange(personIndex) {
+
+        //deze code is er om te checken of filteredPosts is uitgevoerd, zo niet
+        // dan wordt er een foutmleding
         if (filteredPosts.length === 0) {
             console.error(
-                "No data available, ensure displayTime() is completed.",
+                "geen data beschikbaar, zorg dat displayTime() uitgevoerd is.",
             );
             return null;
         }
+
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             selectedPost = filteredPosts[personIndex];
             return {
