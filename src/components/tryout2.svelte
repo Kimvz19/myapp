@@ -353,7 +353,7 @@
 </script>
 
 <!-- HTML Code -->
-<div>
+<div class="content-data">
     <p>Data in {stateFilter}</p>
 
     <!-- User input for the state -->
@@ -420,10 +420,12 @@
 
     <!-- Result output -->
     <div class="resultOutput"></div>
+    
 </div>
 
 <!-- radar chart-->
 <svg bind:this={chartContainer} class="radar-chart"></svg>
+
 <div class="legend-container">
     <div class="legend-item">
         <span
@@ -450,10 +452,10 @@
 />
 
 <style>
-    div {
+    .content-data {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: center; 
         text-align: center;
     }
 
@@ -503,40 +505,39 @@
     }
 
     svg {
-        display: block;
+    display: block;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+
     }
 
-    .radar-chart {
-        display: block;
-        margin: auto;
-        justify-content: center;
-        align-items: center;
-    }
 
     .legend-container {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        text-align: left;
-        font-size: 12px;
-        background-color: #ffffff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-    }
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    position: absolute;
+    bottom: 30px; /* Iets meer ruimte van de onderkant */
+    right: 30px; /* Iets meer ruimte van de rechterkant */
+    text-align: left;
+    font-size: 16px; /* Grotere lettergrootte voor leesbaarheid */
+    background-color: #ffffff;
+    border: 2px solid #ccc; /* Dikkere rand voor betere zichtbaarheid */
+    border-radius: 10px; /* Meer afgeronde hoeken */
+    padding: 15px; /* Meer padding voor een ruimtelijker gevoel */
+}
 
-    .legend-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 5px;
-    }
+.legend-item {
+    display: flex;
+    align-items: center; /* Center de inhoud verticaal */
+    margin-bottom: 10px; /* Grotere afstand tussen items */
+}
 
-    .legend-color {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-        border-radius: 3px;
-    }
+.legend-color {
+    width: 30px; /* Groter kleurblok */
+    height: 30px; /* Groter kleurblok */
+    margin-right: 15px; /* Meer ruimte tussen kleur en tekst */
+    border: 1px solid #000; /* Optionele rand voor betere zichtbaarheid */
+}
 </style>
