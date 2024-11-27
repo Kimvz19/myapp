@@ -49,4 +49,6 @@ Ik heb gebruik gemaakt van :
 
 ### Bronnen 
 * Bron API : https://data.cdc.gov/NCHS/Indicators-of-Anxiety-or-Depression-Based-on-Repor/8pt5-q6wp/about_data
-* Bron URL API limiet oplossing : https://dev.socrata.com/foundry/data.cdc.gov/8pt5-q6wp 
+* Bron URL API limiet oplossing : https://dev.socrata.com/foundry/data.cdc.gov/8pt5-q6wp
+* Bron updaten variabele met nieuwe waardes : https://stackoverflow.com/questions/59231590/svelte-what-does-mean
+* Bron index : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
