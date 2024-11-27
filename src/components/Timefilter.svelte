@@ -8,20 +8,23 @@ de gebruiker de gegevens te laten zien van de laatste periode! -->
 dus de meest actuele time_period-->
 
 <script>
+  //imports 
   import { onMount } from "svelte";
   import { fetchPosts } from "../lib/apiUtil.js";
 
   // Variabelen
   let actualTimePeriod = []; // Meest actuele time_period
-  export const ActualTime = actualTimePeriod;
+  export const ActualTime = actualTimePeriod; // Ook de export werkte hier niet! 
+   // Hier heb ik een fout gemaakt. Geen const gebruiken alleen let,
+   // Dit heb ik in de samengestelde code opgelost 
 
   // Functie voor het filteren van de juiste tijdperiode
   async function displayTime() {
     try {
       //aanroepen van de data uit de API
-      let data = await fetchPosts();
+      let data = await fetchPosts(); // roept hier de data aan 
 
-      // variabele wordt aangemaakt om de vergelijkinis te kunnen maken voor de uitvoering hieronder
+      // Deze optie mapt een nieuwe lijst met array's en kijkt naar de tijd_periode
       let maxTimePeriod = Math.max(
         ...data.map((item) => Number(item.time_period)),
       );
@@ -30,6 +33,7 @@ dus de meest actuele time_period-->
       actualTimePeriod = data.filter(
         (item) => Number(item.time_period) === maxTimePeriod,
       );
+
     } catch (error) {
       // Melding voor error
       console.error("Error bij het ophalen van data:", error.message);
@@ -37,6 +41,7 @@ dus de meest actuele time_period-->
   }
 
   // Roep de functie aan bij het laden van de component
+  // onMount zorgt ervoor dat bij het laden, er wordt gewacht totdat de functie is uitgevoerd
   onMount(() => {
     displayTime();
   });
@@ -44,3 +49,5 @@ dus de meest actuele time_period-->
   // Automatisch opnieuw loggen als de waarde verandert
   $: console.log(actualTimePeriod);
 </script>
+
+
