@@ -21,6 +21,7 @@ Het project is beschikbaar online met de bijbehorende link.
 De deployment host voor dit project is Vercel gekoppeld aan Github repo. 
 
 ### Toekomst plannen voor het project
+De toekomst plannen voor dit project is om meer filter opties toe te voegen. Ook zou ik meer variaties willen toevoegen op het gebied van charts. Ik zou een pie chart willen toevoegen of een barchart. Of juist iets heel anders, een map van Amerika met de states en de daarbijhorende statistieken. Dit zou 1 van mijn toekomst plannen kunnen zijn. Aan gezien de API dynamisch is, zou ik ook meerdere tijdsperiodes kunnen verwerken in de visualisatie, maar voor als nog blijft het voor dit project nu bij de laatste meest actuele tijdsperiode.
 
 ### Codestijl 
 
