@@ -54,4 +54,12 @@ Ik heb gebruik gemaakt van :
 * Bron index : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 * index code voorbeeld opzet : https://chatgpt.com/share/67478f19-6e84-8000-a1fc-3d480dbd1c15
 
+### Radar chart bronnen
+* voorbeeld spider chart : https://yangdanny97.github.io/blog/2019/03/01/D3-Spider-Chart
+* voorbeeld radar chart : https://www.react-graph-gallery.com/radar-chart
+* voorbeeld visualisation radar chart : https://datavizcatalogue.com/methods/radar_chart.html
+   * https://blog.scottlogic.com/2011/09/23/a-critique-of-radar-charts.html
+   * https://graves.cl/radar-chart-d3/
+* toevoegen
+
 
