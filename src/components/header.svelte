@@ -14,12 +14,11 @@
   rel="stylesheet"
 />
 
-<!-- html code-->
+<!-- HTML code -->
 <h1>De psychologische impact van COVID-19</h1>
 <h2>Breng de indicatoren van angst en depressie in beeld</h2>
 
-<!-- styling -->
-
+<!-- Styling -->
 <style>
   h1,
   h2 {
@@ -34,7 +33,12 @@
     font-weight: 300;
     font-style: normal;
     font-size: 45px;
+    background: linear-gradient(to right, #40E0D0, #A9A9A9, #00008B, #800080); /* Vier kleuren gradient */
+    -webkit-background-clip: text; /* Voor Webkit browsers (zoals Safari) */
+    background-clip: text; /* Voor andere moderne browsers */
+    color: transparent; /* Maak de tekst transparant zodat de gradient zichtbaar wordt */
   }
+
 
   h2 {
     font-family: "Montserrat";
@@ -44,3 +48,4 @@
     font-size: 25px;
   }
 </style>
+
