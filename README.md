@@ -48,4 +48,5 @@ Ik heb gebruik gemaakt van :
 * Svelte
 
 ### Bronnen 
-Nog toevoegen
+* Bron API : https://data.cdc.gov/NCHS/Indicators-of-Anxiety-or-Depression-Based-on-Repor/8pt5-q6wp/about_data
+* 
