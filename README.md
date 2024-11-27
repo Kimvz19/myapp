@@ -33,3 +33,6 @@ Ik heb gebruik gemaakt van :
 * Javascript
 * D3
 * Svelte
+
+### Bronnen 
+Nog toevoegen
