@@ -1,7 +1,9 @@
 <script>
-    // Import Svelte and utility functions
+    // Imports 
     import { onMount } from "svelte";
     import * as d3 from "d3";
+
+    //Import API Fetch voor ophalen van data
     import { fetchPosts } from "../lib/apiUtil.js";
 
     let result1 = null; // Data for comparison 1
