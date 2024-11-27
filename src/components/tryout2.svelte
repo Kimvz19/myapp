@@ -107,6 +107,19 @@
             }
 
             console.log("Comparison:", result1, result2);
+
+
+               // Voeg gekleurde vierkanten toe aan de output
+        outputDiv.innerHTML = `
+            <div>
+                <span style="display: inline-block; width: 20px; height: 20px; background: linear-gradient(to right, #40E0D0, #A9A9A9); border: 1px solid #000; margin-right: 5px;"></span>
+                <p>Index ${index1}</p>
+            </div>
+            <div>
+                <span style="display: inline-block; width: 20px; height: 20px; background: linear-gradient(to right, #00008B, #800080); border: 1px solid #000; margin-right: 5px;"></span>
+                <p>Index ${index2}</p>
+            </div>
+        `;
             //     outputDiv.innerHTML = `
             //     <h2>Comparison</h2>
             //     <div>
