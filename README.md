@@ -20,4 +20,14 @@ Mijn doel van dit project waren meer ervaring op te doen met Js, fetchen van een
 Het project is beschikbaar online met de bijbehorende link.
 De deployment host voor dit project is Vercel gekoppeld aan Github repo. 
 
+### Toekomst plannen voor het project
 
+### Codestijl 
+
+Voor dit project heb ik verschillende codetalen geschreven. Ook heb ik gebruik gemaakt van een framework Svelte & D3 gebruikt voor het creeëren van een radar chart. 
+Ik heb gebruik gemaakt van : 
+* Html
+* CSS
+* Javascript
+* D3
+* Svelte
