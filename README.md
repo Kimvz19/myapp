@@ -62,5 +62,7 @@ Ik heb gebruik gemaakt van :
    * https://graves.cl/radar-chart-d3/
 * Bron Radar basis code : https://chatgpt.com/share/67479563-e218-8000-8f8b-96dc05e6cc7c
   * https://chatgpt.com/share/67479d0c-9468-8000-9442-50b1abcc9bfa
+* Bron kleuren : https://thebigstory.nl/psychologie-van-kleur/
+  * https://linku.nl/kleurenpsychologie/
 
 
