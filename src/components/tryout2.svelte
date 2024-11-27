@@ -6,6 +6,8 @@
     //Import API Fetch voor ophalen van data
     import { fetchPosts } from "../lib/apiUtil.js";
 
+
+    // variabelen 
     let result1 = null; // Data for comparison 1
     let result2 = null; // Data for comparison 2
     let chartContainer;
