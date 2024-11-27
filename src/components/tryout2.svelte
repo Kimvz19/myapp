@@ -107,31 +107,31 @@
             }
 
             console.log("Comparison:", result1, result2);
-            outputDiv.innerHTML = `
-            <h2>Comparison</h2>
-            <div>
-                <h3>Index ${index1}</h3>
-                <table border="1">
-                    <tr><td>Confidence Interval</td><td>${result1.confidence_interval}</td></tr>
-                    <tr><td>Low CI</td><td>${result1.lowci}</td></tr>
-                    <tr><td>High CI</td><td>${result1.highci}</td></tr>
-                    <tr><td>Quartile Range</td><td>${result1.quartile_range}</td></tr>
-                    <tr><td>Phase</td><td>${result1.phase}</td></tr>
-                    <tr><td>Value</td><td>${result1.value}</td></tr>
-                </table>
-            </div>
-            <div>
-                <h3>Index ${index2}</h3>
-                <table border="1">
-                    <tr><td>Confidence Interval</td><td>${result2.confidence_interval}</td></tr>
-                    <tr><td>Low CI</td><td>${result2.lowci}</td></tr>
-                    <tr><td>High CI</td><td>${result2.highci}</td></tr>
-                    <tr><td>Quartile Range</td><td>${result2.quartile_range}</td></tr>
-                    <tr><td>Phase</td><td>${result2.phase}</td></tr>
-                    <tr><td>Value</td><td>${result2.value}</td></tr>
-                </table>
-            </div>
-        `;
+            //     outputDiv.innerHTML = `
+            //     <h2>Comparison</h2>
+            //     <div>
+            //         <h3>Index ${index1}</h3>
+            //         <table border="1">
+            //             <tr><td>Confidence Interval</td><td>${result1.confidence_interval}</td></tr>
+            //             <tr><td>Low CI</td><td>${result1.lowci}</td></tr>
+            //             <tr><td>High CI</td><td>${result1.highci}</td></tr>
+            //             <tr><td>Quartile Range</td><td>${result1.quartile_range}</td></tr>
+            //             <tr><td>Phase</td><td>${result1.phase}</td></tr>
+            //             <tr><td>Value</td><td>${result1.value}</td></tr>
+            //         </table>
+            //     </div>
+            //     <div>
+            //         <h3>Index ${index2}</h3>
+            //         <table border="1">
+            //             <tr><td>Confidence Interval</td><td>${result2.confidence_interval}</td></tr>
+            //             <tr><td>Low CI</td><td>${result2.lowci}</td></tr>
+            //             <tr><td>High CI</td><td>${result2.highci}</td></tr>
+            //             <tr><td>Quartile Range</td><td>${result2.quartile_range}</td></tr>
+            //             <tr><td>Phase</td><td>${result2.phase}</td></tr>
+            //             <tr><td>Value</td><td>${result2.value}</td></tr>
+            //         </table>
+            //     </div>
+            // `;
 
             // Maak de radar chart met de gestructureerde data
             let data1 = createRadarData(result1);
@@ -157,7 +157,7 @@
     // Radar chart creation functie aangepast
     function createRadarChart(container, data1, data2) {
         let width = 700,
-            height = 650,
+            height = 850,
             maxValue = 20,
             levels = 5;
         let radius = Math.min(width, height) / 2;
@@ -169,7 +169,7 @@
             .attr("height", height)
             .html("")
             .append("g")
-            .attr("transform", `translate(${width / 2}, ${height / 2})`);
+            .attr("transform", `translate(${width / 2}, ${height / 2 + 50})`);
 
         let defs = svg.append("defs");
 
@@ -199,10 +199,12 @@
             .attr("y1", "0%")
             .attr("x2", "100%")
             .attr("y2", "100%");
+
         depressionGradient
             .append("stop")
             .attr("offset", "0%")
             .attr("stop-color", "#00008B");
+
         depressionGradient
             .append("stop")
             .attr("offset", "100%")
@@ -243,12 +245,12 @@
             .attr(
                 "x",
                 (d, i) =>
-                    (radius + 20) * Math.cos(angleSlice * i - Math.PI / 2),
+                (radius + 25) * Math.cos(angleSlice * i - Math.PI / 2),
             )
             .attr(
                 "y",
                 (d, i) =>
-                    (radius + 20) * Math.sin(angleSlice * i - Math.PI / 2),
+                (radius + 25) * Math.sin(angleSlice * i - Math.PI / 2),
             )
             .text((d) => d.axis)
             .style("font-size", "12px")
@@ -310,7 +312,7 @@
             </svg>
         {:else}
             <!-- Red cross if no data is found -->
-            <svg width="10" height="12" viewBox="0 0 12 12" fill="none">
+            <svg width="15" height="12" viewBox="0 0 12 12" fill="none">
                 <path
                     d="M6.66667 0C10.3533 0 13.3333 2.98 13.3333 6.66667C13.3333 10.3533 10.3533 13.3333 6.66667 13.3333C2.98 13.3333 0 10.3533 0 6.66667C0 2.98 2.98 0 6.66667 0ZM9.06 3.33333L6.66667 5.72667L4.27333 3.33333L3.33333 4.27333L5.72667 6.66667L3.33333 9.06L4.27333 10L6.66667 7.60667L9.06 10L10 9.06L7.60667 6.66667L10 4.27333L9.06 3.33333Z"
                     fill="#F00"
@@ -328,7 +330,7 @@
         min="0"
     />
 
-    <p> vs </p>
+    <p>vs</p>
 
     <input
         class="input-field"
@@ -349,7 +351,7 @@
 </div>
 
 <!-- radar chart-->
-<svg bind:this={chartContainer}></svg>
+<svg bind:this={chartContainer} class="radar-chart"></svg>
 
 <!------------->
 <!-- Styling -->
@@ -414,6 +416,14 @@
 
     svg {
         display: block;
-        margin: auto;
     }
+
+    .radar-chart {
+        display: block; /* Zorgt ervoor dat het element als blok wordt weergegeven */
+        margin: auto; /* Horizontaal centreren en 10px bovenmarge */
+        justify-content: center; /* Centeren van de inhoud (optioneel) */
+        align-items: center; /* Centeren van de inhoud (optioneel) */
+    }
+
+    
 </style>
