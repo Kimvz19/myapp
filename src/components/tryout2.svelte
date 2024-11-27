@@ -328,6 +328,8 @@
         min="0"
     />
 
+    <p> vs </p>
+
     <input
         class="input-field"
         type="number"
@@ -362,6 +364,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
+    }
+
+    p {
+        margin-bottom: 10px;
+        margin-right: 10px;
     }
 
     button,
@@ -390,6 +398,8 @@
         border-radius: 5px;
         border-style: none;
         text-align: center;
+        margin-right: 50px;
+
         display: flex;
         justify-content: center;
         align-items: center;
