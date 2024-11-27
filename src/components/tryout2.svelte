@@ -420,7 +420,6 @@
 
     <!-- Result output -->
     <div class="resultOutput"></div>
-    
 </div>
 
 <!-- radar chart-->
@@ -432,14 +431,14 @@
             class="legend-color"
             style="background: linear-gradient(to right, #40E0D0, #A9A9A9);"
         ></span>
-        <span>Anxiety Data</span>
+        <span>persoon {index1}</span>
     </div>
     <div class="legend-item">
         <span
             class="legend-color"
             style="background: linear-gradient(to right, #00008B, #800080);"
         ></span>
-        <span>Depression Data</span>
+        <span>persoon {index2}</span>
     </div>
 </div>
 
@@ -455,7 +454,7 @@
     .content-data {
         display: flex;
         justify-content: center;
-        align-items: center; 
+        align-items: center;
         text-align: center;
     }
 
@@ -505,39 +504,37 @@
     }
 
     svg {
-    display: block;
-    justify-content: center;
-    align-content: center;
-    margin: auto;
-
+        display: block;
+        justify-content: center;
+        align-content: center;
+        margin: auto;
     }
 
-
     .legend-container {
-    display: flex;
-    justify-content: left;
-    flex-direction: column;
-    position: absolute;
-    bottom: 30px; /* Iets meer ruimte van de onderkant */
-    right: 30px; /* Iets meer ruimte van de rechterkant */
-    text-align: left;
-    font-size: 16px; /* Grotere lettergrootte voor leesbaarheid */
-    background-color: #ffffff;
-    border: 2px solid #ccc; /* Dikkere rand voor betere zichtbaarheid */
-    border-radius: 10px; /* Meer afgeronde hoeken */
-    padding: 15px; /* Meer padding voor een ruimtelijker gevoel */
-}
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
+        position: absolute;
+        bottom: 30px; /* Iets meer ruimte van de onderkant */
+        right: 30px; /* Iets meer ruimte van de rechterkant */
+        text-align: left;
+        font-size: 16px; /* Grotere lettergrootte voor leesbaarheid */
+        background-color: #ffffff;
+        border: 2px solid #ccc; /* Dikkere rand voor betere zichtbaarheid */
+        border-radius: 10px; /* Meer afgeronde hoeken */
+        padding: 15px; /* Meer padding voor een ruimtelijker gevoel */
+    }
 
-.legend-item {
-    display: flex;
-    align-items: center; /* Center de inhoud verticaal */
-    margin-bottom: 10px; /* Grotere afstand tussen items */
-}
+    .legend-item {
+        display: flex;
+        align-items: center; /* Center de inhoud verticaal */
+        margin-bottom: 10px; /* Grotere afstand tussen items */
+    }
 
-.legend-color {
-    width: 30px; /* Groter kleurblok */
-    height: 30px; /* Groter kleurblok */
-    margin-right: 15px; /* Meer ruimte tussen kleur en tekst */
-    border: 1px solid #000; /* Optionele rand voor betere zichtbaarheid */
-}
+    .legend-color {
+        width: 30px; /* Groter kleurblok */
+        height: 30px; /* Groter kleurblok */
+        margin-right: 15px; /* Meer ruimte tussen kleur en tekst */
+        border: 1px solid #000; /* Optionele rand voor betere zichtbaarheid */
+    }
 </style>
