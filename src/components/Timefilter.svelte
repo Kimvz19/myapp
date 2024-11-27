@@ -46,8 +46,9 @@ dus de meest actuele time_period-->
     displayTime();
   });
 
-  // Automatisch opnieuw loggen als de waarde verandert
+  // Automatisch opnieuw updaten van het variabel
   $: console.log(actualTimePeriod);
+
 </script>
 
 
