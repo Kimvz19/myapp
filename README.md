@@ -22,7 +22,18 @@ Ik heb veel geleerd tijdens dit project en zeer trots op het eindresultaat. Het 
 Het project is beschikbaar online met de bijbehorende link.
 De deployment host voor dit project is Vercel gekoppeld aan Github repo. 
 
-### Componenten in het project 
+### Componenten & libraries 
+In dit project heb ik gebruik gemaakt van componenten en libraries. De componenten in dit project: 
+* header.svelte
+* main.svelte (met daarin de time filter, state filter & D3 chart)
+* footer.svelte
+
+De libraries: 
+* apiUtil.js (wordt gebruikt om API te fetchen)
+
+En extra:
+* +page.svlete
+Deze heb ik aangemaakt omdat ik hierin mijn componenten inlaad. Dit maakt de import van de componenten erg overzichtelijk!
 
 ### Toekomst plannen voor het project
 De toekomst plannen voor dit project is om meer filter opties toe te voegen. Ook zou ik meer variaties willen toevoegen op het gebied van charts. Ik zou een pie chart willen toevoegen of een barchart. Of juist iets heel anders, een map van Amerika met de states en de daarbijhorende statistieken. Dit zou 1 van mijn toekomst plannen kunnen zijn. Aangezien de API dynamisch is, zou ik ook meerdere tijdsperiodes kunnen verwerken in de visualisatie, maar voor als nog blijft het voor dit project nu bij de laatste meest actuele tijdsperiode.
