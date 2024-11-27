@@ -52,3 +52,6 @@ Ik heb gebruik gemaakt van :
 * Bron URL API limiet oplossing : https://dev.socrata.com/foundry/data.cdc.gov/8pt5-q6wp
 * Bron updaten variabele met nieuwe waardes : https://stackoverflow.com/questions/59231590/svelte-what-does-mean
 * Bron index : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+* index code voorbeeld opzet : https://chatgpt.com/share/67478f19-6e84-8000-a1fc-3d480dbd1c15
+
+
