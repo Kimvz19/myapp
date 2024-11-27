@@ -108,18 +108,17 @@
 
             console.log("Comparison:", result1, result2);
 
-
-               // Voeg gekleurde vierkanten toe aan de output
-        outputDiv.innerHTML = `
-            <div>
-                <span style="display: inline-block; width: 20px; height: 20px; background: linear-gradient(to right, #40E0D0, #A9A9A9); border: 1px solid #000; margin-right: 5px;"></span>
-                <p>Index ${index1}</p>
-            </div>
-            <div>
-                <span style="display: inline-block; width: 20px; height: 20px; background: linear-gradient(to right, #00008B, #800080); border: 1px solid #000; margin-right: 5px;"></span>
-                <p>Index ${index2}</p>
-            </div>
-        `;
+            //        // Voeg gekleurde vierkanten toe aan de output
+            // outputDiv.innerHTML = `
+            //     <div>
+            //         <span style="display: inline-block; width: 20px; height: 20px; background: linear-gradient(to right, #40E0D0, #A9A9A9); border: 1px solid #000; margin-right: 5px;"></span>
+            //         <p>Index ${index1}</p>
+            //     </div>
+            //     <div>
+            //         <span style="display: inline-block; width: 20px; height: 20px; background: linear-gradient(to right, #00008B, #800080); border: 1px solid #000; margin-right: 5px;"></span>
+            //         <p>Index ${index2}</p>
+            //     </div>
+            // `;
             //     outputDiv.innerHTML = `
             //     <h2>Comparison</h2>
             //     <div>
@@ -171,10 +170,11 @@
     function createRadarChart(container, data1, data2) {
         let width = 700,
             height = 850,
-            maxValue = Math.max(
-            d3.max(data1.map((d) => parseFloat(d.value))),
-            d3.max(data2.map((d) => parseFloat(d.value)))
-        ) * 1.1, // Automatische maxValue
+            maxValue =
+                Math.max(
+                    d3.max(data1.map((d) => parseFloat(d.value))),
+                    d3.max(data2.map((d) => parseFloat(d.value))),
+                ) * 1.1, // Automatische maxValue
             levels = 5;
         let radius = Math.min(width, height) / 2;
         let angleSlice = (Math.PI * 2) / data1.length;
@@ -261,12 +261,12 @@
             .attr(
                 "x",
                 (d, i) =>
-                (radius + 25) * Math.cos(angleSlice * i - Math.PI / 2),
+                    (radius + 25) * Math.cos(angleSlice * i - Math.PI / 2),
             )
             .attr(
                 "y",
                 (d, i) =>
-                (radius + 25) * Math.sin(angleSlice * i - Math.PI / 2),
+                    (radius + 25) * Math.sin(angleSlice * i - Math.PI / 2),
             )
             .text((d) => d.axis)
             .style("font-size", "12px")
@@ -277,52 +277,74 @@
             .radius((d) => (parseFloat(d.value) / maxValue) * radius)
             .angle((d, i) => i * angleSlice);
 
-     // Render radar chart buitenlijn en vlakken
-svg.append("path")
-    .data([data1])
-    .attr("class", "radar-chart-line")
-    .attr("d", radarLine)
-    .style("stroke", "url(#anxietyGradient)") // Buitenkantlijn met kleur
-    .style("stroke-width", 2)
-    .style("fill", "url(#anxietyGradient)")
-    .style("fill-opacity", 0.5) // Lichte transparantie voor het vlak
-    .style("stroke-opacity", 1); // Volledige opacity voor de buitenlijn
+        svg.append("path")
+            .data([data1])
+            .attr("class", "radar-chart-line")
+            .attr("d", radarLine)
+            .style("stroke", "url(#anxietyGradient)")
+            .style("stroke-width", 2)
+            .style("fill", "url(#anxietyGradient)")
+            .style("fill-opacity", 0.5)
+            .style("stroke-opacity", 1); // Volledige opacity
 
-svg.append("path")
-    .data([data2])
-    .attr("class", "radar-chart-line")
-    .attr("d", radarLine)
-    .style("stroke", "url(#depressionGradient)")
-    .style("stroke-width", 2)
-    .style("fill", "url(#depressionGradient)")
-    .style("fill-opacity", 0.5)
-    .style("stroke-opacity", 1);
+        svg.append("path")
+            .data([data2])
+            .attr("class", "radar-chart-line")
+            .attr("d", radarLine)
+            .style("stroke", "url(#depressionGradient)")
+            .style("stroke-width", 2)
+            .style("fill", "url(#depressionGradient)")
+            .style("fill-opacity", 0.5)
+            .style("stroke-opacity", 1); // Volledige opacity
 
-// Voeg punten toe aan de hoekpunten
-svg.selectAll(".data-point1")
-    .data(data1)
-    .enter()
-    .append("circle")
-    .attr("class", "data-point1")
-    .attr("cx", (d, i) => radius * (parseFloat(d.value) / maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
-    .attr("cy", (d, i) => radius * (parseFloat(d.value) / maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
-    .attr("r", 4) // Straal van de cirkel
-    .style("fill", "#40E0D0") // Kleur van de punt
-    .style("stroke", "#000") // Zwarte rand voor zichtbaarheid
-    .style("stroke-width", 1.5);
+        // Voeg data-punten toe
+        svg.selectAll(".data-point1")
+            .data(data1)
+            .enter()
+            .append("circle")
+            .attr("class", "data-point1")
+            .attr(
+                "cx",
+                (d, i) =>
+                    radius *
+                    (parseFloat(d.value) / maxValue) *
+                    Math.cos(angleSlice * i - Math.PI / 2),
+            )
+            .attr(
+                "cy",
+                (d, i) =>
+                    radius *
+                    (parseFloat(d.value) / maxValue) *
+                    Math.sin(angleSlice * i - Math.PI / 2),
+            )
+            .attr("r", 4)
+            .style("fill", "#40E0D0")
+            .style("stroke", "#000")
+            .style("stroke-width", 1.5);
 
-svg.selectAll(".data-point2")
-    .data(data2)
-    .enter()
-    .append("circle")
-    .attr("class", "data-point2")
-    .attr("cx", (d, i) => radius * (parseFloat(d.value) / maxValue) * Math.cos(angleSlice * i - Math.PI / 2))
-    .attr("cy", (d, i) => radius * (parseFloat(d.value) / maxValue) * Math.sin(angleSlice * i - Math.PI / 2))
-    .attr("r", 4)
-    .style("fill", "#800080")
-    .style("stroke", "#000")
-    .style("stroke-width", 1.5);
-
+        svg.selectAll(".data-point2")
+            .data(data2)
+            .enter()
+            .append("circle")
+            .attr("class", "data-point2")
+            .attr(
+                "cx",
+                (d, i) =>
+                    radius *
+                    (parseFloat(d.value) / maxValue) *
+                    Math.cos(angleSlice * i - Math.PI / 2),
+            )
+            .attr(
+                "cy",
+                (d, i) =>
+                    radius *
+                    (parseFloat(d.value) / maxValue) *
+                    Math.sin(angleSlice * i - Math.PI / 2),
+            )
+            .attr("r", 4)
+            .style("fill", "#800080")
+            .style("stroke", "#000")
+            .style("stroke-width", 1.5);
     }
     // Call displayTime to fetch initial data when the component is mounted
     onMount(async () => {
@@ -402,6 +424,22 @@ svg.selectAll(".data-point2")
 
 <!-- radar chart-->
 <svg bind:this={chartContainer} class="radar-chart"></svg>
+<div class="legend-container">
+    <div class="legend-item">
+        <span
+            class="legend-color"
+            style="background: linear-gradient(to right, #40E0D0, #A9A9A9);"
+        ></span>
+        <span>Anxiety Data</span>
+    </div>
+    <div class="legend-item">
+        <span
+            class="legend-color"
+            style="background: linear-gradient(to right, #00008B, #800080);"
+        ></span>
+        <span>Depression Data</span>
+    </div>
+</div>
 
 <!------------->
 <!-- Styling -->
@@ -469,11 +507,36 @@ svg.selectAll(".data-point2")
     }
 
     .radar-chart {
-        display: block; /* Zorgt ervoor dat het element als blok wordt weergegeven */
-        margin: auto; /* Horizontaal centreren en 10px bovenmarge */
-        justify-content: center; /* Centeren van de inhoud (optioneel) */
-        align-items: center; /* Centeren van de inhoud (optioneel) */
+        display: block;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
     }
 
-    
+    .legend-container {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        text-align: left;
+        font-size: 12px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    .legend-color {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border-radius: 3px;
+    }
 </style>
