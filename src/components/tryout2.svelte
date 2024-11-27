@@ -71,9 +71,11 @@
             return null;
         }
 
+        // voor de persoon index wordt de array ingevuld met de values
         if (personIndex >= 0 && personIndex < filteredPosts.length) {
             selectedPost = filteredPosts[personIndex];
             return {
+                // de values die in de array komen
                 confidence_interval: selectedPost.confidence_interval,
                 lowci: selectedPost.lowci,
                 highci: selectedPost.highci,
@@ -81,8 +83,10 @@
                 phase: selectedPost.phase,
                 value: selectedPost.value,
             };
+
+
         } else {
-            return "<p>Invalid index, enter another number!</p>";
+            return "<p> Geen geldig persoon gevonden, kies een lager nummer!</p>";
         }
     }
 
