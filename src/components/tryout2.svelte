@@ -269,13 +269,16 @@
             .data([data1])
             .attr("class", "radar-chart")
             .attr("d", radarLine)
-            .style("fill", "url(#anxietyGradient)");
+            .style("fill", "url(#anxietyGradient)")
+            .style("fill-opacity", 0.5); // Voeg doorzichtigheid toe
+
 
         svg.append("path")
             .data([data2])
             .attr("class", "radar-chart")
             .attr("d", radarLine)
-            .style("fill", "url(#depressionGradient)");
+            .style("fill", "url(#depressionGradient)")
+            .style("fill-opacity", 0.4); // Voeg doorzichtigheid toe
     }
     // Call displayTime to fetch initial data when the component is mounted
     onMount(async () => {
