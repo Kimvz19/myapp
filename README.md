@@ -60,6 +60,6 @@ Ik heb gebruik gemaakt van :
 * voorbeeld visualisation radar chart : https://datavizcatalogue.com/methods/radar_chart.html
    * https://blog.scottlogic.com/2011/09/23/a-critique-of-radar-charts.html
    * https://graves.cl/radar-chart-d3/
-* toevoegen
+* Bron Radar basis code : https://chatgpt.com/share/67479563-e218-8000-8f8b-96dc05e6cc7c
 
 
