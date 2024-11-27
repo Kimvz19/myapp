@@ -33,12 +33,20 @@
     font-weight: 300;
     font-style: normal;
     font-size: 45px;
-    background: linear-gradient(to right, #40E0D0, #A9A9A9, #00008B, #800080); /* Vier kleuren gradient */
+    padding: 5px; /* Ruimte tussen tekst en rand */
+
+    /* Gradient voor de tekst */
+    background: linear-gradient(to right, #40e0d0, #a9a9a9, #00008b, #800080);
     -webkit-background-clip: text; /* Voor Webkit browsers (zoals Safari) */
     background-clip: text; /* Voor andere moderne browsers */
     color: transparent; /* Maak de tekst transparant zodat de gradient zichtbaar wordt */
-  }
 
+    /* Gradient voor de rand */
+    border: 10px solid transparent; /* Transparante rand */
+    border-radius: 30px; /* Ronde hoeken */
+    border-image: linear-gradient(to right, #40e0d0, #a9a9a9, #00008b, #800080)
+      1; /* Gradient rand */
+  }
 
   h2 {
     font-family: "Montserrat";
@@ -48,4 +56,3 @@
     font-size: 25px;
   }
 </style>
-
