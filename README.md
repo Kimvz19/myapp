@@ -16,7 +16,7 @@ Om de gebruiker meer te informeren over de data zijn er gebruiksvriendelijke fee
 ### Doelen
 Mijn doel van dit project waren meer ervaring op te doen met Js, fetchen van een dynamische API, leren omgaan met data filteren extc. Ik heb veel geleerd tijdens dit project en zeer trots op het eindresultaat. 
 
-##### installatie 
+#### Installatie 
 Het project is beschikbaar online met de bijbehorende link.
 De deployment host voor dit project is Vercel gekoppeld aan Github repo. 
 
