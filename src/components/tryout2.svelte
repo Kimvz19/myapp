@@ -21,27 +21,41 @@
     let index2 = null;
     let selectedPost = {};
 
-    // Function to fetch the most current time period
+
+    // functie fetcht met meest actuele tijd periode
     async function displayTime() {
         try {
+
+            // Data ophalen van APi
             let data = await fetchPosts();
+
+            // Deze optie mapt een nieuwe lijst met array's en kijkt naar de tijd_periode
             let maxTimePeriod = Math.max(
                 ...data.map((item) => Number(item.time_period)),
             );
+
+            // Filtert op de max time_period > dus de meest recente === aan de hoogste time_period
             actualTimePeriod = data.filter(
                 (item) => Number(item.time_period) === maxTimePeriod,
             );
+
+            // hier wordt de actule tijd lijst gefiltered op de state
+            // default state staat op hawaii 
             filteredPosts = actualTimePeriod.filter(
                 (post) =>
                     post.state.toLowerCase() === stateFilter.toLowerCase(),
             );
             dataFound = filteredPosts.length > 0;
+
+        // error melding 
         } catch (error) {
             console.error("Error fetching data:", error.message);
             filteredPosts = [];
             dataFound = false;
         }
     }
+
+    
 
     // Function to fetch data for a specific index from filteredPosts
     async function displayRange(personIndex) {
