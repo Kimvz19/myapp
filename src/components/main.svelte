@@ -24,7 +24,7 @@ wordt getekend als alle gegevens kloppen!-->
     let actualTimePeriod = [];
     let filteredPosts = [];
     let stateFilter = "hawaii"; //default state 
-    let dataFound = false; //boolan voor filter status
+    let dataFound = true; //boolan voor filter status
     let index1 = null;
     let index2 = null;
     let selectedPost = {};
@@ -49,13 +49,15 @@ wordt getekend als alle gegevens kloppen!-->
 
             // hier wordt de actule tijd lijst gefiltered op de state
             // default state staat op hawaii
+            //om te voorkomen dat er foutmeldingen komen als er 
+                //geen gebruik wordt gemaakt van hoofdletters
             filteredPosts = actualTimePeriod.filter(
                 (post) =>
                     post.state.toLowerCase() === stateFilter.toLowerCase(),
             );
             dataFound = filteredPosts.length > 0;
 
-            // error melding
+            // error melding 
         } catch (error) {
             console.error("Error fetching data:", error.message);
             filteredPosts = [];
@@ -63,10 +65,12 @@ wordt getekend als alle gegevens kloppen!-->
         }
     }
 
+    // Tweede functie
     // functie om index van de lijst te selecteren
     async function displayRange(personIndex) {
-        //deze code is er om te checken of filteredPosts is uitgevoerd, zo niet
-        // dan wordt er een foutmleding
+
+        // deze code is er om te checken of filteredPosts is uitgevoerd, zo niet
+        // dan komt er een foutmleding
         if (filteredPosts.length === 0) {
             console.error(
                 "geen data beschikbaar, zorg dat displayTime() uitgevoerd is.",
