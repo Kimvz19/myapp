@@ -374,10 +374,13 @@ wordt getekend als alle gegevens kloppen!-->
             .style("stroke", "#000")
             .style("stroke-width", 1.5);
     }
-    // Call displayTime to fetch initial data when the component is mounted
+
+
+    // zorgt ervoor dat de code wordt uitgevoerd nadat die functie is uitgevoerd
     onMount(async () => {
         await displayTime();
     });
+
 </script>
 
 <!-- HTML Code -->
