@@ -11,7 +11,7 @@
     let result2 = null; // Data for comparison 2
     let chartContainer;
 
-    
+
     // Variables
     let actualTimePeriod = [];
     let filteredPosts = [];
@@ -466,7 +466,7 @@
 </div>
 
 <!-- radar chart-->
-<div id="message-container">Vul de gegevens in om de radar chart te tekenen</div>
+<div id="message-container">Vul de gegevens in om de radar chart te tekenen!</div>
 <svg bind:this={chartContainer} class="radar-chart"></svg>
 
 <div class="legend-container">
@@ -509,7 +509,7 @@
 
     button,
     p,
-    .input-field {
+    .input-field, #message-container {
         font-family: "Montserrat";
         font-optical-sizing: auto;
         font-weight: 200;
@@ -548,8 +548,12 @@
     }
 
     #message-container{
-        border: 1px solid #000; /* Optionele rand voor betere zichtbaarheid */
-        color: green;
+        display: flex;
+        justify-content: center;
+        margin-top: 200px;
+        margin-bottom: 150px;
+        color: #7a187a;
+
     }
 
     svg {
