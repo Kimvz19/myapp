@@ -95,11 +95,14 @@ wordt getekend als alle gegevens kloppen!-->
     // Derde functie
     // Functie om data voor de radar chart op te bouwen
     function createRadarData(selectedPost) {
-        // functie zorgt ervoor dat de data uit selected post 
+        // functie zorgt ervoor dat de data uit selected post
         // bruikbaar is in de radar chart
         // De return is de uitkomst
         return [
-            { axis: "Confidence Interval", value: selectedPost.confidence_interval },
+            {
+                axis: "Confidence Interval",
+                value: selectedPost.confidence_interval,
+            },
             { axis: "Low CI", value: selectedPost.lowci },
             { axis: "High CI", value: selectedPost.highci },
             { axis: "Quartile Range", value: selectedPost.quartile_range },
@@ -109,9 +112,9 @@ wordt getekend als alle gegevens kloppen!-->
     }
 
     // Vierde functie
-    // Functie om twee indices met data te vergelijken
+    // Functie om twee indexes met data te vergelijken
     async function compareIndexes() {
-        await displayTime(); // Wacht op displayTime() voordat je verder gaat
+        await displayTime(); // Wacht op displayTime() voordat er verder wordt gegaan
 
         if (
             index1 === null ||
@@ -119,7 +122,7 @@ wordt getekend als alle gegevens kloppen!-->
             !dataFound ||
             filteredPosts.length === 0
         ) {
-            console.error("Invalid indices or data not available.");
+            console.error("Error, geen gegevens van index1 of index2!");
             return;
         }
 
@@ -133,11 +136,6 @@ wordt getekend als alle gegevens kloppen!-->
             result1 = await displayRange(index1);
             result2 = await displayRange(index2);
 
-            if (!result1 || !result2) {
-                outputDiv.innerHTML = "<p>Invalid input, try again!</p>";
-                return;
-            }
-
             console.log("Comparison:", result1, result2);
 
             // Maak de radar chart met de gestructureerde data
@@ -148,7 +146,7 @@ wordt getekend als alle gegevens kloppen!-->
             // Nu kan de radar chart setup functie worden aangeroepen
             setupRadarChart(data1, data2);
         } else {
-            outputDiv.innerHTML = "<p>Invalid index, try again!</p>";
+            outputDiv.innerHTML = "<p>Kies een lager nummer!</p>";
         }
     }
 
