@@ -1,8 +1,6 @@
-
 <!-- MAIN bestand-->
 <!-- In deze code wordt er gefilterd op tijd_periode, state, index & radar chart
 wordt getekend als alle gegevens kloppen!-->
-
 
 <!-- Javascript code-->
 <script>
@@ -15,20 +13,18 @@ wordt getekend als alle gegevens kloppen!-->
     import { fetchPosts } from "../lib/apiUtil.js";
 
     // variabelen voor gebruik radar chart
-    let result1 = null; 
-    let result2 = null; 
+    let result1 = null;
+    let result2 = null;
     let chartContainer;
-
 
     // Variabelen voor filteren
     let actualTimePeriod = [];
     let filteredPosts = [];
-    let stateFilter = "hawaii"; //default state 
+    let stateFilter = "hawaii"; //default state
     let dataFound = true; //boolan voor filter status
     let index1 = null;
     let index2 = null;
     let selectedPost = {};
-
 
     // eerste filter functie
     // functie fetcht met meest actuele tijd periode
@@ -49,15 +45,15 @@ wordt getekend als alle gegevens kloppen!-->
 
             // hier wordt de actule tijd lijst gefiltered op de state
             // default state staat op hawaii
-            //om te voorkomen dat er foutmeldingen komen als er 
-                //geen gebruik wordt gemaakt van hoofdletters
+            //om te voorkomen dat er foutmeldingen komen als er
+            //geen gebruik wordt gemaakt van hoofdletters
             filteredPosts = actualTimePeriod.filter(
                 (post) =>
                     post.state.toLowerCase() === stateFilter.toLowerCase(),
             );
             dataFound = filteredPosts.length > 0;
 
-            // error melding 
+            // error melding
         } catch (error) {
             console.error("Error fetching data:", error.message);
             filteredPosts = [];
@@ -68,7 +64,6 @@ wordt getekend als alle gegevens kloppen!-->
     // Tweede functie
     // functie om index van de lijst te selecteren
     async function displayRange(personIndex) {
-
         // deze code is er om te checken of filteredPosts is uitgevoerd, zo niet
         // dan komt er een foutmleding
         if (filteredPosts.length === 0) {
@@ -91,20 +86,20 @@ wordt getekend als alle gegevens kloppen!-->
                 value: selectedPost.value,
             };
 
-            
-        // foutmelding + problem solving
+            // foutmelding + problem solving
         } else {
             return "<p> Geen geldig persoon gevonden, kies een lager nummer!</p>";
         }
     }
 
+    // Derde functie
     // Functie om data voor de radar chart op te bouwen
     function createRadarData(selectedPost) {
+        // functie zorgt ervoor dat de data uit selected post 
+        // bruikbaar is in de radar chart
+        // De return is de uitkomst
         return [
-            {
-                axis: "Confidence Interval",
-                value: selectedPost.confidence_interval,
-            },
+            { axis: "Confidence Interval", value: selectedPost.confidence_interval },
             { axis: "Low CI", value: selectedPost.lowci },
             { axis: "High CI", value: selectedPost.highci },
             { axis: "Quartile Range", value: selectedPost.quartile_range },
@@ -113,6 +108,7 @@ wordt getekend als alle gegevens kloppen!-->
         ];
     }
 
+    // Vierde functie
     // Functie om twee indices met data te vergelijken
     async function compareIndexes() {
         await displayTime(); // Wacht op displayTime() voordat je verder gaat
@@ -144,43 +140,6 @@ wordt getekend als alle gegevens kloppen!-->
 
             console.log("Comparison:", result1, result2);
 
-            //        // Voeg gekleurde vierkanten toe aan de output
-            // outputDiv.innerHTML = `
-            //     <div>
-            //         <span style="display: inline-block; width: 20px; height: 20px; background: linear-gradient(to right, #40E0D0, #A9A9A9); border: 1px solid #000; margin-right: 5px;"></span>
-            //         <p>Index ${index1}</p>
-            //     </div>
-            //     <div>
-            //         <span style="display: inline-block; width: 20px; height: 20px; background: linear-gradient(to right, #00008B, #800080); border: 1px solid #000; margin-right: 5px;"></span>
-            //         <p>Index ${index2}</p>
-            //     </div>
-            // `;
-            //     outputDiv.innerHTML = `
-            //     <h2>Comparison</h2>
-            //     <div>
-            //         <h3>Index ${index1}</h3>
-            //         <table border="1">
-            //             <tr><td>Confidence Interval</td><td>${result1.confidence_interval}</td></tr>
-            //             <tr><td>Low CI</td><td>${result1.lowci}</td></tr>
-            //             <tr><td>High CI</td><td>${result1.highci}</td></tr>
-            //             <tr><td>Quartile Range</td><td>${result1.quartile_range}</td></tr>
-            //             <tr><td>Phase</td><td>${result1.phase}</td></tr>
-            //             <tr><td>Value</td><td>${result1.value}</td></tr>
-            //         </table>
-            //     </div>
-            //     <div>
-            //         <h3>Index ${index2}</h3>
-            //         <table border="1">
-            //             <tr><td>Confidence Interval</td><td>${result2.confidence_interval}</td></tr>
-            //             <tr><td>Low CI</td><td>${result2.lowci}</td></tr>
-            //             <tr><td>High CI</td><td>${result2.highci}</td></tr>
-            //             <tr><td>Quartile Range</td><td>${result2.quartile_range}</td></tr>
-            //             <tr><td>Phase</td><td>${result2.phase}</td></tr>
-            //             <tr><td>Value</td><td>${result2.value}</td></tr>
-            //         </table>
-            //     </div>
-            // `;
-
             // Maak de radar chart met de gestructureerde data
             let data1 = createRadarData(result1);
             let data2 = createRadarData(result2);
@@ -193,25 +152,25 @@ wordt getekend als alle gegevens kloppen!-->
         }
     }
 
+    // Vijfde functie
     // Radar chart setup functie aangepast om data door te geven
     async function setupRadarChart(data1, data2) {
-
-        let messageContainer = document.getElementById('message-container');
+        let messageContainer = document.getElementById("message-container");
 
         if (!data1 || !data2 || !chartContainer) {
             console.error("Data missing or chart container not available.");
             return;
         }
-    
 
-         // Verwijder het bericht wanneer de grafiek wordt getekend
-    if (messageContainer) {
-        messageContainer.style.display = 'none'; // Verberg het bericht
+        // Verwijder het bericht wanneer de grafiek wordt getekend
+        if (messageContainer) {
+            messageContainer.style.display = "none"; // Verberg het bericht
+        }
+
+        createRadarChart(chartContainer, data1, data2);
     }
 
-    createRadarChart(chartContainer, data1, data2);
-    }
-
+    // Zesde functie
     // Radar chart creation functie aangepast
     function createRadarChart(container, data1, data2) {
         let width = 700,
@@ -481,20 +440,18 @@ wordt getekend als alle gegevens kloppen!-->
 </div>
 
 <!-- radar chart-->
-<div id="message-container">Vul de gegevens in om de radar chart te tekenen!</div>
+<div id="message-container">
+    Vul de gegevens in om de radar chart te tekenen!
+</div>
 <svg bind:this={chartContainer} class="radar-chart"></svg>
 
 <div class="legend-container">
     <div class="legend-item">
-        <span
-            class="legend-color1"
-        ></span>
+        <span class="legend-color1"></span>
         <span>persoon {index1}</span>
     </div>
     <div class="legend-item">
-        <span
-            class="legend-color2"
-        ></span>
+        <span class="legend-color2"></span>
         <span>persoon {index2}</span>
     </div>
 </div>
@@ -522,7 +479,8 @@ wordt getekend als alle gegevens kloppen!-->
 
     button,
     p,
-    .input-field, #message-container {
+    .input-field,
+    #message-container {
         font-family: "Montserrat";
         font-optical-sizing: auto;
         font-weight: 200;
@@ -560,13 +518,12 @@ wordt getekend als alle gegevens kloppen!-->
         border-radius: 8px;
     }
 
-    #message-container{
+    #message-container {
         display: flex;
         justify-content: center;
         margin-top: 200px;
         margin-bottom: 150px;
         color: #7a187a;
-
     }
 
     svg {
@@ -597,18 +554,19 @@ wordt getekend als alle gegevens kloppen!-->
         margin-bottom: 10px; /* Grotere afstand tussen items */
     }
 
-    .legend-color1, .legend-color2 {
+    .legend-color1,
+    .legend-color2 {
         width: 30px; /* Groter kleurblok */
         height: 30px; /* Groter kleurblok */
         margin-right: 15px; /* Meer ruimte tussen kleur en tekst */
         border: 1px solid #000; /* Optionele rand voor betere zichtbaarheid */
     }
 
-    .legend-color1{
-        background: linear-gradient(to right, #40E0D0, #A9A9A9);
+    .legend-color1 {
+        background: linear-gradient(to right, #40e0d0, #a9a9a9);
     }
 
-    .legend-color2{
-        background: linear-gradient(to right, #00008B, #800080);
+    .legend-color2 {
+        background: linear-gradient(to right, #00008b, #800080);
     }
 </style>
