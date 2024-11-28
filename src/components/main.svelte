@@ -90,6 +90,9 @@ wordt getekend als alle gegevens kloppen!-->
                 phase: selectedPost.phase,
                 value: selectedPost.value,
             };
+
+            
+        // foutmelding + problem solving
         } else {
             return "<p> Geen geldig persoon gevonden, kies een lager nummer!</p>";
         }
