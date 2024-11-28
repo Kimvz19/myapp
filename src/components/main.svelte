@@ -194,9 +194,12 @@ wordt getekend als alle gegevens kloppen!-->
                     d3.max(data2.map((d) => parseFloat(d.value))),
                 ) * 1.1, // zorgt voor 10% extra ruimte op de grafiek 
             levels = 10; // aantal cirkels dat wordt getekend in de grafiek 
-        let radius = Math.min(width, height) / 2;
-        let angleSlice = (Math.PI * 2) / data1.length;
 
+        // berekening radius en hoeken
+        let radius = Math.min(width, height) / 2; //de grootste cirkel van de radar chart
+        let angleSlice = (Math.PI * 2) / data1.length; //hoek tussen assen
+
+        //aanmaken van svg radar chart
         let svg = d3
             .select(container)
             .attr("width", width)
@@ -207,7 +210,8 @@ wordt getekend als alle gegevens kloppen!-->
 
         let defs = svg.append("defs");
 
-        // Define gradients for Anxiety and Depression
+        // kleur radients, heb persoon1 anxiety genoemd en persoon 2 depression
+        // in verband met de betekenis van de kleuren
         let anxietyGradient = defs
             .append("linearGradient")
             .attr("id", "anxietyGradient")
@@ -244,6 +248,8 @@ wordt getekend als alle gegevens kloppen!-->
             .attr("offset", "100%")
             .attr("stop-color", "#800080");
 
+
+        // schaal van de cirkels weer te geven in de radar chart
         svg.selectAll(".grid-level")
             .data(d3.range(1, levels + 1).reverse())
             .enter()
@@ -254,6 +260,7 @@ wordt getekend als alle gegevens kloppen!-->
             .style("stroke", "#999")
             .style("fill-opacity", 0.1);
 
+        // waardes van de cirkels
         svg.selectAll(".grid-label")
             .data(d3.range(1, levels + 1).reverse())
             .enter()
@@ -266,6 +273,8 @@ wordt getekend als alle gegevens kloppen!-->
             .style("text-anchor", "middle")
             .style("fill", "#666");
 
+
+        // tekenen van radar chart
         let axis = svg
             .selectAll(".axis")
             .data(data1)
@@ -302,11 +311,13 @@ wordt getekend als alle gegevens kloppen!-->
             .style("font-size", "12px")
             .attr("text-anchor", "middle");
 
+        // radarlijnen
         let radarLine = d3
             .lineRadial()
             .radius((d) => (parseFloat(d.value) / maxValue) * radius)
             .angle((d, i) => i * angleSlice);
 
+        // tekenen van data 1 path
         svg.append("path")
             .data([data1])
             .attr("class", "radar-chart-line")
@@ -317,6 +328,7 @@ wordt getekend als alle gegevens kloppen!-->
             .style("fill-opacity", 0.5)
             .style("stroke-opacity", 1); // Volledige opacity
 
+        // tekenen van data 2 path 
         svg.append("path")
             .data([data2])
             .attr("class", "radar-chart-line")
@@ -327,7 +339,8 @@ wordt getekend als alle gegevens kloppen!-->
             .style("fill-opacity", 0.5)
             .style("stroke-opacity", 1); // Volledige opacity
 
-        // Voeg data-punten toe
+        // Voeg data-punten toe op de assen
+        //voor data 1
         svg.selectAll(".data-point1")
             .data(data1)
             .enter()
@@ -352,6 +365,7 @@ wordt getekend als alle gegevens kloppen!-->
             .style("stroke", "#000")
             .style("stroke-width", 1.5);
 
+        //voor data 2
         svg.selectAll(".data-point2")
             .data(data2)
             .enter()
