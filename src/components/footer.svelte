@@ -5,7 +5,15 @@ informatie te geven over wat de punten betekenen-->
 <!-- HTML code -->
 <section class="footer">
     <h3>Betekenis van de punten</h3>
-    <h4>Breng de indicatoren van angst en depressie in beeld</h4>
+
+    <ul>
+        <li>confidence interval = </li>
+        <li>Low CI = </li>
+        <li>High CI = </li>
+        <li>Quartile Range = </li>
+        <li>Phase = </li>
+        <li>Value = </li>
+    </ul>
 </section>
 
 <!-- Styling css-->
@@ -17,7 +25,7 @@ informatie te geven over wat de punten betekenen-->
     justify-content: center;
     align-items: center;
     width: 100%; /* Flexibele breedte */
-    max-width: 800px; /* Maximale breedte */
+    max-width: 1000px; /* Maximale breedte */
     margin: auto;
     margin-top: 20px;
     padding: 10px;
@@ -25,9 +33,6 @@ informatie te geven over wat de punten betekenen-->
     border-image: linear-gradient(to right, #40e0d0, #a9a9a9, #40e0d0, #a9a9a9) 1;
 }
 
-h3, h4 {
-    text-align: center;
-}
 
 h3 {
     font-family: "Montserrat";
@@ -43,15 +48,21 @@ h3 {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-align: center;
 }
 
-h4 {
+ul{
+    display: flex;
+    list-style: none;
+}
+
+li {
     font-family: "Montserrat";
     font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
     font-size: 15px;
     margin-top: 0;
-    margin-bottom: 10px; /* Fout: geen eenheid */
+    margin-bottom: 10px;
 }
 </style>
