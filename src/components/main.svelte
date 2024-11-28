@@ -134,6 +134,7 @@ wordt getekend als alle gegevens kloppen!-->
         let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
+    
         if (index1Valid && index2Valid) {
             // Haal de data op voor beide indexes/personen
             result1 = await displayRange(index1);
@@ -146,6 +147,11 @@ wordt getekend als alle gegevens kloppen!-->
             let data2 = createRadarData(result2);
             //controle, wat zit er in de data1 en data2
             console.log(data1, data2);
+
+             // Verwijder het bericht wanneer de grafiek wordt getekend
+        if (outputDiv) {
+            outputDiv.style.display = "none"; // Verberg het bericht
+        }
 
             // Nu kan de radar chart setup functie worden aangeroepen
             setupRadarChart(data1, data2);
@@ -486,7 +492,6 @@ wordt getekend als alle gegevens kloppen!-->
     .input-field,
     #message-container {
         font-family: "Montserrat";
-        font-optical-sizing: auto;
         font-weight: 200;
         font-style: normal;
         font-size: 20px;
@@ -516,6 +521,8 @@ wordt getekend als alle gegevens kloppen!-->
     }
 
     .resultOutput {
+
+
         margin-top: 20px;
         padding: 10px;
         background-color: #f5f5f5;
