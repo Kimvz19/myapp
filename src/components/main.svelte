@@ -116,6 +116,7 @@ wordt getekend als alle gegevens kloppen!-->
     async function compareIndexes() {
         await displayTime(); // Wacht op displayTime() voordat er verder wordt gegaan
 
+        // hier wordt gekeken of index1 en 2 gegevens hebben
         if (
             index1 === null ||
             index2 === null ||
@@ -126,25 +127,30 @@ wordt getekend als alle gegevens kloppen!-->
             return;
         }
 
+        // html element wordt hier geselecteerd
         let outputDiv = document.querySelector(".resultOutput");
 
+        //kijken of index in de lijst valt van filtered post
         let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
         if (index1Valid && index2Valid) {
-            // Haal de data op voor beide indices
+            // Haal de data op voor beide indexes/personen
             result1 = await displayRange(index1);
             result2 = await displayRange(index2);
 
-            console.log("Comparison:", result1, result2);
+            console.log("Vergelijking:", result1, result2);
 
             // Maak de radar chart met de gestructureerde data
             let data1 = createRadarData(result1);
             let data2 = createRadarData(result2);
+            //controle, wat zit er in de data1 en data2
             console.log(data1, data2);
 
             // Nu kan de radar chart setup functie worden aangeroepen
             setupRadarChart(data1, data2);
+
+        // als de gegevens niet in de gefilterde post vallen dan komt er deze error.
         } else {
             outputDiv.innerHTML = "<p>Kies een lager nummer!</p>";
         }
