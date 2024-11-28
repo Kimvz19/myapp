@@ -44,11 +44,13 @@ informatie te geven over wat de punten betekenen-->
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
         width: 100%; /* Flexibele breedte */
-        max-width: 1000px; /* Maximale breedte */
+        max-width: 1100px; /* Maximale breedte */
         margin: auto;
         margin-top: 20px;
         padding: 10px;
+
         border: 5px solid transparent;
         border-image: linear-gradient(
                 to right,
@@ -65,11 +67,13 @@ informatie te geven over wat de punten betekenen-->
         font-optical-sizing: auto;
         font-weight: 300;
         font-style: normal;
-        font-size: 20px;
+        font-size: 18px;
+
         padding: 5px;
-        width: 585px; /* Correcte breedte */
+        width: 585px;
         margin-top: 5px;
         margin-bottom: 9px;
+
         background: linear-gradient(to right, #000000, #800080);
         -webkit-background-clip: text;
         background-clip: text;
@@ -91,19 +95,29 @@ informatie te geven over wat de punten betekenen-->
         font-optical-sizing: auto;
         font-weight: 200;
         font-style: normal;
-        font-size: 15px;
+        font-size: 13px;
+
         margin-top: 0;
         margin-bottom: 10px;
         padding: 15px;
     }
-
     .term {
         font-weight: bold;
         color: #2c3e50; /* Donkerblauw */
+        background: linear-gradient(
+            to right,
+            #aeebe5,
+            #e1e8e7
+        );
+        border-radius: 5px;
+        padding: 2px;
+        text-align: center;
     }
 
     .description {
         color: #555;
         font-style: italic;
+        text-align: center;
+        width: 150px;
     }
 </style>
