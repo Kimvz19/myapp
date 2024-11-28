@@ -472,15 +472,13 @@
 <div class="legend-container">
     <div class="legend-item">
         <span
-            class="legend-color"
-            style="background: linear-gradient(to right, #40E0D0, #A9A9A9);"
+            class="legend-color1"
         ></span>
         <span>persoon {index1}</span>
     </div>
     <div class="legend-item">
         <span
-            class="legend-color"
-            style="background: linear-gradient(to right, #00008B, #800080);"
+            class="legend-color2"
         ></span>
         <span>persoon {index2}</span>
     </div>
@@ -584,10 +582,18 @@
         margin-bottom: 10px; /* Grotere afstand tussen items */
     }
 
-    .legend-color {
+    .legend-color1, .legend-color2 {
         width: 30px; /* Groter kleurblok */
         height: 30px; /* Groter kleurblok */
         margin-right: 15px; /* Meer ruimte tussen kleur en tekst */
         border: 1px solid #000; /* Optionele rand voor betere zichtbaarheid */
+    }
+
+    .legend-color1{
+        background: linear-gradient(to right, #40E0D0, #A9A9A9);
+    }
+
+    .legend-color2{
+        background: linear-gradient(to right, #00008B, #800080);
     }
 </style>
