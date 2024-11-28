@@ -134,7 +134,6 @@ wordt getekend als alle gegevens kloppen!-->
         let index1Valid = index1 >= 0 && index1 < filteredPosts.length;
         let index2Valid = index2 >= 0 && index2 < filteredPosts.length;
 
-    
         if (index1Valid && index2Valid) {
             // Haal de data op voor beide indexes/personen
             result1 = await displayRange(index1);
@@ -148,15 +147,15 @@ wordt getekend als alle gegevens kloppen!-->
             //controle, wat zit er in de data1 en data2
             console.log(data1, data2);
 
-             // Verwijder het bericht wanneer de grafiek wordt getekend
-        if (outputDiv) {
-            outputDiv.style.display = "none"; // Verberg het bericht
-        }
+            // Verwijder het bericht wanneer de grafiek wordt getekend
+            if (outputDiv) {
+                outputDiv.style.display = "none"; // Verberg het bericht
+            }
 
             // Nu kan de radar chart setup functie worden aangeroepen
             setupRadarChart(data1, data2);
 
-        // als de gegevens niet in de gefilterde post vallen dan komt er deze error.
+            // als de gegevens niet in de gefilterde post vallen dan komt er deze error.
         } else {
             outputDiv.innerHTML = "<p>Kies een lager nummer!</p>";
         }
@@ -167,6 +166,7 @@ wordt getekend als alle gegevens kloppen!-->
     async function setupRadarChart(data1, data2) {
         let messageContainer = document.getElementById("message-container");
 
+        //! = niet waar
         if (!data1 || !data2 || !chartContainer) {
             console.error("Data missing or chart container not available.");
             return;
@@ -177,6 +177,7 @@ wordt getekend als alle gegevens kloppen!-->
             messageContainer.style.display = "none"; // Verberg het bericht
         }
 
+        // roept functie aan met data1 en data2
         createRadarChart(chartContainer, data1, data2);
     }
 
@@ -383,7 +384,7 @@ wordt getekend als alle gegevens kloppen!-->
 <div class="content-data">
     <p>Data in {stateFilter}</p>
 
-    <!-- User input for the state -->
+    <!-- gebruiker input voor de state -->
     <input
         class="input-field"
         type="text"
@@ -394,7 +395,7 @@ wordt getekend als alle gegevens kloppen!-->
     <!-- Filter posts button -->
     <button on:click={displayTime}>Filter Posts</button>
 
-    <!-- Status button showing if data is found -->
+    <!-- status state gevonden ja = groen , nee = rood -->
     <button
         class="status-button"
         style="background-color: {dataFound ? 'green' : 'red'}"
@@ -441,15 +442,16 @@ wordt getekend als alle gegevens kloppen!-->
 
     <button on:click={compareIndexes}>Vergelijk</button>
 
-
     <!-- Result output -->
     <div class="resultOutput"></div>
 </div>
 
 <!-- radar chart-->
+<!-- enigste id op deze pagina-->
 <div id="message-container">
     Vul de gegevens in om de radar chart te tekenen!
 </div>
+
 <svg bind:this={chartContainer} class="radar-chart"></svg>
 
 <div class="legend-container">
@@ -518,7 +520,6 @@ wordt getekend als alle gegevens kloppen!-->
     }
 
     .resultOutput {
-
         font-family: "Montserrat";
         margin-top: 20px;
         padding: 10px;
