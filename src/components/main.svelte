@@ -184,6 +184,7 @@ wordt getekend als alle gegevens kloppen!-->
     // Zesde functie
     // Radar chart creation functie aangepast
     function createRadarChart(container, data1, data2) {
+        //afmetingen van de radar chart
         let width = 700,
             height = 850,
             maxValue =
