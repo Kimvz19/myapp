@@ -76,7 +76,6 @@
 
   h2 {
     font-family: "Montserrat";
-    font-optical-sizing: auto;
     font-weight: 200;
     font-style: normal;
     font-size: 18px;

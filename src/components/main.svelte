@@ -564,28 +564,28 @@ wordt getekend als alle gegevens kloppen!-->
         justify-content: left;
         flex-direction: column;
         position: absolute;
-        bottom: 30px; /* Iets meer ruimte van de onderkant */
-        right: 30px; /* Iets meer ruimte van de rechterkant */
+        bottom: 30px; 
+        right: 30px; 
         text-align: left;
-        font-size: 16px; /* Grotere lettergrootte voor leesbaarheid */
+        font-size: 16px; 
         background-color: #ffffff;
-        border: 2px solid #ccc; /* Dikkere rand voor betere zichtbaarheid */
-        border-radius: 10px; /* Meer afgeronde hoeken */
-        padding: 15px; /* Meer padding voor een ruimtelijker gevoel */
+        border: 2px solid #ccc; 
+        border-radius: 10px; 
+        padding: 15px; 
     }
 
     .legend-item {
         display: flex;
-        align-items: center; /* Center de inhoud verticaal */
-        margin-bottom: 10px; /* Grotere afstand tussen items */
+        align-items: center; 
+        margin-bottom: 10px; 
     }
 
     .legend-color1,
     .legend-color2 {
-        width: 30px; /* Groter kleurblok */
-        height: 30px; /* Groter kleurblok */
-        margin-right: 15px; /* Meer ruimte tussen kleur en tekst */
-        border: 1px solid #000; /* Optionele rand voor betere zichtbaarheid */
+        width: 30px;
+        height: 30px; 
+        margin-right: 15px;
+        border: 1px solid #000; 
     }
 
     .legend-color1 {
