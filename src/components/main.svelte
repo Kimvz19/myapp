@@ -1,26 +1,36 @@
+
+<!-- MAIN bestand-->
+<!-- In deze code wordt er gefilterd op tijd_periode, state, index & radar chart
+wordt getekend als alle gegevens kloppen!-->
+
+
+<!-- Javascript code-->
 <script>
     // Imports
+    // zorgt ervoor de code pas plaatsvind als alles is ingeladen
     import { onMount } from "svelte";
     import * as d3 from "d3";
 
     //Import API Fetch voor ophalen van data
     import { fetchPosts } from "../lib/apiUtil.js";
 
-    // variabelen
-    let result1 = null; // Data for comparison 1
-    let result2 = null; // Data for comparison 2
+    // variabelen voor gebruik radar chart
+    let result1 = null; 
+    let result2 = null; 
     let chartContainer;
 
 
-    // Variables
+    // Variabelen voor filteren
     let actualTimePeriod = [];
     let filteredPosts = [];
-    let stateFilter = "hawaii";
-    let dataFound = false;
+    let stateFilter = "hawaii"; //default state 
+    let dataFound = false; //boolan voor filter status
     let index1 = null;
     let index2 = null;
     let selectedPost = {};
 
+
+    // eerste filter functie
     // functie fetcht met meest actuele tijd periode
     async function displayTime() {
         try {
@@ -52,8 +62,6 @@
             dataFound = false;
         }
     }
-
-    // Function to fetch data for a specific index from filteredPosts
 
     // functie om index van de lijst te selecteren
     async function displayRange(personIndex) {
