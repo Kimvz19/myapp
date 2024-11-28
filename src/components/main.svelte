@@ -375,12 +375,10 @@ wordt getekend als alle gegevens kloppen!-->
             .style("stroke-width", 1.5);
     }
 
-
     // zorgt ervoor dat de code wordt uitgevoerd nadat die functie is uitgevoerd
     onMount(async () => {
         await displayTime();
     });
-
 </script>
 
 <!-- HTML Code -->
