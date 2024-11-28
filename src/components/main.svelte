@@ -441,9 +441,6 @@ wordt getekend als alle gegevens kloppen!-->
 
     <button on:click={compareIndexes}>Vergelijk</button>
 
-    <!-- Reset Button -->
-    <!-- <button on:click={resetForm}>Reset</button> -->
-    <!-- Reset button added -->
 
     <!-- Result output -->
     <div class="resultOutput"></div>
@@ -522,7 +519,7 @@ wordt getekend als alle gegevens kloppen!-->
 
     .resultOutput {
 
-
+        font-family: "Montserrat";
         margin-top: 20px;
         padding: 10px;
         background-color: #f5f5f5;
