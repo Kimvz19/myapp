@@ -25,7 +25,7 @@
 <!-- HTML code -->
 <section class="header">
   <h1>De psychologische impact van COVID-19</h1>
-  <h2>Breng de indicatoren van angst en depressie in beeld</h2>
+  <h2>Meetpunten statistieken van zelfverzekerheid - symtomen anxiety and Depression</h2>
 </section>
 
 
