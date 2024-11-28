@@ -212,7 +212,7 @@
             .attr("width", width)
             .attr("height", height)
             .html("")
-            .append("g")
+            .append("g") // zorgt dat de radar chart in het midden komt van svg
             .attr("transform", `translate(${width / 2}, ${height / 2 + 50})`);
 
         let defs = svg.append("defs");
