@@ -11,6 +11,7 @@
     let result2 = null; // Data for comparison 2
     let chartContainer;
 
+    
     // Variables
     let actualTimePeriod = [];
     let filteredPosts = [];
@@ -179,11 +180,21 @@
 
     // Radar chart setup functie aangepast om data door te geven
     async function setupRadarChart(data1, data2) {
+
+        let messageContainer = document.getElementById('message-container');
+
         if (!data1 || !data2 || !chartContainer) {
             console.error("Data missing or chart container not available.");
             return;
         }
-        createRadarChart(chartContainer, data1, data2);
+    
+
+         // Verwijder het bericht wanneer de grafiek wordt getekend
+    if (messageContainer) {
+        messageContainer.style.display = 'none'; // Verberg het bericht
+    }
+
+    createRadarChart(chartContainer, data1, data2);
     }
 
     // Radar chart creation functie aangepast
@@ -455,6 +466,7 @@
 </div>
 
 <!-- radar chart-->
+<div id="message-container">Vul de gegevens in om de radar chart te tekenen</div>
 <svg bind:this={chartContainer} class="radar-chart"></svg>
 
 <div class="legend-container">
@@ -533,6 +545,11 @@
         padding: 10px;
         background-color: #f5f5f5;
         border-radius: 8px;
+    }
+
+    #message-container{
+        border: 1px solid #000; /* Optionele rand voor betere zichtbaarheid */
+        color: green;
     }
 
     svg {
