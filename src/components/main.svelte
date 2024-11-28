@@ -188,11 +188,12 @@ wordt getekend als alle gegevens kloppen!-->
         let width = 700,
             height = 850,
             maxValue =
+            //maxvalue is gebaseerd op de  value, anders valt de data buiten de radar chart
                 Math.max(
                     d3.max(data1.map((d) => parseFloat(d.value))),
                     d3.max(data2.map((d) => parseFloat(d.value))),
-                ) * 1.1, // Automatische maxValue
-            levels = 5;
+                ) * 1.1, // zorgt voor 10% extra ruimte op de grafiek 
+            levels = 10; // aantal cirkels dat wordt getekend in de grafiek 
         let radius = Math.min(width, height) / 2;
         let angleSlice = (Math.PI * 2) / data1.length;
 
