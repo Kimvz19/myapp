@@ -23,14 +23,15 @@
 />
 
 <!-- HTML code -->
-<section>
+<section class="header">
   <h1>De psychologische impact van COVID-19</h1>
   <h2>Breng de indicatoren van angst en depressie in beeld</h2>
 </section>
 
+
 <!-- Styling -->
 <style>
-  section {
+  .header {
     display: flex;
     flex-direction: column;
     justify-content: center;
