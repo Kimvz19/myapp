@@ -1,13 +1,12 @@
 <script>
-    // Imports 
+    // Imports
     import { onMount } from "svelte";
     import * as d3 from "d3";
 
     //Import API Fetch voor ophalen van data
     import { fetchPosts } from "../lib/apiUtil.js";
 
-
-    // variabelen 
+    // variabelen
     let result1 = null; // Data for comparison 1
     let result2 = null; // Data for comparison 2
     let chartContainer;
@@ -21,11 +20,9 @@
     let index2 = null;
     let selectedPost = {};
 
-
     // functie fetcht met meest actuele tijd periode
     async function displayTime() {
         try {
-
             // Data ophalen van APi
             let data = await fetchPosts();
 
@@ -40,14 +37,14 @@
             );
 
             // hier wordt de actule tijd lijst gefiltered op de state
-            // default state staat op hawaii 
+            // default state staat op hawaii
             filteredPosts = actualTimePeriod.filter(
                 (post) =>
                     post.state.toLowerCase() === stateFilter.toLowerCase(),
             );
             dataFound = filteredPosts.length > 0;
 
-        // error melding 
+            // error melding
         } catch (error) {
             console.error("Error fetching data:", error.message);
             filteredPosts = [];
@@ -55,13 +52,10 @@
         }
     }
 
-
-
     // Function to fetch data for a specific index from filteredPosts
 
     // functie om index van de lijst te selecteren
     async function displayRange(personIndex) {
-
         //deze code is er om te checken of filteredPosts is uitgevoerd, zo niet
         // dan wordt er een foutmleding
         if (filteredPosts.length === 0) {
@@ -83,8 +77,6 @@
                 phase: selectedPost.phase,
                 value: selectedPost.value,
             };
-
-
         } else {
             return "<p> Geen geldig persoon gevonden, kies een lager nummer!</p>";
         }
@@ -263,6 +255,18 @@
             .style("fill", "#CDCDCD")
             .style("stroke", "#999")
             .style("fill-opacity", 0.1);
+
+        svg.selectAll(".grid-label")
+            .data(d3.range(1, levels + 1).reverse())
+            .enter()
+            .append("text")
+            .attr("class", "grid-label")
+            .attr("x", 0)
+            .attr("y", (d) => -((radius / levels) * d))
+            .text((d) => ((maxValue / levels) * d).toFixed(1))
+            .style("font-size", "12px")
+            .style("text-anchor", "middle")
+            .style("fill", "#666");
 
         let axis = svg
             .selectAll(".axis")
